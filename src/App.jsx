@@ -68,24 +68,124 @@ function Ocean() {
     )
 }
 
+function PlaneModel() {
+    const planeRef = useRef()
+    useFrame((state) => {
+        const t = state.clock.getElapsedTime()
+        planeRef.current.position.x = Math.sin(t * 0.2) * 15
+        planeRef.current.position.y = 4 + Math.sin(t * 0.5) * 0.5
+        planeRef.current.position.z = Math.cos(t * 0.2) * 15
+        planeRef.current.rotation.y = -t * 0.2 + Math.PI / 2
+    })
+
+    return (
+        <group ref={planeRef}>
+            {/* Fuselage */}
+            <mesh>
+                <capsuleGeometry args={[0.3, 2, 4, 8]} />
+                <meshStandardMaterial color="#f8fafc" />
+            </mesh>
+            {/* Wings */}
+            <mesh rotation={[Math.PI / 2, 0, 0]}>
+                <boxGeometry args={[3, 0.1, 0.5]} />
+                <meshStandardMaterial color="#f8fafc" />
+            </mesh>
+            {/* Tail */}
+            <mesh position={[0, 0.3, -1]} rotation={[Math.PI / 4, 0, 0]}>
+                <boxGeometry args={[0.8, 0.1, 0.4]} />
+                <meshStandardMaterial color="#f8fafc" />
+            </mesh>
+        </group>
+    )
+}
+
+function TruckModel({ position, delay = 0 }) {
+    const truckRef = useRef()
+    useFrame((state) => {
+        const t = (state.clock.getElapsedTime() + delay) % 10
+        truckRef.current.position.z = -10 + t * 2
+    })
+
+    return (
+        <group ref={truckRef} position={position}>
+            {/* Cab */}
+            <mesh position={[0, 0.3, 0.8]}>
+                <boxGeometry args={[0.6, 0.6, 0.4]} />
+                <meshStandardMaterial color="#1e293b" />
+            </mesh>
+            {/* Trailer */}
+            <mesh position={[0, 0.4, -0.2]}>
+                <boxGeometry args={[0.6, 0.8, 1.6]} />
+                <meshStandardMaterial color="#3b82f6" />
+            </mesh>
+            {/* Wheels */}
+            {[[-0.3, 0.1, 0.6], [0.3, 0.1, 0.6], [-0.3, 0.1, -0.6], [0.3, 0.1, -0.6]].map((pos, i) => (
+                <mesh key={i} position={pos} rotation={[0, 0, Math.PI / 2]}>
+                    <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
+                    <meshStandardMaterial color="#000" />
+                </mesh>
+            ))}
+        </group>
+    )
+}
+
+function PortInfrastructure() {
+    return (
+        <group position={[5, -1, 0]}>
+            {/* Port Ground */}
+            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
+                <planeGeometry args={[10, 20]} />
+                <meshStandardMaterial color="#334155" />
+            </mesh>
+            {/* Runway */}
+            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[5, 0.02, 0]}>
+                <planeGeometry args={[4, 20]} />
+                <meshStandardMaterial color="#1e293b" />
+            </mesh>
+            {/* Runway Markings */}
+            {Array.from({ length: 10 }).map((_, i) => (
+                <mesh key={i} rotation={[-Math.PI / 2, 0, 0]} position={[5, 0.03, -9 + i * 2]}>
+                    <planeGeometry args={[0.2, 1]} />
+                    <meshStandardMaterial color="#fff" />
+                </mesh>
+            ))}
+            {/* Containers Stacks */}
+            {Array.from({ length: 6 }).map((_, i) => (
+                <Container
+                    key={i}
+                    position={[-3, 0.4 + (i % 3) * 0.4, -2 + Math.floor(i / 3) * 0.5]}
+                    color={['#ef4444', '#3b82f6', '#10b981', '#f59e0b'][i % 4]}
+                />
+            ))}
+        </group>
+    )
+}
+
 function Scene() {
     return (
         <>
-            <ambientLight intensity={0.5} />
-            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-            <pointLight position={[-10, -10, -10]} intensity={0.5} />
+            <ambientLight intensity={0.6} />
+            <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
+            <pointLight position={[-10, 5, -10]} intensity={0.5} />
+
+            <PlaneModel />
 
             <DreiFloat speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
                 <CargoShip />
             </DreiFloat>
 
+            <PortInfrastructure />
+
+            <TruckModel position={[4, -1, 0]} />
+            <TruckModel position={[3, -1, 0]} delay={5} />
+
             <Ocean />
 
             <OrbitControls
-                enableZoom={false}
+                enableZoom={true}
                 enablePan={false}
                 maxPolarAngle={Math.PI / 2.1}
-                minPolarAngle={Math.PI / 3}
+                minPolarAngle={Math.PI / 6}
             />
         </>
     )
@@ -105,11 +205,11 @@ function App() {
 
             <div className="canvas-container">
                 <Canvas shadows>
-                    <PerspectiveCamera makeDefault position={[8, 3, 8]} fov={40} />
+                    <PerspectiveCamera makeDefault position={[12, 6, 12]} fov={45} />
                     <Suspense fallback={null}>
                         <Scene />
                     </Suspense>
-                    <fog attach="fog" args={['#020617', 10, 30]} />
+                    <fog attach="fog" args={['#020617', 5, 40]} />
                 </Canvas>
             </div>
 
