@@ -29,42 +29,64 @@ function CargoShip() {
 
     return (
         <group ref={shipRef} position={[0, -0.5, 0]}>
-            {/* Hull */}
+            {/* Hull - Multi-part for realism */}
             <mesh position={[0, 0, 0]}>
-                <boxGeometry args={[6, 0.8, 2]} />
-                <meshStandardMaterial color="#0f172a" metalness={0.8} roughness={0.2} />
+                <boxGeometry args={[6.5, 0.9, 2.2]} />
+                <meshPhysicalMaterial color="#020617" roughness={0.3} metalness={0.9} />
             </mesh>
-            <mesh position={[3, 0.1, 0]} rotation={[0, 0, -Math.PI / 8]}>
-                <boxGeometry args={[1, 0.8, 2]} />
-                <meshStandardMaterial color="#0f172a" metalness={0.8} roughness={0.2} />
+            <mesh position={[3.3, 0.1, 0]} rotation={[0, 0, -Math.PI / 6]}>
+                <boxGeometry args={[1.2, 0.9, 2.2]} />
+                <meshPhysicalMaterial color="#020617" roughness={0.3} metalness={0.9} />
             </mesh>
 
-            {/* Bridge */}
-            <group position={[-2, 0.9, 0]}>
+            {/* Bridge - Tiered structure */}
+            <group position={[-2.2, 1.1, 0]}>
+                {/* Tier 1 */}
                 <mesh>
-                    <boxGeometry args={[1.5, 1, 1.5]} />
-                    <meshStandardMaterial color="#f1f5f9" />
+                    <boxGeometry args={[1.8, 0.6, 1.8]} />
+                    <meshPhysicalMaterial color="#ffffff" />
                 </mesh>
-                {/* Windows */}
-                <mesh position={[0.4, 0.2, 0]}>
-                    <boxGeometry args={[0.8, 0.3, 1.51]} />
-                    <meshStandardMaterial color="#0ea5e9" emissive="#0ea5e9" emissiveIntensity={0.5} />
+                {/* Tier 2 */}
+                <mesh position={[0, 0.6, 0]}>
+                    <boxGeometry args={[1.2, 0.5, 1.4]} />
+                    <meshPhysicalMaterial color="#ffffff" />
                 </mesh>
-                {/* Radar */}
-                <mesh ref={radarRef} position={[0, 0.6, 0]}>
-                    <boxGeometry args={[1, 0.1, 0.2]} />
-                    <meshStandardMaterial color="#64748b" />
+                {/* Windows - Emissive glass */}
+                <mesh position={[0.4, 0.6, 0]}>
+                    <boxGeometry args={[0.5, 0.25, 1.41]} />
+                    <meshPhysicalMaterial color="#0ea5e9" emissive="#0ea5e9" emissiveIntensity={0.8} transparent opacity={0.6} />
+                </mesh>
+                {/* Railings (Simplified) */}
+                <mesh position={[0, 0.3, 0]}>
+                    <boxGeometry args={[1.9, 0.05, 1.9]} />
+                    <meshPhysicalMaterial color="#94a3b8" />
+                </mesh>
+                {/* Radar Mast */}
+                <mesh position={[-0.2, 1, 0]}>
+                    <cylinderGeometry args={[0.05, 0.05, 0.8]} />
+                    <meshPhysicalMaterial color="#334155" />
+                </mesh>
+                <mesh ref={radarRef} position={[-0.2, 1.4, 0]}>
+                    <boxGeometry args={[1.2, 0.1, 0.2]} />
+                    <meshPhysicalMaterial color="#f1f5f9" />
                 </mesh>
             </group>
 
-            {/* Containers */}
-            <Container position={[0, 0.6, 0.5]} color="#ef4444" />
-            <Container position={[0, 0.6, -0.5]} color="#3b82f6" />
-            <Container position={[1, 0.6, 0.5]} color="#10b981" />
-            <Container position={[1, 0.6, -0.5]} color="#f59e0b" />
-            <Container position={[-0.5, 0.6, 0]} color="#3b82f6" />
-            <Container position={[0, 1, 0.5]} color="#3b82f6" />
-            <Container position={[1, 1, -0.5]} color="#ef4444" />
+            {/* Deck Machinery */}
+            <mesh position={[2, 0.5, 0]}>
+                <cylinderGeometry args={[0.3, 0.3, 0.2]} />
+                <meshPhysicalMaterial color="#334155" />
+            </mesh>
+
+            {/* Containers - More variety */}
+            <Container position={[0, 0.6, 0.6]} color="#ef4444" />
+            <Container position={[0, 0.6, -0.6]} color="#3b82f6" />
+            <Container position={[1, 0.6, 0.6]} color="#10b981" />
+            <Container position={[1, 0.6, -0.6]} color="#f59e0b" />
+            <Container position={[-0.8, 0.6, 0.4]} color="#3b82f6" />
+            <Container position={[-0.8, 0.6, -0.4]} color="#ef4444" />
+            <Container position={[0, 1.05, 0.6]} color="#3b82f6" />
+            <Container position={[1, 1.05, -0.6]} color="#ef4444" />
         </group>
     )
 }
@@ -85,91 +107,174 @@ function Ocean() {
 
 function PlaneModel() {
     const planeRef = useRef()
+    const fanRef1 = useRef()
+    const fanRef2 = useRef()
+
     useFrame((state) => {
         const t = state.clock.getElapsedTime()
-        planeRef.current.position.x = Math.sin(t * 0.15) * 18
-        planeRef.current.position.y = 5 + Math.sin(t * 0.4) * 0.8
-        planeRef.current.position.z = Math.cos(t * 0.15) * 18
-        planeRef.current.rotation.y = -t * 0.15 + Math.PI / 2
-        planeRef.current.rotation.z = Math.sin(t * 0.15) * 0.1
+        planeRef.current.position.x = Math.sin(t * 0.1) * 22
+        planeRef.current.position.y = 6 + Math.sin(t * 0.3) * 1.2
+        planeRef.current.position.z = Math.cos(t * 0.1) * 22
+        planeRef.current.rotation.y = -t * 0.1 + Math.PI / 2
+        planeRef.current.rotation.z = Math.sin(t * 0.1) * 0.15
+
+        fanRef1.current.rotation.y = t * 10
+        fanRef2.current.rotation.y = t * 10
     })
 
     return (
         <group ref={planeRef}>
-            {/* Fuselage */}
-            <mesh rotation={[0, 0, Math.PI / 2]}>
-                <capsuleGeometry args={[0.35, 2.5, 4, 12]} />
-                <meshStandardMaterial color="#ffffff" metalness={0.5} roughness={0.1} />
+            {/* Fuselage - Structured */}
+            <group rotation={[0, 0, Math.PI / 2]}>
+                <mesh>
+                    <cylinderGeometry args={[0.4, 0.4, 3, 16]} />
+                    <meshPhysicalMaterial color="#ffffff" metalness={0.2} roughness={0.1} />
+                </mesh>
+                {/* Nose Cone */}
+                <mesh position={[0, 1.8, 0]}>
+                    <sphereGeometry args={[0.4, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
+                    <meshPhysicalMaterial color="#ffffff" />
+                </mesh>
+                {/* Tail Taper */}
+                <mesh position={[0, -1.8, 0]} rotation={[Math.PI, 0, 0]}>
+                    <coneGeometry args={[0.4, 1, 16]} />
+                    <meshPhysicalMaterial color="#ffffff" />
+                </mesh>
+            </group>
+
+            {/* Swept Wings */}
+            <group position={[0, 0, 0.2]}>
+                <mesh rotation={[0.4, 0, 0]} position={[1.5, 0, -0.3]} scale={[1, 1, 0.5]}>
+                    <boxGeometry args={[3, 0.05, 1.2]} />
+                    <meshPhysicalMaterial color="#ffffff" />
+                </mesh>
+                <mesh rotation={[-0.4, 0, 0]} position={[-1.5, 0, -0.3]} scale={[1, 1, 0.5]}>
+                    <boxGeometry args={[3, 0.05, 1.2]} />
+                    <meshPhysicalMaterial color="#ffffff" />
+                </mesh>
+            </group>
+
+            {/* Engines with spinning fans */}
+            <group position={[1.2, -0.4, 0.2]}>
+                <mesh rotation={[Math.PI / 2, 0, 0]}>
+                    <cylinderGeometry args={[0.25, 0.25, 0.7, 16]} />
+                    <meshPhysicalMaterial color="#94a3b8" metalness={0.8} />
+                </mesh>
+                <mesh ref={fanRef1} position={[0, 0, 0.3]} rotation={[Math.PI / 2, 0, 0]}>
+                    <boxGeometry args={[0.4, 0.02, 0.4]} />
+                    <meshPhysicalMaterial color="#1e293b" />
+                </mesh>
+            </group>
+            <group position={[-1.2, -0.4, 0.2]}>
+                <mesh rotation={[Math.PI / 2, 0, 0]}>
+                    <cylinderGeometry args={[0.25, 0.25, 0.7, 16]} />
+                    <meshPhysicalMaterial color="#94a3b8" metalness={0.8} />
+                </mesh>
+                <mesh ref={fanRef2} position={[0, 0, 0.3]} rotation={[Math.PI / 2, 0, 0]}>
+                    <boxGeometry args={[0.4, 0.02, 0.4]} />
+                    <meshPhysicalMaterial color="#1e293b" />
+                </mesh>
+            </group>
+
+            {/* Tail Stabilizers */}
+            <mesh position={[0, 0.6, -1.8]} rotation={[0.3, 0, 0]}>
+                <boxGeometry args={[0.05, 1, 0.6]} />
+                <meshPhysicalMaterial color="#ffffff" />
             </mesh>
-            {/* Wings */}
-            <mesh rotation={[Math.PI / 2, 0, 0]}>
-                <boxGeometry args={[4, 0.1, 0.8]} />
-                <meshStandardMaterial color="#ffffff" />
+            <mesh position={[0, 0.1, -1.8]} rotation={[0, 0, 0]}>
+                <boxGeometry args={[1.5, 0.05, 0.4]} />
+                <meshPhysicalMaterial color="#ffffff" />
             </mesh>
-            {/* Engines */}
-            <mesh position={[1, -0.2, 0.1]} rotation={[0, 0, Math.PI / 2]}>
-                <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} />
-                <meshStandardMaterial color="#94a3b8" />
-            </mesh>
-            <mesh position={[-1, -0.2, 0.1]} rotation={[0, 0, Math.PI / 2]}>
-                <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} />
-                <meshStandardMaterial color="#94a3b8" />
-            </mesh>
-            {/* Tail Vertical */}
-            <mesh position={[0, 0.4, -1.2]} rotation={[0.5, 0, 0]}>
-                <boxGeometry args={[0.1, 0.8, 0.5]} />
-                <meshStandardMaterial color="#ffffff" />
-            </mesh>
-            {/* Cockpit */}
-            <mesh position={[0, 0.15, 1.2]} rotation={[0, 0, 0]}>
-                <boxGeometry args={[0.4, 0.2, 0.3]} />
-                <meshStandardMaterial color="#020617" />
+
+            {/* Cockpit - Dark Glass */}
+            <mesh position={[0, 0.25, 1.4]} rotation={[0.4, 0, 0]}>
+                <boxGeometry args={[0.45, 0.2, 0.4]} />
+                <meshPhysicalMaterial color="#020617" roughness={0} />
             </mesh>
         </group>
     )
 }
 
-function TruckModel({ position, delay = 0, color = "#3b82f6" }) {
+function TruckModel({ position, delay = 0, color = "#2563eb" }) {
     const truckRef = useRef()
     useFrame((state) => {
-        const t = (state.clock.getElapsedTime() * 0.5 + delay) % 15
-        truckRef.current.position.z = -15 + t * 2
+        const t = (state.clock.getElapsedTime() * 0.4 + delay) % 18
+        truckRef.current.position.z = -18 + t * 2
     })
 
     return (
         <group ref={truckRef} position={position}>
-            {/* Cab */}
-            <group position={[0, 0.3, 0.8]}>
-                <mesh>
-                    <boxGeometry args={[0.6, 0.7, 0.5]} />
-                    <meshStandardMaterial color="#1e293b" />
+            {/* Cab section */}
+            <group position={[0, 0.1, 1]}>
+                {/* Main Body */}
+                <mesh position={[0, 0.4, 0]}>
+                    <boxGeometry args={[0.8, 0.8, 0.6]} />
+                    <meshPhysicalMaterial color="#1e293b" metalness={0.5} roughness={0.2} />
+                </mesh>
+                {/* Grill */}
+                <mesh position={[0, 0.3, 0.31]}>
+                    <boxGeometry args={[0.6, 0.4, 0.05]} />
+                    <meshPhysicalMaterial color="#334155" metalness={1} roughness={0} />
+                </mesh>
+                {/* Bumper */}
+                <mesh position={[0, 0.05, 0.35]}>
+                    <boxGeometry args={[0.85, 0.15, 0.1]} />
+                    <meshPhysicalMaterial color="#000000" />
                 </mesh>
                 {/* Headlights */}
-                <mesh position={[0.2, -0.1, 0.26]}>
-                    <boxGeometry args={[0.1, 0.1, 0.05]} />
-                    <meshStandardMaterial color="#fff" emissive="#fff" emissiveIntensity={2} />
+                <mesh position={[0.3, 0.1, 0.36]}>
+                    <sphereGeometry args={[0.08, 16, 16]} />
+                    <meshPhysicalMaterial color="#fff" emissive="#fff" emissiveIntensity={3} />
                 </mesh>
-                <mesh position={[-0.2, -0.1, 0.26]}>
-                    <boxGeometry args={[0.1, 0.1, 0.05]} />
-                    <meshStandardMaterial color="#fff" emissive="#fff" emissiveIntensity={2} />
+                <mesh position={[-0.3, 0.1, 0.36]}>
+                    <sphereGeometry args={[0.08, 16, 16]} />
+                    <meshPhysicalMaterial color="#fff" emissive="#fff" emissiveIntensity={3} />
                 </mesh>
-                {/* Windshield */}
-                <mesh position={[0, 0.15, 0.26]}>
-                    <boxGeometry args={[0.5, 0.3, 0.01]} />
-                    <meshStandardMaterial color="#0ea5e9" transparent opacity={0.6} />
+                {/* Windows */}
+                <mesh position={[0, 0.55, 0.31]}>
+                    <boxGeometry args={[0.7, 0.35, 0.01]} />
+                    <meshPhysicalMaterial color="#0369a1" transparent opacity={0.7} />
+                </mesh>
+                {/* Side Mirrors */}
+                <mesh position={[0.45, 0.55, 0.1]}>
+                    <boxGeometry args={[0.05, 0.3, 0.1]} />
+                    <meshPhysicalMaterial color="#1e293b" />
+                </mesh>
+                <mesh position={[-0.45, 0.55, 0.1]}>
+                    <boxGeometry args={[0.05, 0.3, 0.1]} />
+                    <meshPhysicalMaterial color="#1e293b" />
                 </mesh>
             </group>
-            {/* Trailer */}
-            <mesh position={[0, 0.45, -0.2]}>
-                <boxGeometry args={[0.65, 0.9, 1.8]} />
-                <meshStandardMaterial color={color} />
+
+            {/* Chassis & Coupler */}
+            <mesh position={[0, 0.15, -0.2]}>
+                <boxGeometry args={[0.7, 0.15, 2]} />
+                <meshPhysicalMaterial color="#111" />
             </mesh>
-            {/* Wheels */}
-            {[[-0.3, 0.1, 0.7], [0.3, 0.1, 0.7], [-0.3, 0.1, -0.4], [0.3, 0.1, -0.4], [-0.3, 0.1, -0.8], [0.3, 0.1, -0.8]].map((pos, i) => (
-                <mesh key={i} position={pos} rotation={[0, 0, Math.PI / 2]}>
-                    <cylinderGeometry args={[0.15, 0.15, 0.1, 16]} />
-                    <meshStandardMaterial color="#111" />
-                </mesh>
+
+            {/* Trailer */}
+            <mesh position={[0, 0.65, -0.6]}>
+                <boxGeometry args={[0.85, 1, 2.4]} />
+                <meshPhysicalMaterial color={color} metalness={0.4} />
+            </mesh>
+            {/* Logos on trailer */}
+            <mesh position={[0.43, 0.8, -0.6]}>
+                <boxGeometry args={[0.01, 0.2, 0.8]} />
+                <meshPhysicalMaterial color="#fff" />
+            </mesh>
+
+            {/* Wheels with Hubs */}
+            {[[-0.35, 0.1, 0.8], [0.35, 0.1, 0.8], [-0.35, 0.1, -0.4], [0.35, 0.1, -0.4], [-0.35, 0.1, -1.2], [0.35, 0.1, -1.2]].map((pos, i) => (
+                <group key={i} position={pos} rotation={[0, 0, Math.PI / 2]}>
+                    <mesh>
+                        <cylinderGeometry args={[0.18, 0.18, 0.15, 24]} />
+                        <meshPhysicalMaterial color="#111" />
+                    </mesh>
+                    <mesh position={[0, 0.08, 0]}>
+                        <cylinderGeometry args={[0.08, 0.08, 0.02, 16]} />
+                        <meshPhysicalMaterial color="#94a3b8" metalness={1} />
+                    </mesh>
+                </group>
             ))}
         </group>
     )
@@ -239,10 +344,16 @@ function PortInfrastructure() {
 function Scene() {
     return (
         <>
-            <ambientLight intensity={0.4} />
-            <hemisphereLight intensity={0.6} groundColor="#000" />
-            <directionalLight position={[10, 20, 10]} intensity={1.5} castShadow shadow-mapSize={[2048, 2048]} />
-            <pointLight position={[-10, 10, -10]} intensity={0.8} color="#0ea5e9" />
+            <ambientLight intensity={0.2} />
+            <hemisphereLight intensity={0.4} groundColor="#000" color="#fff" />
+            <directionalLight
+                position={[20, 30, 20]}
+                intensity={2}
+                castShadow
+                shadow-mapSize={[4096, 4096]}
+            />
+            <pointLight position={[-15, 15, -15]} intensity={1.5} color="#0ea5e9" />
+            <spotLight position={[0, 15, 0]} angle={0.8} penumbra={1} intensity={1} color="#fef08a" />
 
             <PlaneModel />
 
@@ -252,9 +363,9 @@ function Scene() {
 
             <PortInfrastructure />
 
-            <TruckModel position={[5, -1, 0]} color="#ef4444" />
-            <TruckModel position={[4, -1, 3]} delay={5} color="#10b981" />
-            <TruckModel position={[3.5, -1, -5]} delay={10} color="#f59e0b" />
+            <TruckModel position={[4.5, -1, 0]} color="#ef4444" delay={0} />
+            <TruckModel position={[3.5, -1, 4]} delay={6} color="#10b981" />
+            <TruckModel position={[5.5, -1, -8]} delay={12} color="#f59e0b" />
 
             <Ocean />
 
@@ -262,8 +373,9 @@ function Scene() {
                 enableZoom={true}
                 enablePan={false}
                 maxPolarAngle={Math.PI / 2.1}
-                minPolarAngle={Math.PI / 8}
+                minPolarAngle={Math.PI / 10}
             />
+            <Environment preset="night" />
         </>
     )
 }
