@@ -3,7 +3,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Float, MeshDistortMaterial, MeshWobbleMaterial, Text, Float as DreiFloat } from '@react-three/drei'
 import * as THREE from 'three'
 import { motion } from 'framer-motion'
-import { Ship, Plane, Globe, Package, Truck, Anchor, Menu } from 'lucide-react'
+import { Ship, Plane, Globe, Package, Truck, Anchor, Menu, Facebook, Linkedin, Instagram } from 'lucide-react'
+import { SocialLinks } from './components/SocialLinks'
 import './App.css'
 
 function Container({ position, color }) {
@@ -138,8 +139,10 @@ function App() {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="hero-ctas"
                     >
-                        <button className="cta-button">Connect Globally</button>
-                        <button className="cta-button" style={{ background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.3)', marginLeft: '1rem' }}>Our Mission</button>
+                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                            <button className="cta-button">Connect Globally</button>
+                            <SocialLinks facebookUrl="https://www.facebook.com/afaqalbahr" linkedinUrl="https://www.linkedin.com/company/afaq-al-bahr-shipping-llc" instagramUrl="https://www.instagram.com/afaqalbahr" />
+                        </div>
                     </motion.div>
                 </section>
 
@@ -194,6 +197,12 @@ function App() {
                             We understand the importance of timely deliveries and the impact it has on your business.
                             With <strong>Afaq Al Bahr Shipping</strong>, you can trust us to deliver on time, every time.
                         </p>
+
+                        <div style={{ marginTop: '2rem' }}>
+                            <h4 style={{ color: '#fff', marginBottom: '1rem' }}>Follow Our Journey</h4>
+                            <SocialLinks facebookUrl="https://www.facebook.com/afaqalbahr" linkedinUrl="https://www.linkedin.com/company/afaq-al-bahr-shipping-llc" instagramUrl="https://www.instagram.com/afaqalbahr" />
+                        </div>
+
                         <div style={{ marginTop: '2rem', display: 'flex', gap: '2rem' }}>
                             <div>
                                 <h4 style={{ color: '#fff' }}>Reliability</h4>
