@@ -1,0 +1,145 @@
+.app-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+}
+
+.overlay {
+    position: relative;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.glass-card {
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2rem;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    background: rgba(30, 41, 59, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 10%;
+}
+
+.title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+    background: linear-gradient(to bottom right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin-top: 1rem;
+}
+
+.cta-button {
+    margin-top: 2rem;
+    padding: 1rem 2.5rem;
+    background: #fff;
+    color: #020617;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    background: #94a3b8;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 5% 10%;
+    pointer-events: none;
+}
+
+.service-card {
+    pointer-events: auto;
+    text-align: center;
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 16px;
+    color: #38bdf8;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+    pointer-events: auto;
+    color: #fff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+    pointer-events: auto;
+}
+
+.nav-link {
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #fff;
+}
