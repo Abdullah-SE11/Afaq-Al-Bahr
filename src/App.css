@@ -16,31 +16,24 @@
     z-index: 1;
 }
 
-.loader-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #020617;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.loader-content {
+.loader-3d {
     text-align: center;
+    background: rgba(2, 6, 23, 0.9);
+    padding: 2rem;
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 250px;
 }
 
 .spinner {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border: 3px solid rgba(14, 165, 233, 0.2);
     border-top: 3px solid #0ea5e9;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1rem;
 }
 
 @keyframes spin {
@@ -53,7 +46,7 @@
     }
 }
 
-.loader-content p {
+.loader-3d p {
     letter-spacing: 0.3em;
     font-size: 0.7rem;
     font-weight: 800;
@@ -98,9 +91,9 @@ a {
 }
 
 .title {
-    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 900;
-    line-height: 0.85;
+    line-height: 0.9;
     letter-spacing: -0.05em;
     margin: 1.5rem 0;
 }
@@ -109,6 +102,7 @@ a {
     color: #0ea5e9;
     background: linear-gradient(to right, #0ea5e9, #38bdf8);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
