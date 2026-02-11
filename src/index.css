@@ -1,28 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 :root {
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: dark;
-  color: #fff;
-  background-color: #020617;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  color-scheme: light;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: #ffffff;
 }
 
 #root {
   width: 100%;
 }
 
-* {
-  box-sizing: border-box;
+@layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-poppins;
+  }
+}
+
+/* Custom Utilities for the "Wow" effect */
+.glass-panel {
+  @apply bg-white/80 backdrop-blur-md border border-white/20;
+}
+
+.section-spacing {
+  @apply py-20 lg:py-32;
+}
+
+.bg-hero-gradient {
+  background: radial-gradient(circle at top right, #0A3D62, #020617);
+}
+
+.bg-world-map {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_Map_Blank.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.05;
 }
 
 canvas {

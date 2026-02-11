@@ -1,22 +1,22 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ExternalLink } from 'lucide-react'
 
-export function SocialLinks() {
+export function SocialLinks({ facebookUrl, linkedinUrl, instagramUrl }) {
     const socialConfig = [
         {
             name: 'Facebook',
-            url: 'https://www.facebook.com/profile.php?id=61582700610000',
+            url: facebookUrl || 'https://www.facebook.com/profile.php?id=61582700610000',
             icon: <Facebook size={20} />,
             color: '#1877F2'
         },
         {
             name: 'LinkedIn',
-            url: 'https://www.linkedin.com/company/afaq-al-bahr-shipping-l-l-c/',
+            url: linkedinUrl || 'https://www.linkedin.com/company/afaq-al-bahr-shipping-l-l-c/',
             icon: <Linkedin size={20} />,
             color: '#0A66C2'
         },
         {
             name: 'Instagram',
-            url: 'https://www.instagram.com/afaqalbahr_shipping/',
+            url: instagramUrl || 'https://www.instagram.com/afaqalbahr_shipping/',
             icon: <Instagram size={20} />,
             color: '#E4405F'
         }
