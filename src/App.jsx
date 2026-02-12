@@ -1,316 +1,15 @@
-import React, { Suspense, useRef, useMemo, useState, useEffect } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Stars, Sky, useGLTF, Environment, ContactShadows, Html, Float as DreiFloat } from '@react-three/drei'
-import * as THREE from 'three'
+import React, { useState, useEffect } from 'react'
+
 import { motion, AnimatePresence } from 'framer-motion'
-import { Ship, Plane, Globe, Package, Truck, Anchor, Menu, Facebook, Linkedin, Instagram, ArrowRight, ExternalLink } from 'lucide-react'
+import { Ship, Plane, Globe, Package, Truck, Anchor, Menu, Facebook, Linkedin, Instagram, ArrowRight, ExternalLink, Phone, MessageCircle } from 'lucide-react'
 import { SocialLinks } from './components/SocialLinks'
+import { translations } from './data/translations'
 
-// Professional 3D Assets (Verified URLs)
-const MODELS = {
-    PLANE: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/airplane/model.gltf',
-    TRUCK: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/truck/model.gltf',
-    SHIP: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/cargo-ship/model.gltf'
-}
 
-const CONTAINER_COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#6366f1']
 
-class SafeComponent extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { hasError: false }
-    }
-    static getDerivedStateFromError(error) {
-        return { hasError: true }
-    }
-    componentDidCatch(error, errorInfo) {
-        console.warn("3D Component Error caught:", error)
-    }
-    render() {
-        if (this.state.hasError) {
-            return this.props.fallback || null
-        }
-        return this.props.children
-    }
-}
-
-function Loader() {
-    return (
-        <Html center>
-            <div className="loader-3d">
-                <div className="spinner"></div>
-                <p>INITIALIZING ASSETS...</p>
-            </div>
-        </Html>
-    )
-}
-
-function ModelFallback({ type }) {
-    const color = type === 'ship' ? '#0ea5e9' : type === 'plane' ? '#38bdf8' : '#7dd3fc'
-    return (
-        <group>
-            <mesh>
-                <boxGeometry args={type === 'ship' ? [3, 0.5, 1] : type === 'plane' ? [1, 0.2, 1.5] : [1, 0.6, 2]} />
-                <meshStandardMaterial
-                    color={color}
-                    emissive={color}
-                    emissiveIntensity={0.5}
-                    transparent
-                    opacity={0.6}
-                    roughness={0}
-                    metalness={1}
-                />
-            </mesh>
-            <pointLight color={color} intensity={2} distance={5} />
-        </group>
-    )
-}
-
-function CargoShip() {
-    const { scene } = useGLTF(MODELS.SHIP)
-    const shipRef = useRef()
-    const clonedScene = useMemo(() => scene.clone(), [scene])
-
-    useFrame((state) => {
-        if (!shipRef.current) return
-        const t = state.clock.getElapsedTime()
-        shipRef.current.position.y = Math.sin(t * 0.4) * 0.1
-        shipRef.current.rotation.z = Math.sin(t * 0.4) * 0.015
-    })
-
-    return (
-        <group ref={shipRef} position={[0, -0.8, 0]} scale={2.5}>
-            <primitive object={clonedScene} />
-        </group>
-    )
-}
-
-function PlaneModel() {
-    const { scene } = useGLTF(MODELS.PLANE)
-    const planeRef = useRef()
-    const clonedScene = useMemo(() => scene.clone(), [scene])
-
-    useFrame((state) => {
-        if (!planeRef.current) return
-        const t = state.clock.getElapsedTime() * 0.15
-        planeRef.current.position.x = Math.sin(t) * 80
-        planeRef.current.position.y = 25 + Math.sin(t * 2) * 5
-        planeRef.current.position.z = Math.cos(t) * 80
-        planeRef.current.rotation.y = -t + Math.PI / 2
-        planeRef.current.lookAt(0, 25, 0)
-    })
-
-    return (
-        <group ref={planeRef} scale={1.5}>
-            <primitive object={clonedScene} />
-            <pointLight intensity={2} color="#fca5a1" distance={10} />
-        </group>
-    )
-}
-
-function TruckModel({ position, delay = 0 }) {
-    const { scene } = useGLTF(MODELS.TRUCK)
-    const truckRef = useRef()
-    const clonedScene = useMemo(() => scene.clone(), [scene])
-
-    useFrame((state) => {
-        if (!truckRef.current) return
-        const t = (state.clock.getElapsedTime() * 0.3 + delay) % 1
-        truckRef.current.position.x = 120 - t * 240
-    })
-
-    return (
-        <group ref={truckRef} position={position} scale={0.7} rotation={[0, -Math.PI / 2, 0]}>
-            <primitive object={clonedScene} />
-            {/* Headlights */}
-            <mesh position={[2, 1, 0]}>
-                <sphereGeometry args={[0.1]} />
-                <meshStandardMaterial emissive="#fff" emissiveIntensity={5} />
-            </mesh>
-            <pointLight position={[3, 1, 0]} intensity={1} distance={5} color="#fff" />
-        </group>
-    )
-}
-
-function GantryCrane({ position }) {
-    return (
-        <group position={position}>
-            {/* Base legs */}
-            <mesh position={[-2, 5, 0]}>
-                <boxGeometry args={[0.5, 10, 0.5]} />
-                <meshStandardMaterial color="#ea580c" metalness={0.7} />
-            </mesh>
-            <mesh position={[2, 5, 0]}>
-                <boxGeometry args={[0.5, 10, 0.5]} />
-                <meshStandardMaterial color="#ea580c" metalness={0.7} />
-            </mesh>
-            {/* Top horizontal */}
-            <mesh position={[2, 10, 0]}>
-                <boxGeometry args={[12, 1, 1.5]} />
-                <meshStandardMaterial color="#ea580c" metalness={0.7} />
-            </mesh>
-            {/* Control cabin */}
-            <mesh position={[-1, 9, 0]}>
-                <boxGeometry args={[1.5, 1.5, 2]} />
-                <meshStandardMaterial color="#334155" />
-            </mesh>
-            {/* Support cables/structure */}
-            <mesh position={[5, 12, 0]} rotation={[0, 0, Math.PI / 4]}>
-                <boxGeometry args={[0.1, 8, 0.1]} />
-                <meshStandardMaterial color="#fca5a1" />
-            </mesh>
-            {/* Lights */}
-            <mesh position={[0, 10, 1]}>
-                <sphereGeometry args={[0.2]} />
-                <meshStandardMaterial emissive="#fde047" emissiveIntensity={5} />
-            </mesh>
-        </group>
-    )
-}
-
-function ContainerStack({ position, rows = 3, levels = 4 }) {
-    return (
-        <group position={position}>
-            {Array.from({ length: rows }).map((_, r) => (
-                Array.from({ length: levels }).map((_, l) => (
-                    <mesh key={`${r}-${l}`} position={[r * 2.2, l * 1.1, 0]}>
-                        <boxGeometry args={[2, 1, 5]} />
-                        <meshStandardMaterial color={CONTAINER_COLORS[(r + l) % CONTAINER_COLORS.length]} roughness={0.5} />
-                    </mesh>
-                ))
-            ))}
-        </group>
-    )
-}
-
-function PortInfrastructure() {
-    return (
-        <group position={[0, -1, -35]}>
-            {/* Main Pier Deck */}
-            <mesh position={[0, 0.5, 0]}>
-                <boxGeometry args={[250, 1, 25]} />
-                <meshStandardMaterial color="#1e293b" metalness={0.2} roughness={0.8} />
-            </mesh>
-
-            {/* Moored Ships (Large hulls) */}
-            <group position={[-60, 1, 15]}>
-                <mesh rotation={[0, 0, 0]}>
-                    <boxGeometry args={[50, 6, 12]} />
-                    <meshStandardMaterial color="#0f172a" />
-                </mesh>
-                <ContainerStack position={[-10, 4, 0]} rows={8} levels={5} />
-                {/* Ship Lights */}
-                <pointLight position={[0, 8, 0]} intensity={2} color="#fff" distance={20} />
-            </group>
-
-            <group position={[60, 1, 15]}>
-                <mesh>
-                    <boxGeometry args={[45, 5, 10]} />
-                    <meshStandardMaterial color="#1e3a8a" />
-                </mesh>
-                <ContainerStack position={[-10, 3.5, 0]} rows={6} levels={4} />
-            </group>
-
-            {/* Gantry Cranes */}
-            {[-80, -40, 0, 40, 80].map((x, i) => (
-                <GantryCrane key={i} position={[x, 0.5, 0]} />
-            ))}
-
-            {/* Container Terminal Area */}
-            {[-100, -70, -10, 30, 70, 100].map((x, i) => (
-                <ContainerStack key={i} position={[x, 1, -8]} rows={2} levels={6} />
-            ))}
-
-            {/* Port Lighting (Floodlights) */}
-            {[-110, -55, 0, 55, 110].map((x, i) => (
-                <group key={i} position={[x, 15, -12]}>
-                    <mesh>
-                        <boxGeometry args={[0.5, 15, 0.5]} />
-                        <meshStandardMaterial color="#334155" />
-                    </mesh>
-                    <mesh position={[0, 7.5, 0]}>
-                        <sphereGeometry args={[0.8]} />
-                        <meshStandardMaterial emissive="#fff" emissiveIntensity={10} />
-                    </mesh>
-                    <pointLight intensity={15} distance={50} color="#fef9c3" />
-                </group>
-            ))}
-
-            {/* Runway */}
-            <mesh position={[0, 0.55, 35]}>
-                <boxGeometry args={[300, 0.05, 15]} />
-                <meshStandardMaterial color="#020617" roughness={1} />
-                <gridHelper args={[300, 20, "#fbbf24", "#334155"]} rotation={[0, 0, 0]} position={[0, 0.06, 0]} />
-            </mesh>
-        </group>
-    )
-}
-
-function Ocean() {
-    return (
-        <group>
-            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.2, 0]}>
-                <planeGeometry args={[2000, 2000]} />
-                <meshStandardMaterial
-                    color="#0c1a30"
-                    roughness={0.05}
-                    metalness={0.9}
-                    envMapIntensity={1}
-                />
-            </mesh>
-            {/* Horizon Haze */}
-            <mesh position={[0, 5, -500]} rotation={[0, 0, 0]}>
-                <planeGeometry args={[2000, 100]} />
-                <meshBasicMaterial color="#1e293b" transparent opacity={0.5} />
-            </mesh>
-        </group>
-    )
-}
-
-function Scene() {
-    return (
-        <group>
-            {/* Ambient Planes */}
-            <Suspense fallback={null}>
-                <SafeComponent fallback={null}>
-                    <LandingPlane delay={0} />
-                    <LandingPlane delay={0.5} />
-                </SafeComponent>
-            </Suspense>
-
-            {/* Static Port Logistics */}
-            <PortInfrastructure />
-
-            {/* Original Interactive Models */}
-            <Suspense fallback={null}>
-                <SafeComponent fallback={<ModelFallback type="plane" />}>
-                    <PlaneModel />
-                </SafeComponent>
-            </Suspense>
-
-            <DreiFloat speed={2} rotationIntensity={0.5} floatIntensity={1}>
-                <Suspense fallback={null}>
-                    <SafeComponent fallback={<ModelFallback type="ship" />}>
-                        <CargoShip />
-                    </SafeComponent>
-                </Suspense>
-            </DreiFloat>
-
-            <Suspense fallback={null}>
-                <SafeComponent fallback={<ModelFallback type="truck" />}>
-                    <TruckModel position={[0, -0.4, 32]} delay={0} />
-                    <TruckModel position={[0, -0.4, 38]} delay={0.5} />
-                </SafeComponent>
-            </Suspense>
-
-            <Ocean />
-            <ContactShadows position={[0, -0.99, 0]} opacity={0.5} scale={50} blur={2} />
-        </group>
-    )
-}
-
-function Navbar() {
+function Navbar({ lang, setLang, t }) {
     const [scrolled, setScrolled] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -318,33 +17,81 @@ function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (showDropdown && !event.target.closest('.dropdown-container')) {
+                setShowDropdown(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [showDropdown])
+
     return (
-        <header className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'}`}>
+        <header className="fixed top-0 w-full z-[100] bg-white backdrop-blur-xl shadow-lg py-3">
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                    <div className="bg-afaq-blue p-2 rounded-lg shadow-lg">
-                        <Anchor className="text-white" size={24} />
-                    </div>
-                    <span className={`font-poppins font-bold text-xl tracking-tight transition-colors ${scrolled ? 'text-afaq-blue' : 'text-white'}`}>AFAQ AL BAHR</span>
+                    <img src="/logo.png" alt="ABS Logo" className="h-10 w-auto object-contain" />
+                    <button
+                        onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
+                        className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 transition-colors ms-4"
+                    >
+                        {lang === 'en' ? 'URDU' : 'ENGLISH'}
+                    </button>
                 </div>
 
-                <nav className="hidden md:flex items-center gap-8">
-                    {['Solutions', 'About', 'Network', 'Contact'].map((item) => (
-                        <a
-                            key={item}
-                            href={`#${item.toLowerCase()}`}
-                            className={`font-medium transition-colors hover:text-afaq-light ${scrolled ? 'text-gray-600' : 'text-white/90'}`}
+                <nav className="hidden md:flex items-center gap-10">
+                    <div className="relative dropdown-container">
+                        <button
+                            onClick={() => setShowDropdown(!showDropdown)}
+                            className="bg-gradient-to-r from-afaq-green to-emerald-600 hover:from-emerald-600 hover:to-afaq-green text-white px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                         >
-                            {item}
-                        </a>
-                    ))}
-                    <button className="bg-afaq-green hover:bg-opacity-90 text-white px-6 py-2.5 rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl">
-                        Get a Quote
-                    </button>
+                            {t.navbar.contact}
+                        </button>
+
+                        {showDropdown && (
+                            <div className="absolute top-full end-0 mt-2 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-300">
+                                <div className="p-4 bg-slate-50/50 border-b border-slate-100">
+                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Immediate Assistance</p>
+                                </div>
+                                {[
+                                    { num: "056 826 2134", wa: "971568262134" },
+                                    { num: "055 935 9616", wa: "971559359616" },
+                                    { num: "055 536 5465", wa: "971555365465" }
+                                ].map((c, i) => (
+                                    <div key={i} className="px-2 py-1">
+                                        <a
+                                            href={`https://wa.me/${c.wa}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-4 p-3 hover:bg-green-50/50 rounded-xl transition-all duration-300 group"
+                                        >
+                                            <div className="relative">
+                                                <div className="absolute inset-0 bg-green-400 blur-md opacity-0 group-hover:opacity-40 transition-opacity rounded-full" />
+                                                <div className="relative p-2.5 bg-green-500 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
+                                                    <MessageCircle size={18} className="text-white" />
+                                                </div>
+                                            </div>
+                                            <div className="flex-1">
+                                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Contact Line {i + 1}</p>
+                                                <p className="text-sm font-bold text-slate-700">{c.num}</p>
+                                            </div>
+                                            <div className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+                                                <ArrowRight size={14} className="text-green-500" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                ))}
+                                <div className="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                    <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">Available 24/7 on WhatsApp</p>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </nav>
 
-                <button className={`md:hidden ${scrolled ? 'text-afaq-blue' : 'text-white'}`}>
-                    <Menu size={28} />
+                <button className="md:hidden p-2 rounded-lg text-afaq-blue bg-slate-100">
+                    <Menu size={24} />
                 </button>
             </div>
         </header>
@@ -352,34 +99,17 @@ function Navbar() {
 }
 
 function App() {
+    const [shippingMode, setShippingMode] = useState('air')
+    const [lang, setLang] = useState('en')
+    const t = translations[lang]
+
     return (
-        <div className="relative min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden">
-            {/* 3D Background Container */}
-            <div className="fixed inset-0 z-0 pointer-events-none opacity-50 overflow-hidden">
-                <Canvas shadows camera={{ position: [25, 15, 60], fov: 35 }}>
-                    <color attach="background" args={['#f1f5f9']} />
-                    <ambientLight intensity={0.6} />
-                    <hemisphereLight intensity={0.8} groundColor="#f1f5f9" color="#1CA7EC" />
-                    <directionalLight position={[50, 30, 20]} intensity={1} color="#ffffff" castShadow />
-                    <Sky sunPosition={[100, 10, 100]} turbidity={0.1} rayleigh={0.5} />
-                    <fog attach="fog" args={['#f1f5f9', 50, 180]} />
+        <div dir={lang === 'ur' ? 'rtl' : 'ltr'} className={`relative min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden ${lang === 'ur' ? 'font-urdu' : ''}`}>
 
-                    <Scene />
 
-                    <OrbitControls
-                        enableZoom={false}
-                        enablePan={false}
-                        maxPolarAngle={Math.PI / 2.2}
-                        autoRotate
-                        autoRotateSpeed={0.5}
-                    />
-                    <Environment preset="city" />
-                </Canvas>
-            </div>
+            <Navbar lang={lang} setLang={setLang} t={t} />
 
-            <Navbar />
-
-            <main className="relative z-10 pt-20">
+            <main className="relative z-10 pt-0">
                 {/* Hero Section */}
                 <section className="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden">
                     {/* World Map Overlay */}
@@ -399,45 +129,32 @@ function App() {
                                 transition={{ delay: 0.2, duration: 0.5 }}
                                 className="inline-flex items-center gap-2 bg-afaq-light/10 text-afaq-light px-4 py-2 rounded-full text-xs font-bold tracking-[0.2em] mb-8 uppercase border border-afaq-light/20"
                             >
-                                <Globe size={14} /> Global Logistics Mastery
+                                <Ship size={14} /> {t.hero.tag}
                             </motion.div>
 
                             <h1 className="text-5xl lg:text-8xl font-black text-white leading-[1.05] mb-8 font-poppins italic tracking-tight">
-                                Global Cargo <br />
-                                <span className="text-afaq-light">&</span> Freight <br />
-                                <span className="text-afaq-green">Solutions</span>
+                                {t.hero.title_line1} {lang === 'ur' ? ' ' : <br />}
+                                <span className="text-afaq-light">{t.hero.title_line2_1}</span> <span className="text-white">{t.hero.title_line2_2}</span> <br />
+                                <span className="text-afaq-green">{t.hero.title_line3}</span>
                             </h1>
 
                             <p className="text-xl text-slate-300 mb-12 max-w-lg leading-relaxed font-light">
-                                Reliable road and air freight services delivering across borders with <span className="text-white font-semibold underline decoration-afaq-green underline-offset-8">speed, security, and precision</span>.
+                                {t.hero.description}
                             </p>
 
-                            <div className="flex flex-wrap gap-6">
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="bg-afaq-green text-white px-10 py-5 rounded-xl font-extrabold text-sm tracking-widest uppercase shadow-[0_10px_40px_-10px_rgba(14,143,106,0.5)] hover:shadow-[0_20px_50px_-10px_rgba(14,143,106,0.6)] transition-all"
-                                >
-                                    Get a Quote
-                                </motion.button>
-                                <motion.button
-                                    whileHover={{ scale: 1.05, backgroundColor: 'rgba(10, 61, 98, 0.1)' }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="bg-transparent text-white border-2 border-afaq-blue px-10 py-5 rounded-xl font-extrabold text-sm tracking-widest uppercase hover:text-afaq-light transition-all"
-                                >
-                                    Track Shipment
-                                </motion.button>
-                            </div>
+
+
+
 
                             <div className="mt-16 flex items-center gap-8 border-t border-white/10 pt-10">
-                                <div className="flex -space-x-3">
+                                <div className="flex -space-x-3 space-x-reverse">
                                     {[1, 2, 3, 4].map(i => (
                                         <div key={i} className="w-10 h-10 rounded-full border-2 border-afaq-blue bg-slate-800 flex items-center justify-center overflow-hidden">
                                             <img src={`https://i.pravatar.cc/40?u=${i}`} alt="user" />
                                         </div>
                                     ))}
                                 </div>
-                                <p className="text-sm text-slate-400 font-medium">Trusted by <span className="text-white">5,000+</span> global enterprises</p>
+                                <p className="text-sm text-slate-400 font-medium">{lang === 'en' ? <>Trusted by <span className="text-white">5,000+</span> global enterprises</> : <>قابل اعتماد <span className="text-white">5,000+</span> عالمی کاروباری ادارے</>}</p>
                             </div>
                         </motion.div>
 
@@ -455,29 +172,66 @@ function App() {
                                 <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 group">
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"></div>
                                     <img
-                                        src="https://images.unsplash.com/photo-1594818379496-da1e345b0ded?q=80&w=1932&auto=format&fit=crop"
-                                        alt="Global Logistics"
-                                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
+                                        src="/hero-image.jpg"
+                                        alt="Shipping Docks with Plane"
+                                        className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
                                     />
 
                                     {/* Glass Metrics on Image */}
-                                    <div className="absolute bottom-8 left-8 right-8 grid grid-cols-2 gap-4">
-                                        <div className="glass-panel p-4 rounded-2xl flex items-center gap-4 bg-white/10 border-white/20 backdrop-blur-xl">
-                                            <div className="p-2 bg-afaq-green/20 text-afaq-green rounded-lg">
-                                                <Plane size={24} />
+                                    {/* Shipping Option Selector */}
+                                    <div className="absolute bottom-8 inset-x-8">
+                                        <div className="glass-panel p-5 rounded-3xl border-white/20 backdrop-blur-xl shadow-2xl">
+                                            <div className="flex justify-between items-center mb-4">
+                                                <p className="text-white/80 text-xs font-bold uppercase tracking-widest ps-1">{t.hero.shipping_method}</p>
+                                                <div className="flex gap-1 opacity-50">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Air Cargo</p>
-                                                <p className="text-lg font-bold text-white tracking-tight">Express</p>
-                                            </div>
-                                        </div>
-                                        <div className="glass-panel p-4 rounded-2xl flex items-center gap-4 bg-white/10 border-white/20 backdrop-blur-xl">
-                                            <div className="p-2 bg-afaq-blue/20 text-afaq-blue rounded-lg">
-                                                <Truck size={24} />
-                                            </div>
-                                            <div>
-                                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Ground</p>
-                                                <p className="text-lg font-bold text-white tracking-tight">Heavy</p>
+
+                                            <div className="grid grid-cols-3 gap-3">
+                                                <motion.div
+                                                    whileTap={{ scale: 0.95 }}
+                                                    onClick={() => setShippingMode('air')}
+                                                    className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all duration-300 border ${shippingMode === 'air' ? 'bg-afaq-green text-white border-transparent shadow-lg' : 'bg-white/5 text-slate-400 border-white/10 hover:bg-white/10'}`}
+                                                >
+                                                    <div className={`p-2 rounded-lg ${shippingMode === 'air' ? 'bg-white/20' : 'bg-white/5'}`}>
+                                                        <Plane size={20} />
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-[9px] uppercase font-bold tracking-wider opacity-70">{t.hero.methods.air.tag}</p>
+                                                        <p className="font-bold text-xs">{t.hero.methods.air.title}</p>
+                                                    </div>
+                                                </motion.div>
+
+                                                <motion.div
+                                                    whileTap={{ scale: 0.95 }}
+                                                    onClick={() => setShippingMode('sea')}
+                                                    className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all duration-300 border ${shippingMode === 'sea' ? 'bg-afaq-light text-white border-transparent shadow-lg' : 'bg-white/5 text-slate-400 border-white/10 hover:bg-white/10'}`}
+                                                >
+                                                    <div className={`p-2 rounded-lg ${shippingMode === 'sea' ? 'bg-white/20' : 'bg-white/5'}`}>
+                                                        <Ship size={20} />
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-[9px] uppercase font-bold tracking-wider opacity-70">{t.hero.methods.sea.tag}</p>
+                                                        <p className="font-bold text-xs">{t.hero.methods.sea.title}</p>
+                                                    </div>
+                                                </motion.div>
+
+                                                <motion.div
+                                                    whileTap={{ scale: 0.95 }}
+                                                    onClick={() => setShippingMode('ground')}
+                                                    className={`p-3 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all duration-300 border ${shippingMode === 'ground' ? 'bg-afaq-blue text-white border-transparent shadow-lg' : 'bg-white/5 text-slate-400 border-white/10 hover:bg-white/10'}`}
+                                                >
+                                                    <div className={`p-2 rounded-lg ${shippingMode === 'ground' ? 'bg-white/20' : 'bg-white/5'}`}>
+                                                        <Truck size={20} />
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <p className="text-[9px] uppercase font-bold tracking-wider opacity-70">{t.hero.methods.ground.tag}</p>
+                                                        <p className="font-bold text-xs">{t.hero.methods.ground.title}</p>
+                                                    </div>
+                                                </motion.div>
                                             </div>
                                         </div>
                                     </div>
@@ -487,34 +241,29 @@ function App() {
                                 <motion.div
                                     animate={{ y: [0, -20, 0] }}
                                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    className="absolute -top-10 -right-10 glass-panel p-6 rounded-3xl shadow-2xl border border-white/20 hidden xl:block"
+                                    className="absolute -top-10 -end-10 glass-panel p-6 rounded-3xl shadow-2xl border border-white/20 hidden xl:block"
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className="w-12 h-12 bg-afaq-green rounded-full flex items-center justify-center text-white font-black text-xl italic shadow-lg">99%</div>
                                         <div>
-                                            <p className="text-xs text-slate-400 font-bold uppercase">Success Rate</p>
-                                            <p className="text-sm font-black text-afaq-blue">On-Time Delivery</p>
+                                            <p className="text-xs text-slate-400 font-bold uppercase">{t.hero.badge.label}</p>
+                                            <p className="text-sm font-black text-afaq-blue">{t.hero.badge.sub}</p>
                                         </div>
                                     </div>
                                 </motion.div>
                             </div>
                         </motion.div>
                     </div>
-                </section>
+                </section >
 
                 {/* Counter Section */}
-                <div className="bg-afaq-blue py-12 relative overflow-hidden">
+                < div className="bg-afaq-blue py-12 relative overflow-hidden" >
                     <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
                         <Globe size={400} className="absolute -right-20 -top-20 text-white" />
                     </div>
                     <div className="container mx-auto px-6 relative z-10">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                            {[
-                                { val: '150+', lab: 'Strategic Partners' },
-                                { val: '24/7', lab: 'Real-time Support' },
-                                { val: '12K', lab: 'Annual Shipments' },
-                                { val: 'Global', lab: 'Reach & Network' }
-                            ].map((stat, i) => (
+                            {t.stats.map((stat, i) => (
                                 <div key={i} className="text-center">
                                     <div className="text-white text-3xl font-bold font-poppins mb-1">{stat.val}</div>
                                     <div className="text-white/60 text-[10px] uppercase font-bold tracking-tighter">{stat.lab}</div>
@@ -522,23 +271,18 @@ function App() {
                             ))}
                         </div>
                     </div>
-                </div>
+                </div >
 
                 {/* Solutions Grid */}
-                <section id="solutions" className="py-24 lg:py-32 bg-slate-50/50">
+                < section id="solutions" className="py-24 lg:py-32 bg-slate-50/50" >
                     <div className="container mx-auto px-6">
                         <div className="max-w-3xl mb-20">
-                            <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-6 font-poppins">End-to-End Solutions</h2>
-                            <p className="text-slate-600 text-lg leading-relaxed">Integrated supply chain management tailored to your enterprise requirements.</p>
+                            <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-6 font-poppins">{t.solutions.title}</h2>
+                            <p className="text-slate-600 text-lg leading-relaxed">{t.solutions.description}</p>
                         </div>
 
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {[
-                                { title: "Ocean Freight", icon: <Anchor />, desc: "Global maritime solutions with prioritized space protection.", color: 'bg-blue-50' },
-                                { title: "Air Logistics", icon: <Plane />, desc: "High-velocity air freight for critical global trade.", color: 'bg-cyan-50' },
-                                { title: "Land Transport", icon: <Truck />, desc: "Regional distribution with full-fleet visibility.", color: 'bg-green-50' },
-                                { title: "Customs", icon: <ExternalLink />, desc: "Complex regulatory clearance and compliance mastery.", color: 'bg-slate-100' }
-                            ].map((service, i) => (
+                            {t.solutions.items.map((service, i) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, y: 20 }}
@@ -555,44 +299,43 @@ function App() {
                                     <p className="text-slate-500 text-sm leading-relaxed mb-8">
                                         {service.desc}
                                     </p>
-                                    <span className="text-afaq-light font-bold text-sm tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all cursor-pointer">
-                                        PROCEED <ArrowRight size={14} />
-                                    </span>
+                                    <a href="#contact" className="text-afaq-light font-bold text-sm tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all cursor-pointer">
+                                        {t.solutions.proceed} {lang === 'ur' ? <ArrowRight size={14} className="rotate-180" /> : <ArrowRight size={14} />}
+                                    </a>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
-                </section>
+                </section >
 
                 {/* About Section */}
                 <section id="about" className="py-24 lg:py-32 bg-white">
                     <div className="container mx-auto px-6">
-                        <div className="grid lg:grid-cols-2 gap-20 items-center">
-                            <div className="relative group">
-                                <div className="aspect-[4/5] bg-slate-200 rounded-[12px] overflow-hidden shadow-2xl relative">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-afaq-blue/40 to-transparent"></div>
-                                    <div className="flex items-center justify-center h-full">
-                                        <Globe size={240} className="text-afaq-blue/20 rotate-12 group-hover:rotate-45 transition-transform duration-700" />
+                        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                            <div className="relative group max-w-sm mx-auto lg:mx-0">
+                                <div className="aspect-square bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 relative group-hover:shadow-2xl transition-all duration-500">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-100 to-transparent"></div>
+                                    <div className="flex items-center justify-center h-full p-16 touch-none select-none">
+                                        <img
+                                            src="/logo.png"
+                                            alt="AFAQ AL BAHR Logo"
+                                            className="w-2/3 h-2/3 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                                        />
                                     </div>
                                 </div>
-                                <div className="absolute -bottom-10 -right-10 bg-white p-10 rounded-[12px] shadow-2xl border border-slate-200 max-w-xs hidden md:block">
-                                    <div className="text-afaq-green mb-4"><Package size={40} /></div>
-                                    <p className="text-slate-700 font-medium mb-0">Established in the heart of maritime trade — Dubai, UAE.</p>
+                                <div className="absolute -bottom-6 -end-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 max-w-[180px] hidden xl:block">
+                                    <div className="text-afaq-green mb-2"><Package size={24} /></div>
+                                    <p className="text-[10px] leading-tight text-slate-700 font-bold mb-0">{t.about.established}</p>
                                 </div>
                             </div>
 
-                            <div className="lg:pl-10">
-                                <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-8 font-poppins leading-tight">Mastering The <br />Flow Of Industry</h2>
+                            <div className="lg:max-w-xl">
+                                <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-6 font-poppins leading-tight">{t.about.title}</h2>
                                 <p className="text-lg text-slate-600 mb-10 leading-relaxed font-normal">
-                                    AFAQ AL BAHR SHIPPING L.L.C. is more than a logistics provider; we are architects of global connectivity. By combining local operational depth with international reach, we ensure your assets move with unparalleled velocity and safety.
+                                    {t.about.description}
                                 </p>
                                 <div className="space-y-6 mb-12">
-                                    {[
-                                        "Multi-modal Transportation Excellence",
-                                        "Strategic Warehousing & Distribution",
-                                        "Innovative Supply Chain Optimization",
-                                        "Dedicated Key Account Management"
-                                    ].map((list, i) => (
+                                    {t.about.list.map((list, i) => (
                                         <div key={i} className="flex items-center gap-4">
                                             <div className="w-6 h-6 rounded-full bg-afaq-green/10 flex items-center justify-center text-afaq-green">
                                                 <ExternalLink size={12} />
@@ -602,63 +345,223 @@ function App() {
                                     ))}
                                 </div>
                                 <button className="bg-afaq-blue text-white px-12 py-5 rounded-xl font-bold shadow-xl hover:bg-slate-800 transition-all text-sm tracking-widest uppercase">
-                                    Learn Our Story
+                                    {t.about.button}
                                 </button>
                             </div>
                         </div>
                     </div>
-                </section>
+                </section >
 
-                <footer className="bg-slate-900 pt-24 pb-12 text-white">
+                {/* Leadership Section */}
+                < section className="py-24 lg:py-32 bg-slate-50 overflow-hidden relative" >
+                    <div className="absolute top-0 left-0 w-full h-full bg-world-map opacity-[0.03]"></div>
+                    <div className="container mx-auto px-6 relative z-10">
+                        <div className="max-w-5xl mx-auto">
+                            <div className="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden grid md:grid-cols-5 items-stretch">
+                                <div className="md:col-span-2 bg-afaq-blue relative min-h-[400px]">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-afaq-blue to-slate-900"></div>
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-full h-full p-4">
+                                            <div className="w-full h-full rounded-2xl border border-white/10 overflow-hidden bg-slate-800 shadow-2xl relative group/image">
+                                                <img
+                                                    src="/onwer.jpeg"
+                                                    alt={t.about.leadership.name}
+                                                    className="w-full h-full object-cover object-top scale-110 group-hover/image:scale-100 transition-transform duration-1000"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-afaq-blue/60 via-transparent to-transparent opacity-60"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="absolute bottom-10 inset-x-10">
+                                        <h3 className="text-2xl font-bold text-white mb-2 font-poppins">{t.about.leadership.name}</h3>
+                                        <p className="text-afaq-green font-bold text-sm tracking-widest uppercase">{t.about.leadership.role}</p>
+                                    </div>
+                                </div>
+                                <div className="md:col-span-3 p-12 lg:p-20 flex flex-col justify-center">
+                                    <div className="mb-10 text-afaq-blue/20">
+                                        <svg width="60" height="45" viewBox="0 0 60 45" fill="currentColor">
+                                            <path d="M13.3333 45L0 31.6667V0H26.6667V31.6667H13.3333V45ZM46.6667 45L33.3333 31.6667V0H60V31.6667H46.6667V45Z" />
+                                        </svg>
+                                    </div>
+                                    <h2 className="text-3xl font-bold text-afaq-blue mb-8 font-poppins">{t.about.leadership.title}</h2>
+                                    <p className="text-xl text-slate-600 leading-relaxed italic font-medium mb-10">
+                                        "{t.about.leadership.message}"
+                                    </p>
+                                    <div className="flex items-center gap-6">
+                                        <div className="w-12 h-0.5 bg-afaq-green"></div>
+                                        <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Excellence in Global Logistics</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section >
+
+                {/* Contact Section */}
+                <section id="contact" className="py-24 lg:py-32 bg-gradient-to-br from-slate-50 to-white">
+                    <div className="container mx-auto px-6">
+                        <div className="max-w-6xl mx-auto">
+                            <div className="text-center mb-16">
+                                <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-6 font-poppins">{t.contact.title}</h2>
+                                <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+                                    {t.contact.description}
+                                </p>
+                            </div>
+
+                            <div className="grid lg:grid-cols-2 gap-16">
+                                {/* Contact Form */}
+                                <div className="bg-white p-10 rounded-3xl shadow-xl border border-slate-100">
+                                    <h3 className="text-2xl font-bold text-afaq-blue mb-8 font-poppins">{t.contact.form_title}</h3>
+                                    <form className="space-y-6">
+                                        <div>
+                                            <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">{t.contact.labels.name}</label>
+                                            <input
+                                                type="text"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-afaq-blue focus:outline-none transition-colors"
+                                                placeholder={t.contact.labels.name_placeholder}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">{t.contact.labels.phone}</label>
+                                            <input
+                                                type="tel"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-afaq-blue focus:outline-none transition-colors"
+                                                placeholder="+971 XX XXX XXXX"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">{t.contact.labels.message}</label>
+                                            <textarea
+                                                rows="5"
+                                                className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-afaq-blue focus:outline-none transition-colors resize-none"
+                                                placeholder={t.contact.labels.msg_placeholder}
+                                            ></textarea>
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            className="w-full bg-gradient-to-r from-afaq-green to-emerald-600 hover:from-emerald-600 hover:to-afaq-green text-white px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                                        >
+                                            {t.contact.labels.submit}
+                                        </button>
+                                    </form>
+                                </div>
+
+                                {/* Contact Information */}
+                                <div className="space-y-8">
+                                    <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+                                        <div className="flex items-start gap-4">
+                                            <div className="p-3 bg-afaq-blue/10 rounded-xl">
+                                                <Globe size={28} className="text-afaq-blue" />
+                                            </div>
+                                            <div>
+                                                <h4 className="font-bold text-afaq-blue mb-2 text-lg">{t.contact.office_title}</h4>
+                                                <p className="text-slate-600">
+                                                    {t.contact.office_desc}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-gradient-to-br from-slate-900 to-afaq-blue p-8 rounded-[2.5rem] shadow-2xl border border-white/10 relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 w-64 h-64 bg-afaq-green/10 blur-[80px] rounded-full -mr-20 -mt-20 group-hover:bg-afaq-green/20 transition-colors duration-700" />
+
+                                        <h4 className="font-bold text-white mb-8 text-xl font-poppins relative z-10 flex items-center gap-3">
+                                            <span className="w-8 h-1 bg-afaq-green rounded-full shadow-[0_0_15px_rgba(14,143,106,0.5)]" />
+                                            {t.contact.quick_title}
+                                        </h4>
+
+                                        <div className="grid gap-6 relative z-10">
+                                            {[
+                                                { num: "056 826 2134", wa: "971568262134" },
+                                                { num: "055 935 9616", wa: "971559359616" },
+                                                { num: "055 536 5465", wa: "971555365465" }
+                                            ].map((c, i) => (
+                                                <div key={i} className="group/item">
+                                                    <a
+                                                        href={`https://wa.me/${c.wa}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex items-center justify-between p-5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 hover:border-afaq-green/40 transition-all duration-500 group-hover/item:-translate-y-1 shadow-lg"
+                                                    >
+                                                        <div className="flex items-center gap-5">
+                                                            <div className="relative">
+                                                                <div className="absolute inset-0 bg-afaq-green blur-[10px] opacity-20 animate-pulse" />
+                                                                <div className="relative p-4 bg-afaq-green rounded-xl shadow-[0_0_20px_rgba(14,143,106,0.3)]">
+                                                                    <MessageCircle size={24} className="text-white" />
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <p className="text-[10px] font-black text-afaq-green uppercase tracking-[0.2em] mb-1">Service Line {i + 1}</p>
+                                                                <p className="text-lg font-bold text-white tracking-wider">{c.num}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="p-3 rounded-full bg-white/5 group-hover/item:bg-afaq-green transition-colors duration-500">
+                                                            <ArrowRight size={20} className="text-white" />
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className="mt-8 pt-8 border-t border-white/5 text-center">
+                                            <p className="text-slate-400 text-xs font-medium uppercase tracking-[0.3em]">Direct WhatsApp Connect</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section >
+
+                <footer dir="ltr" className="bg-slate-900 pt-24 pb-12 text-white text-left">
                     <div className="container mx-auto px-6">
                         <div className="grid lg:grid-cols-4 gap-16 mb-24">
                             <div className="col-span-1 lg:col-span-2">
-                                <div className="flex items-center gap-3 mb-10">
-                                    <Anchor className="text-afaq-light" size={40} />
-                                    <span className="font-poppins font-bold text-3xl tracking-tighter">AFAQ AL BAHR</span>
+                                <div className="flex items-center gap-3 mb-10 bg-white p-2 rounded-lg inline-block w-fit">
+                                    <img src="/logo.png" alt="AFAQ AL BAHR" className="h-16 w-auto" />
                                 </div>
                                 <p className="text-slate-400 leading-relaxed mb-10 max-w-md text-lg">
-                                    Premium logistics, freight forwarding, and integrated supply chain management solutions since 2026.
+                                    Premium logistics, freight forwarding, and integrated supply chain management solutions since 2022.
                                 </p>
-                                <SocialLinks facebookUrl="https://www.facebook.com/afaqalbahr" linkedinUrl="https://www.linkedin.com/company/afaq-al-bahr-shipping-llc" instagramUrl="https://www.instagram.com/afaqalbahr" />
+                                <SocialLinks facebookUrl="https://www.facebook.com/profile.php?id=61582700610000" linkedinUrl="https://www.linkedin.com/company/afaq-al-bahr-shipping-l-l-c/about/?viewAsMember=true" instagramUrl="https://www.instagram.com/afaqalbahr" />
                             </div>
 
                             <div>
-                                <h4 className="text-xl font-bold mb-8 font-poppins underline underline-offset-8 decoration-afaq-green decoration-4">Navigation</h4>
+                                <h4 className="text-xl font-bold mb-8 font-poppins underline underline-offset-8 decoration-afaq-green decoration-4">{t.navbar.solutions}</h4>
                                 <ul className="space-y-4 text-slate-400 font-medium">
-                                    <li><a href="#" className="hover:text-afaq-light transition-colors">Solutions</a></li>
-                                    <li><a href="#" className="hover:text-afaq-light transition-colors">Our Network</a></li>
-                                    <li><a href="#" className="hover:text-afaq-light transition-colors">About Company</a></li>
-                                    <li><a href="#" className="hover:text-afaq-light transition-colors">Track Portal</a></li>
+                                    <li><a href="#" className="hover:text-afaq-light transition-colors">{t.navbar.solutions}</a></li>
+                                    <li><a href="#" className="hover:text-afaq-light transition-colors">{t.navbar.network}</a></li>
+                                    <li><a href="#" className="hover:text-afaq-light transition-colors">{t.navbar.about}</a></li>
+                                    <li><a href="#" className="hover:text-afaq-light transition-colors">{t.navbar.track}</a></li>
                                 </ul>
                             </div>
 
                             <div>
-                                <h4 className="text-xl font-bold mb-8 font-poppins underline underline-offset-8 decoration-afaq-light decoration-4">Connect</h4>
+                                <h4 className="text-xl font-bold mb-8 font-poppins underline underline-offset-8 decoration-afaq-light decoration-4">{t.navbar.connect}</h4>
                                 <div className="space-y-6 text-slate-400">
                                     <div className="flex gap-4">
                                         <Globe size={20} className="text-afaq-light shrink-0" />
-                                        <p className="text-sm">Dubai, United Arab Emirates <br /> Business Bay, Prime Tower</p>
+                                        <p className="text-sm">{t.contact.office_desc}</p>
                                     </div>
                                     <div className="flex gap-4">
                                         <ExternalLink size={20} className="text-afaq-light shrink-0" />
-                                        <p className="text-sm">info@afaqalbahr.com <br /> +971 4 000 0000</p>
+                                        <p className="text-sm">{t.contact.contact_desc}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="pt-12 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                            <p className="text-slate-500 text-xs font-medium tracking-widest uppercase">© 2026 AFAQ AL BAHR SHIPPING L.L.C. | GLOBAL TRADE CONNECTIVITY</p>
+                            <p className="text-slate-500 text-xs font-medium tracking-widest uppercase">{t.navbar.rights}</p>
                             <div className="flex gap-8 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-                                <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                                <a href="#" className="hover:text-white transition-colors">Legal</a>
-                                <a href="#" className="hover:text-white transition-colors">Cookies</a>
+                                <a href="#" className="hover:text-white transition-colors">{t.navbar.privacy}</a>
+                                <a href="#" className="hover:text-white transition-colors">{t.navbar.legal}</a>
+                                <a href="#" className="hover:text-white transition-colors">{t.navbar.cookies}</a>
                             </div>
                         </div>
                     </div>
                 </footer>
-            </main>
-        </div>
+            </main >
+        </div >
     )
 }
 

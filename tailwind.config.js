@@ -7,13 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'afaq-blue': '#0A3D62',
-        'afaq-green': '#0E8F6A',
-        'afaq-light': '#1CA7EC',
+        'afaq-blue': '#31369F',
+        'afaq-green': '#009640',
+        'afaq-light': '#4FACFE',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
+        urdu: ['Noto Nastaliq Urdu', 'serif'],
       },
     },
   },

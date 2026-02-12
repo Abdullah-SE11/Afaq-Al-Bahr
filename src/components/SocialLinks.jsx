@@ -10,7 +10,7 @@ export function SocialLinks({ facebookUrl, linkedinUrl, instagramUrl }) {
         },
         {
             name: 'LinkedIn',
-            url: linkedinUrl || 'https://www.linkedin.com/company/afaq-al-bahr-shipping-l-l-c/',
+            url: linkedinUrl || 'https://www.linkedin.com/company/afaq-al-bahr-shipping-l-l-c/about/?viewAsMember=true',
             icon: <Linkedin size={20} />,
             color: '#0A66C2'
         },

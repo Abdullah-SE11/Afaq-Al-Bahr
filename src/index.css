@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
 
 :root {
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -44,7 +48,7 @@ body {
 }
 
 .bg-hero-gradient {
-  background: radial-gradient(circle at top right, #0A3D62, #020617);
+  background: radial-gradient(circle at top right, #31369F, #020617);
 }
 
 .bg-world-map {
@@ -55,6 +59,212 @@ body {
   opacity: 0.05;
 }
 
-canvas {
-  touch-action: none;
+/* Urdu Optimization Overrides - Default RTL Styles */
+[dir="rtl"],
+[dir="rtl"] * {
+  font-family: 'Noto Nastaliq Urdu', serif !important;
+  font-style: normal !important;
+}
+
+[dir="rtl"] {
+  text-align: right !important;
+}
+
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] a,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] div {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  text-align: right !important;
+  /* Reduced line-height to keep section heights consistent with English */
+  line-height: 1.5 !important;
+}
+
+[dir="rtl"] .flex {
+  text-align: right !important;
+}
+
+[dir="rtl"] .font-poppins {
+  font-family: 'Noto Nastaliq Urdu', serif !important;
+}
+
+/* Match English Font Scaling to keep card/section sizes identical */
+[dir="rtl"] .text-xs {
+  font-size: 0.75rem !important;
+  line-height: 1.5 !important;
+}
+
+[dir="rtl"] .text-sm {
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+}
+
+[dir="rtl"] .text-base {
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+}
+
+[dir="rtl"] .text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.6 !important;
+}
+
+[dir="rtl"] .text-xl {
+  font-size: 1.25rem !important;
+  line-height: 1.6 !important;
+}
+
+[dir="rtl"] * {
+  letter-spacing: 0 !important;
+}
+
+[dir="rtl"] h1 {
+  line-height: 1.4 !important;
+  padding-bottom: 20px;
+}
+
+[dir="rtl"] .text-2xl {
+  font-size: 1.5rem !important;
+  line-height: 1.5 !important;
+}
+
+[dir="rtl"] .text-3xl {
+  font-size: 1.875rem !important;
+  line-height: 1.4 !important;
+}
+
+[dir="rtl"] .text-4xl {
+  font-size: 2.25rem !important;
+  line-height: 1.4 !important;
+}
+
+[dir="rtl"] .text-5xl {
+  font-size: 3rem !important;
+  line-height: 1.4 !important;
+}
+
+[dir="rtl"] .text-6xl {
+  font-size: 3.75rem !important;
+  line-height: 1.3 !important;
+}
+
+[dir="rtl"] .text-7xl {
+  font-size: 4.5rem !important;
+  line-height: 1.3 !important;
+}
+
+[dir="rtl"] .text-8xl {
+  font-size: 6rem !important;
+  line-height: 1.2 !important;
+}
+
+/* Flip Hero Gradient for RTL */
+[dir="rtl"] .bg-hero-gradient {
+  background: radial-gradient(circle at top left, #31369F, #020617) !important;
+}
+
+/* Fix Icon rotation for RTL */
+[dir="rtl"] .lucide {
+  transform: scaleX(-1);
+}
+
+/* Don't flip specific icons that are direction-neutral or represent specific things */
+[dir="rtl"] .lucide-ship,
+[dir="rtl"] .lucide-plane,
+[dir="rtl"] .lucide-truck,
+[dir="rtl"] .lucide-map-pin,
+[dir="rtl"] .lucide-external-link,
+[dir="rtl"] .lucide-message-circle,
+[dir="rtl"] .lucide-phone,
+[dir="rtl"] .lucide-facebook,
+[dir="rtl"] .lucide-linkedin,
+[dir="rtl"] .lucide-instagram {
+  transform: scaleX(1);
+}
+
+
+/* Footer & Contact Section LTR Override in RTL mode - Force Reset All Typography to English Rules */
+/* Global LTR Overrides for Branding Consistency (Nav, Footer, Contact) */
+[dir="rtl"] nav,
+[dir="rtl"] nav *,
+[dir="rtl"] footer,
+[dir="rtl"] footer *,
+[dir="rtl"] #contact,
+[dir="rtl"] #contact * {
+  text-align: left;
+  direction: ltr !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  /* Force English Typography Rules */
+  font-size: unset !important;
+  line-height: normal !important;
+  letter-spacing: normal !important;
+  unicode-bidi: plaintext !important;
+}
+
+/* Ensure centering utility works within the LTR sections */
+[dir="rtl"] #contact .text-center,
+[dir="rtl"] #contact .text-center *,
+[dir="rtl"] nav .text-center,
+[dir="rtl"] nav .text-center * {
+  text-align: center !important;
+}
+
+/* Fix button alignment in contact section - override the global right-align */
+[dir="rtl"] #contact button,
+[dir="rtl"] nav button {
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Explicitly reset text sizes for LTR sections inside RTL context */
+[dir="rtl"] nav .text-sm,
+[dir="rtl"] footer .text-sm,
+[dir="rtl"] #contact .text-sm {
+  font-size: 0.875rem !important;
+}
+
+[dir="rtl"] nav .text-xs,
+[dir="rtl"] footer .text-xs,
+[dir="rtl"] #contact .text-xs {
+  font-size: 0.75rem !important;
+}
+
+[dir="rtl"] nav .text-lg,
+[dir="rtl"] footer .text-lg,
+[dir="rtl"] #contact .text-lg {
+  font-size: 1.125rem !important;
+}
+
+/* Increased Header Sizes for Contact Section - MD/LG screens */
+[dir="rtl"] #contact .text-3xl {
+  font-size: 2.25rem !important;
+  /* 36px */
+}
+
+[dir="rtl"] #contact .text-4xl {
+  font-size: 3rem !important;
+  /* 48px */
+}
+
+[dir="rtl"] #contact .text-5xl {
+  font-size: 4rem !important;
+  /* 64px */
+}
+
+/* Re-enable Poppins for headings in LTR sections within RTL context */
+[dir="rtl"] nav h2,
+[dir="rtl"] nav h3,
+[dir="rtl"] footer h3,
+[dir="rtl"] footer h4,
+[dir="rtl"] #contact h2,
+[dir="rtl"] #contact h2 *,
+[dir="rtl"] #contact h3,
+[dir="rtl"] #contact h4 {
+  font-family: 'Poppins', sans-serif !important;
+  letter-spacing: normal !important;
 }
