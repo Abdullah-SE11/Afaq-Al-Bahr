@@ -37,7 +37,7 @@ function Navbar({ lang, setLang, t }) {
 
     return (
         <header className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-white shadow-xl py-2' : 'bg-white/90 backdrop-blur-md py-4'}`}>
-            <div className="container mx-auto px-6 flex justify-between items-center">
+            <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
                 <div className="flex items-center gap-6">
                     <img src="/logo.png" alt="ABS Logo" className="h-8 md:h-12 w-auto object-contain" />
 
@@ -54,10 +54,10 @@ function Navbar({ lang, setLang, t }) {
                     </nav>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 md:gap-4">
                     <button
                         onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
-                        className="px-3 py-2 rounded-xl bg-slate-100/50 text-slate-700 font-bold text-[10px] md:text-xs hover:bg-slate-200 transition-all border border-slate-200/50"
+                        className="px-3 py-2 rounded-xl bg-slate-100/50 text-slate-700 font-bold text-[10px] md:text-xs hover:bg-slate-200 active:scale-95 transition-all border border-slate-200/50"
                     >
                         {lang === 'en' ? 'URDU' : 'ENGLISH'}
                     </button>
@@ -134,11 +134,11 @@ function App() {
 
             <main className="relative z-10 pt-0">
                 {/* Hero Section */}
-                <section className="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden pt-24 lg:pt-0">
+                <section className="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden pt-28 lg:pt-0">
                     {/* World Map Overlay */}
                     <div className="absolute inset-0 bg-world-map z-0 pointer-events-none"></div>
 
-                    <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+                    <div className="container mx-auto px-5 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
                         {/* Left Column: Content */}
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
@@ -155,9 +155,9 @@ function App() {
                                 <Ship size={14} /> {t.hero.tag}
                             </motion.div>
 
-                            <h1 className="text-4xl sm:text-5xl lg:text-8xl font-black text-white leading-[1.1] md:leading-[1.05] mb-6 md:mb-8 font-poppins italic tracking-tight">
+                            <h1 className="text-[32px] xs:text-4xl sm:text-5xl lg:text-8xl font-black text-white leading-[1.2] sm:leading-[1.1] md:leading-[1.05] mb-6 md:mb-8 font-poppins italic tracking-tight">
                                 {t.hero.title_line1} {lang === 'ur' ? ' ' : <br />}
-                                <span className="text-afaq-light">{t.hero.title_line2_1}</span> <span className="text-white">{t.hero.title_line2_2}</span> <br />
+                                <span className="text-afaq-light">{t.hero.title_line2_1}</span> <span className="text-white">{t.hero.title_line2_2}</span> <br className="hidden sm:block" />
                                 <span className="text-afaq-green">{t.hero.title_line3}</span>
                             </h1>
 
@@ -186,7 +186,7 @@ function App() {
                             initial={{ opacity: 0, scale: 0.8, x: 50 }}
                             animate={{ opacity: 1, scale: 1, x: 0 }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="relative lg:h-[700px] flex items-center justify-center"
+                            className="relative lg:h-[700px] flex items-center justify-center mt-10 lg:mt-0"
                         >
                             {/* Decorative Elements */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-afaq-blue/20 rounded-full blur-[120px] -z-10"></div>
