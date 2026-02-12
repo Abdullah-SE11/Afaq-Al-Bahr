@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Ship, Plane, Globe, Package, Truck, Anchor, Menu, Facebook, Linkedin, Instagram, ArrowRight, ExternalLink, Phone, MessageCircle } from 'lucide-react'
+import { Ship, Plane, Globe, Package, Truck, Anchor, Menu, Facebook, Linkedin, ArrowRight, ExternalLink, Phone, MessageCircle } from 'lucide-react'
 import { SocialLinks } from './components/SocialLinks'
 import { translations } from './data/translations'
 
@@ -10,6 +10,7 @@ import { translations } from './data/translations'
 function Navbar({ lang, setLang, t }) {
     const [scrolled, setScrolled] = useState(false)
     const [showDropdown, setShowDropdown] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -27,30 +28,49 @@ function Navbar({ lang, setLang, t }) {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [showDropdown])
 
+    const navLinks = [
+        { name: t.navbar.solutions, href: '#services' },
+        { name: t.navbar.network, href: '#about' },
+        { name: t.navbar.about, href: '#about' },
+        { name: t.navbar.track, href: '#track' }
+    ]
+
     return (
-        <header className="fixed top-0 w-full z-[100] bg-white backdrop-blur-xl shadow-lg py-3">
+        <header className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-white shadow-xl py-2' : 'bg-white/90 backdrop-blur-md py-4'}`}>
             <div className="container mx-auto px-6 flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                    <img src="/logo.png" alt="ABS Logo" className="h-10 w-auto object-contain" />
+                <div className="flex items-center gap-6">
+                    <img src="/logo.png" alt="ABS Logo" className="h-8 md:h-12 w-auto object-contain" />
                     <button
                         onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
-                        className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 transition-colors ms-4"
+                        className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 font-bold text-[10px] md:text-xs hover:bg-slate-200 transition-colors"
                     >
                         {lang === 'en' ? 'URDU' : 'ENGLISH'}
                     </button>
+
+                    <nav className="hidden lg:flex items-center gap-8 ms-10">
+                        {navLinks.map((link) => (
+                            <a
+                                key={link.name}
+                                href={link.href}
+                                className="text-sm font-bold text-slate-600 hover:text-afaq-blue transition-colors uppercase tracking-widest"
+                            >
+                                {link.name}
+                            </a>
+                        ))}
+                    </nav>
                 </div>
 
-                <nav className="hidden md:flex items-center gap-10">
-                    <div className="relative dropdown-container">
+                <div className="flex items-center gap-4">
+                    <div className="hidden md:block relative dropdown-container">
                         <button
                             onClick={() => setShowDropdown(!showDropdown)}
-                            className="bg-gradient-to-r from-afaq-green to-emerald-600 hover:from-emerald-600 hover:to-afaq-green text-white px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                            className="bg-gradient-to-r from-afaq-green to-emerald-600 hover:from-emerald-600 hover:to-afaq-green text-white px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                         >
                             {t.navbar.contact}
                         </button>
 
                         {showDropdown && (
-                            <div className="absolute top-full end-0 mt-2 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-300">
+                            <div className="absolute top-full end-0 mt-4 w-80 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-300">
                                 <div className="p-4 bg-slate-50/50 border-b border-slate-100">
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Immediate Assistance</p>
                                 </div>
@@ -68,32 +88,75 @@ function Navbar({ lang, setLang, t }) {
                                         >
                                             <div className="relative">
                                                 <div className="absolute inset-0 bg-green-400 blur-md opacity-0 group-hover:opacity-40 transition-opacity rounded-full" />
-                                                <div className="relative p-2.5 bg-green-500 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
-                                                    <MessageCircle size={18} className="text-white" />
+                                                <div className="relative p-2 bg-green-500 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
+                                                    <MessageCircle size={16} className="text-white" />
                                                 </div>
                                             </div>
                                             <div className="flex-1">
-                                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Contact Line {i + 1}</p>
+                                                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Line {i + 1}</p>
                                                 <p className="text-sm font-bold text-slate-700">{c.num}</p>
-                                            </div>
-                                            <div className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
-                                                <ArrowRight size={14} className="text-green-500" />
                                             </div>
                                         </a>
                                     </div>
                                 ))}
-                                <div className="p-3 bg-slate-50 border-t border-slate-100 text-center">
-                                    <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest">Available 24/7 on WhatsApp</p>
-                                </div>
                             </div>
                         )}
                     </div>
-                </nav>
 
-                <button className="md:hidden p-2 rounded-lg text-afaq-blue bg-slate-100">
-                    <Menu size={24} />
-                </button>
+                    <button
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        className="lg:hidden p-2.5 rounded-xl text-afaq-blue bg-slate-50 hover:bg-slate-100 transition-colors"
+                    >
+                        <Menu size={20} />
+                    </button>
+                </div>
             </div>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, x: lang === 'ur' ? -100 : 100 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: lang === 'ur' ? -100 : 100 }}
+                        className={`fixed inset-0 z-[1000] bg-white flex flex-col p-8 ${lang === 'ur' ? 'text-right' : 'text-left'}`}
+                    >
+                        <div className="flex justify-between items-center mb-12">
+                            <img src="/logo.png" alt="ABS Logo" className="h-8 w-auto" />
+                            <button
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="p-2.5 rounded-xl bg-slate-50 text-slate-400"
+                            >
+                                <ArrowRight className={lang === 'ur' ? 'rotate-180' : ''} />
+                            </button>
+                        </div>
+
+                        <div className="flex flex-col gap-8">
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="text-2xl font-black text-afaq-blue uppercase tracking-tighter"
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </div>
+
+                        <div className="mt-auto space-y-4">
+                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t.navbar.contact}</p>
+                            <a
+                                href="tel:0555365465"
+                                className="flex items-center gap-4 p-5 bg-afaq-blue text-white rounded-2xl shadow-xl"
+                            >
+                                <Phone size={20} />
+                                <span className="text-lg font-bold">055 536 5465</span>
+                            </a>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header>
     )
 }
@@ -353,15 +416,15 @@ function App() {
                 </section >
 
                 {/* Leadership Section */}
-                < section className="py-24 lg:py-32 bg-slate-50 overflow-hidden relative" >
+                <section className="py-20 lg:py-32 bg-slate-50 overflow-hidden relative">
                     <div className="absolute top-0 left-0 w-full h-full bg-world-map opacity-[0.03]"></div>
                     <div className="container mx-auto px-6 relative z-10">
                         <div className="max-w-5xl mx-auto">
-                            <div className="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden grid md:grid-cols-5 items-stretch">
-                                <div className="md:col-span-2 bg-afaq-blue relative min-h-[400px]">
+                            <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden grid md:grid-cols-5 items-stretch">
+                                <div className="md:col-span-2 bg-afaq-blue relative min-h-[350px] md:min-h-[400px]">
                                     <div className="absolute inset-0 bg-gradient-to-br from-afaq-blue to-slate-900"></div>
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="w-full h-full p-4">
+                                        <div className="w-full h-full p-4 md:p-6">
                                             <div className="w-full h-full rounded-2xl border border-white/10 overflow-hidden bg-slate-800 shadow-2xl relative group/image">
                                                 <img
                                                     src="/onwer.jpeg"
@@ -372,30 +435,30 @@ function App() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="absolute bottom-10 inset-x-10">
-                                        <h3 className="text-2xl font-bold text-white mb-2 font-poppins">{t.about.leadership.name}</h3>
-                                        <p className="text-afaq-green font-bold text-sm tracking-widest uppercase">{t.about.leadership.role}</p>
+                                    <div className="absolute bottom-8 md:bottom-10 inset-x-8 md:inset-x-10">
+                                        <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2 font-poppins">{t.about.leadership.name}</h3>
+                                        <p className="text-afaq-green font-bold text-[10px] md:text-xs tracking-widest uppercase">{t.about.leadership.role}</p>
                                     </div>
                                 </div>
-                                <div className="md:col-span-3 p-12 lg:p-20 flex flex-col justify-center">
-                                    <div className="mb-10 text-afaq-blue/20">
-                                        <svg width="60" height="45" viewBox="0 0 60 45" fill="currentColor">
+                                <div className="md:col-span-3 p-8 md:p-12 lg:p-20 flex flex-col justify-center">
+                                    <div className="mb-6 md:mb-10 text-afaq-blue/20">
+                                        <svg width="45" height="34" viewBox="0 0 60 45" fill="currentColor" className="md:w-[60px] md:h-[45px]">
                                             <path d="M13.3333 45L0 31.6667V0H26.6667V31.6667H13.3333V45ZM46.6667 45L33.3333 31.6667V0H60V31.6667H46.6667V45Z" />
                                         </svg>
                                     </div>
-                                    <h2 className="text-3xl font-bold text-afaq-blue mb-8 font-poppins">{t.about.leadership.title}</h2>
-                                    <p className="text-xl text-slate-600 leading-relaxed italic font-medium mb-10">
+                                    <h2 className="text-2xl md:text-3xl font-bold text-afaq-blue mb-6 md:mb-8 font-poppins">{t.about.leadership.title}</h2>
+                                    <p className="text-lg md:text-xl text-slate-600 leading-relaxed italic font-medium mb-8 md:mb-10">
                                         "{t.about.leadership.message}"
                                     </p>
-                                    <div className="flex items-center gap-6">
-                                        <div className="w-12 h-0.5 bg-afaq-green"></div>
-                                        <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Excellence in Global Logistics</p>
+                                    <div className="flex items-center gap-4 md:gap-6">
+                                        <div className="w-8 md:w-12 h-0.5 bg-afaq-green"></div>
+                                        <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px] md:text-xs">Excellence in Global Logistics</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section >
+                </section>
 
                 {/* Contact Section */}
                 <section id="contact" className="py-24 lg:py-32 bg-gradient-to-br from-slate-50 to-white">
@@ -410,7 +473,7 @@ function App() {
 
                             <div className="grid lg:grid-cols-2 gap-16">
                                 {/* Contact Form */}
-                                <div className="bg-white p-10 rounded-3xl shadow-xl border border-slate-100">
+                                <div className="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-slate-100">
                                     <h3 className="text-2xl font-bold text-afaq-blue mb-8 font-poppins">{t.contact.form_title}</h3>
                                     <form className="space-y-6">
                                         <div>
@@ -523,7 +586,7 @@ function App() {
                                 <p className="text-slate-400 leading-relaxed mb-10 max-w-md text-lg">
                                     Premium logistics, freight forwarding, and integrated supply chain management solutions since 2022.
                                 </p>
-                                <SocialLinks facebookUrl="https://www.facebook.com/profile.php?id=61582700610000" linkedinUrl="https://www.linkedin.com/company/afaq-al-bahr-shipping-l-l-c/about/?viewAsMember=true" instagramUrl="https://www.instagram.com/afaqalbahr" />
+                                <SocialLinks facebookUrl="https://www.facebook.com/profile.php?id=61582700610000" linkedinUrl="https://www.linkedin.com/company/afaq-al-bahr-shipping-l-l-c/about/?viewAsMember=true" />
                             </div>
 
                             <div>

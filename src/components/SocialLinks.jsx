@@ -1,6 +1,6 @@
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ExternalLink } from 'lucide-react'
+import { Facebook, Linkedin, Mail, MapPin, Phone, ExternalLink } from 'lucide-react'
 
-export function SocialLinks({ facebookUrl, linkedinUrl, instagramUrl }) {
+export function SocialLinks({ facebookUrl, linkedinUrl }) {
     const socialConfig = [
         {
             name: 'Facebook',
@@ -13,12 +13,6 @@ export function SocialLinks({ facebookUrl, linkedinUrl, instagramUrl }) {
             url: linkedinUrl || 'https://www.linkedin.com/company/afaq-al-bahr-shipping-l-l-c/about/?viewAsMember=true',
             icon: <Linkedin size={20} />,
             color: '#0A66C2'
-        },
-        {
-            name: 'Instagram',
-            url: instagramUrl || 'https://www.instagram.com/afaqalbahr_shipping/',
-            icon: <Instagram size={20} />,
-            color: '#E4405F'
         }
     ]
 
