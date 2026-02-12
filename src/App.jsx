@@ -9,15 +9,12 @@ import { translations } from './data/translations'
 
 function Navbar({ lang, setLang, t }) {
     const [scrolled, setScrolled] = useState(false)
-    const [isAtBottom, setIsAtBottom] = useState(false)
     const [showDropdown, setShowDropdown] = useState(false)
 
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20)
-            const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100
-            setIsAtBottom(bottom)
         }
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
@@ -34,16 +31,16 @@ function Navbar({ lang, setLang, t }) {
     }, [showDropdown])
 
     return (
-        <header className={`fixed top-0 w-full z-[100] transition-all duration-300 ${isAtBottom ? 'bg-afaq-blue shadow-none py-2' : scrolled ? 'bg-white shadow-xl py-2' : 'bg-white/90 backdrop-blur-md py-4'}`}>
+        <header className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-white shadow-xl py-2' : 'bg-white/90 backdrop-blur-md py-4'}`}>
             <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
                 <div className="flex items-center gap-6">
-                    <img src="/logo.png" alt="ABS Logo" className={`h-8 md:h-12 w-auto object-contain transition-all duration-300 ${isAtBottom ? 'brightness-0 invert' : ''}`} />
+                    <img src="/logo.png" alt="ABS Logo" className="h-8 md:h-12 w-auto object-contain transition-all duration-300" />
                 </div>
 
                 <div className="flex items-center gap-3 md:gap-4">
                     <button
                         onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
-                        className={`px-3 py-2 rounded-xl font-bold text-[10px] md:text-xs active:scale-95 transition-all border ${isAtBottom ? 'bg-white/10 text-white border-white/20 hover:bg-white/20' : 'bg-slate-100/50 text-slate-700 border-slate-200/50 hover:bg-slate-200'}`}
+                        className="px-3 py-2 rounded-xl bg-slate-100/50 text-slate-700 font-bold text-[10px] md:text-xs hover:bg-slate-200 active:scale-95 transition-all border border-slate-200/50"
                     >
                         {lang === 'en' ? 'URDU' : 'ENGLISH'}
                     </button>
