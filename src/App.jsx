@@ -155,13 +155,13 @@ function App() {
                                 <Ship size={14} /> {t.hero.tag}
                             </motion.div>
 
-                            <h1 className="text-[32px] xs:text-4xl sm:text-5xl lg:text-8xl font-black text-white leading-[1.2] sm:leading-[1.1] md:leading-[1.05] mb-6 md:mb-8 font-poppins italic tracking-tight">
+                            <h1 className="text-3xl sm:text-5xl lg:text-8xl font-black text-white leading-[1.2] sm:leading-[1.1] md:leading-[1.05] mb-6 md:mb-8 font-poppins italic tracking-tight">
                                 {t.hero.title_line1} {lang === 'ur' ? ' ' : <br />}
                                 <span className="text-afaq-light">{t.hero.title_line2_1}</span> <span className="text-white">{t.hero.title_line2_2}</span> <br className="hidden sm:block" />
                                 <span className="text-afaq-green">{t.hero.title_line3}</span>
                             </h1>
 
-                            <p className="text-xl text-slate-300 mb-12 max-w-lg leading-relaxed font-light">
+                            <p className="text-lg md:text-xl text-slate-300 mb-8 md:mb-12 max-w-lg leading-relaxed font-light">
                                 {t.hero.description}
                             </p>
 
@@ -169,15 +169,15 @@ function App() {
 
 
 
-                            <div className="mt-10 md:mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 border-t border-white/10 pt-8 md:pt-10">
+                            <div className="mt-8 md:mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 border-t border-white/10 pt-6 md:pt-10">
                                 <div className="flex -space-x-3 space-x-reverse">
                                     {[1, 2, 3, 4].map(i => (
-                                        <div key={i} className="w-10 h-10 rounded-full border-2 border-afaq-blue bg-slate-800 flex items-center justify-center overflow-hidden">
+                                        <div key={i} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-afaq-blue bg-slate-800 flex items-center justify-center overflow-hidden">
                                             <img src={`https://i.pravatar.cc/40?u=${i}`} alt="user" />
                                         </div>
                                     ))}
                                 </div>
-                                <p className="text-sm text-slate-400 font-medium">{lang === 'en' ? <>Trusted by <span className="text-white">5,000+</span> global enterprises</> : <>قابل اعتماد <span className="text-white">5,000+</span> عالمی کاروباری ادارے</>}</p>
+                                <p className="text-xs md:text-sm text-slate-400 font-medium">{lang === 'en' ? <>Trusted by <span className="text-white">5,000+</span> global enterprises</> : <>قابل اعتماد <span className="text-white">5,000+</span> عالمی کاروباری ادارے</>}</p>
                             </div>
                         </motion.div>
 
@@ -186,7 +186,7 @@ function App() {
                             initial={{ opacity: 0, scale: 0.8, x: 50 }}
                             animate={{ opacity: 1, scale: 1, x: 0 }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="relative lg:h-[700px] flex items-center justify-center mt-10 lg:mt-0"
+                            className="relative lg:h-[700px] flex items-center justify-center mt-6 md:mt-10 lg:mt-0"
                         >
                             {/* Decorative Elements */}
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-afaq-blue/20 rounded-full blur-[120px] -z-10"></div>
@@ -285,7 +285,7 @@ function App() {
                         <Globe size={400} className="absolute -right-20 -top-20 text-white" />
                     </div>
                     <div className="container mx-auto px-6 relative z-10">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
                             {t.stats.map((stat, i) => (
                                 <div key={i} className="text-center">
                                     <div className="text-white text-3xl font-bold font-poppins mb-1">{stat.val}</div>
@@ -298,13 +298,13 @@ function App() {
 
                 {/* Solutions Grid */}
                 <section id="solutions" className="py-20 md:py-24 lg:py-32 bg-slate-50/50">
-                    <div className="container mx-auto px-6">
-                        <div className="max-w-3xl mb-20">
+                    <div className="container mx-auto px-5 md:px-6">
+                        <div className="max-w-3xl mb-12 md:mb-20">
                             <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-6 font-poppins">{t.solutions.title}</h2>
                             <p className="text-slate-600 text-lg leading-relaxed">{t.solutions.description}</p>
                         </div>
 
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                             {t.solutions.items.map((service, i) => (
                                 <motion.div
                                     key={i}
@@ -313,7 +313,7 @@ function App() {
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
                                     whileHover={{ y: -8 }}
-                                    className="bg-white p-10 rounded-[12px] shadow-sm hover:shadow-2xl transition-all border border-slate-100 group"
+                                    className="bg-white p-6 md:p-10 rounded-[12px] shadow-sm hover:shadow-2xl transition-all border border-slate-100 group"
                                 >
                                     <div className={`${service.color} w-14 h-14 rounded-xl flex items-center justify-center text-afaq-blue mb-8 group-hover:bg-afaq-blue group-hover:text-white transition-all`}>
                                         {React.cloneElement(service.icon, { size: 28 })}
