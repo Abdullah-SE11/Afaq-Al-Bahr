@@ -28,30 +28,11 @@ function Navbar({ lang, setLang, t }) {
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [showDropdown])
 
-    const navLinks = [
-        { name: t.navbar.solutions, href: '#services' },
-        { name: t.navbar.network, href: '#about' },
-        { name: t.navbar.about, href: '#about' },
-        { name: t.navbar.track, href: '#track' }
-    ]
-
     return (
         <header className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-white shadow-xl py-2' : 'bg-white/90 backdrop-blur-md py-4'}`}>
             <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
                 <div className="flex items-center gap-6">
                     <img src="/logo.png" alt="ABS Logo" className="h-8 md:h-12 w-auto object-contain" />
-
-                    <nav className="hidden lg:flex items-center gap-8 ms-10">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                className="text-sm font-bold text-slate-600 hover:text-afaq-blue transition-colors uppercase tracking-widest"
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                    </nav>
                 </div>
 
                 <div className="flex items-center gap-3 md:gap-4">
@@ -103,10 +84,8 @@ function Navbar({ lang, setLang, t }) {
                             </div>
                         )}
                     </div>
-
                 </div>
             </div>
-
         </header>
     )
 }
