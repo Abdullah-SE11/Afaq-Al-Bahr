@@ -40,12 +40,6 @@ function Navbar({ lang, setLang, t }) {
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <div className="flex items-center gap-6">
                     <img src="/logo.png" alt="ABS Logo" className="h-8 md:h-12 w-auto object-contain" />
-                    <button
-                        onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
-                        className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 font-bold text-[10px] md:text-xs hover:bg-slate-200 transition-colors"
-                    >
-                        {lang === 'en' ? 'URDU' : 'ENGLISH'}
-                    </button>
 
                     <nav className="hidden lg:flex items-center gap-8 ms-10">
                         {navLinks.map((link) => (
@@ -61,6 +55,13 @@ function Navbar({ lang, setLang, t }) {
                 </div>
 
                 <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => setLang(lang === 'en' ? 'ur' : 'en')}
+                        className="px-3 py-2 rounded-xl bg-slate-100/50 text-slate-700 font-bold text-[10px] md:text-xs hover:bg-slate-200 transition-all border border-slate-200/50"
+                    >
+                        {lang === 'en' ? 'URDU' : 'ENGLISH'}
+                    </button>
+
                     <div className="hidden md:block relative dropdown-container">
                         <button
                             onClick={() => setShowDropdown(!showDropdown)}
@@ -133,7 +134,7 @@ function App() {
 
             <main className="relative z-10 pt-0">
                 {/* Hero Section */}
-                <section className="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden">
+                <section className="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden pt-24 lg:pt-0">
                     {/* World Map Overlay */}
                     <div className="absolute inset-0 bg-world-map z-0 pointer-events-none"></div>
 
