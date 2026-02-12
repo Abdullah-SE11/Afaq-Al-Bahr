@@ -115,6 +115,16 @@ function App() {
     const [lang, setLang] = useState('en')
     const t = translations[lang]
 
+    const handleWhatsAppSubmit = (e) => {
+        e.preventDefault()
+        const name = e.target.elements[0].value
+        const phone = e.target.elements[1].value
+        const message = e.target.elements[2].value
+
+        const whatsappMsg = `*New Inquiry from Website*%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Message:* ${message}`
+        window.open(`https://wa.me/971555365465?text=${whatsappMsg}`, '_blank')
+    }
+
     return (
         <div dir={lang === 'ur' ? 'rtl' : 'ltr'} className={`relative min-h-screen bg-white font-sans text-slate-900 overflow-x-hidden ${lang === 'ur' ? 'font-urdu' : ''}`}>
 
@@ -424,7 +434,7 @@ function App() {
                                 {/* Contact Form */}
                                 <div className="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-slate-100">
                                     <h3 className="text-2xl font-bold text-afaq-blue mb-8 font-poppins">{t.contact.form_title}</h3>
-                                    <form className="space-y-6">
+                                    <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
                                         <div>
                                             <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">{t.contact.labels.name}</label>
                                             <input
