@@ -313,13 +313,13 @@ function App() {
                     <div className="container mx-auto px-6">
                         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                             <div className="relative group max-w-sm mx-auto lg:mx-0">
-                                <div className="aspect-square bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 relative group-hover:shadow-2xl transition-all duration-500">
+                                <div className="aspect-[16/10] bg-slate-50 rounded-[2rem] overflow-hidden shadow-xl border border-slate-100 relative group-hover:shadow-2xl transition-all duration-500">
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-100 to-transparent"></div>
-                                    <div className="flex items-center justify-center h-full p-16 touch-none select-none">
+                                    <div className="flex items-center justify-center h-full p-12 touch-none select-none">
                                         <img
                                             src="/logo.png"
                                             alt="AFAQ AL BAHR Logo"
-                                            className="w-2/3 h-2/3 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+                                            className="w-3/4 h-3/4 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                                         />
                                     </div>
                                 </div>
