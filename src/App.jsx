@@ -16,8 +16,8 @@ function Navbar({ lang, setLang, t }) {
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20)
-            const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100
-            setIsAtBottom(bottom)
+            const heroPast = window.scrollY > (window.innerHeight * 0.8)
+            setIsAtBottom(heroPast)
         }
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
@@ -303,17 +303,15 @@ function App() {
                                         {React.cloneElement(service.icon, { size: 28 })}
                                     </div>
                                     <h3 className="text-xl font-bold text-afaq-blue mb-4 font-poppins">{service.title}</h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed mb-8">
-                                        {service.desc}
-                                    </p>
-                                    <a href="#contact" className="text-afaq-light font-bold text-sm tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all cursor-pointer">
-                                        {t.solutions.proceed} {lang === 'ur' ? <ArrowRight size={14} className="rotate-180" /> : <ArrowRight size={14} />}
-                                    </a>
+                                    <p className="text-slate-500 text-sm leading-relaxed mb-6">{service.desc}</p>
+                                    <div className="flex items-center gap-2 text-afaq-blue font-bold text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
+                                        Learn More <ArrowRight size={14} />
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>
                     </div>
-                </section >
+                </section>
 
                 {/* About Section */}
                 <section id="about" className="py-20 md:py-24 lg:py-32 bg-white">
@@ -322,76 +320,58 @@ function App() {
                             <div className="relative group max-w-sm mx-auto lg:mx-0">
                                 <div className="aspect-[16/10] bg-slate-50 rounded-[2rem] overflow-hidden shadow-xl border border-slate-100 relative group-hover:shadow-2xl transition-all duration-500">
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-100 to-transparent"></div>
-                                    <div className="flex items-center justify-center h-full p-12 touch-none select-none">
-                                        <img
-                                            src="/logo.png"
-                                            alt="AFAQ AL BAHR Logo"
-                                            className="w-3/4 h-3/4 object-contain drop-shadow-xl hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
-                                        />
-                                    </div>
+                                    <img
+                                        src="/logo.png"
+                                        alt="AFAQ AL BAHR STORY"
+                                        className="w-full h-full object-contain p-8 md:p-12"
+                                    />
                                 </div>
-                                <div className="absolute -bottom-6 -end-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 max-w-[180px] hidden xl:block">
-                                    <div className="text-afaq-green mb-2"><Package size={24} /></div>
-                                    <p className="text-[10px] leading-tight text-slate-700 font-bold mb-0">{t.about.established}</p>
+                                <div className="absolute -bottom-6 -right-6 bg-afaq-green p-4 md:p-6 rounded-3xl shadow-xl border-4 border-white hidden sm:block">
+                                    <p className="text-white font-black text-xl md:text-2xl font-poppins leading-tight">Since<br />2022</p>
                                 </div>
                             </div>
 
-                            <div className="lg:max-w-xl">
-                                <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-6 font-poppins leading-tight">{t.about.title}</h2>
-                                <p className="text-lg text-slate-600 mb-10 leading-relaxed font-normal">
-                                    {t.about.description}
-                                </p>
-                                <div className="space-y-6 mb-12">
-                                    {t.about.list.map((list, i) => (
-                                        <div key={i} className="flex items-center gap-4">
-                                            <div className="w-6 h-6 rounded-full bg-afaq-green/10 flex items-center justify-center text-afaq-green">
-                                                <ExternalLink size={12} />
+                            <div>
+                                <div className="inline-flex items-center gap-2 bg-afaq-blue/5 text-afaq-blue px-4 py-2 rounded-full text-xs font-bold tracking-[0.2em] mb-6 uppercase">
+                                    <Globe size={14} /> {t.about.badge}
+                                </div>
+                                <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-10 font-poppins leading-tight">{t.about.title}</h2>
+
+                                <div className="space-y-8">
+                                    {t.about.points.map((p, i) => (
+                                        <div key={i} className="flex gap-6 group">
+                                            <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-afaq-blue group-hover:text-white transition-all duration-300">
+                                                <div className="text-afaq-blue group-hover:text-white">
+                                                    {React.cloneElement(p.icon, { size: 24 })}
+                                                </div>
                                             </div>
-                                            <span className="font-bold text-slate-700">{list}</span>
+                                            <div>
+                                                <h4 className="font-bold text-afaq-blue text-lg mb-2">{p.title}</h4>
+                                                <p className="text-slate-500 leading-relaxed">{p.desc}</p>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
-                                <button className="bg-afaq-blue text-white px-12 py-5 rounded-xl font-bold shadow-xl hover:bg-slate-800 transition-all text-sm tracking-widest uppercase">
-                                    {t.about.button}
-                                </button>
                             </div>
                         </div>
-                    </div>
-                </section >
 
-                {/* Leadership Section */}
-                <section className="py-20 lg:py-32 bg-slate-50 overflow-hidden relative">
-                    <div className="absolute top-0 left-0 w-full h-full bg-world-map opacity-[0.03]"></div>
-                    <div className="container mx-auto px-6 relative z-10">
-                        <div className="max-w-5xl mx-auto">
-                            <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden grid md:grid-cols-5 items-stretch">
-                                <div className="md:col-span-2 bg-afaq-blue relative min-h-[350px] md:min-h-[400px]">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-afaq-blue to-slate-900"></div>
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="w-full h-full p-4 md:p-6">
-                                            <div className="w-full h-full rounded-2xl border border-white/10 overflow-hidden bg-slate-800 shadow-2xl relative group/image">
-                                                <img
-                                                    src="/onwer.jpeg"
-                                                    alt={t.about.leadership.name}
-                                                    className="w-full h-full object-cover object-top scale-110 group-hover/image:scale-100 transition-transform duration-1000"
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-afaq-blue/60 via-transparent to-transparent opacity-60"></div>
-                                            </div>
+                        {/* Message from Leadership */}
+                        <div className="mt-20 md:mt-32 max-w-4xl mx-auto">
+                            <div className="bg-slate-900 rounded-[3rem] p-8 md:p-16 relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-afaq-green/10 blur-[100px] rounded-full -mr-32 -mt-32 group-hover:bg-afaq-green/20 transition-all duration-700"></div>
+
+                                <div className="relative z-10">
+                                    <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-10">
+                                        <div className="w-24 h-24 md:w-32 md:h-32 rounded-3xl bg-slate-800 border border-white/10 overflow-hidden shrink-0 shadow-2xl">
+                                            <img src="https://i.pravatar.cc/128?u=ceo" alt="CEO" className="w-full h-full object-cover" />
+                                        </div>
+                                        <div className="text-center md:text-left">
+                                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 font-poppins">{t.about.leadership.name}</h3>
+                                            <p className="text-afaq-green font-bold tracking-widest text-xs md:text-sm uppercase">{t.about.leadership.role}</p>
                                         </div>
                                     </div>
-                                    <div className="absolute bottom-8 md:bottom-10 inset-x-8 md:inset-x-10">
-                                        <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2 font-poppins">{t.about.leadership.name}</h3>
-                                        <p className="text-afaq-green font-bold text-[10px] md:text-xs tracking-widest uppercase">{t.about.leadership.role}</p>
-                                    </div>
-                                </div>
-                                <div className="md:col-span-3 p-8 md:p-12 lg:p-20 flex flex-col justify-center">
-                                    <div className="mb-6 md:mb-10 text-afaq-blue/20">
-                                        <svg width="45" height="34" viewBox="0 0 60 45" fill="currentColor" className="md:w-[60px] md:h-[45px]">
-                                            <path d="M13.3333 45L0 31.6667V0H26.6667V31.6667H13.3333V45ZM46.6667 45L33.3333 31.6667V0H60V31.6667H46.6667V45Z" />
-                                        </svg>
-                                    </div>
-                                    <h2 className="text-2xl md:text-3xl font-bold text-afaq-blue mb-6 md:mb-8 font-poppins">{t.about.leadership.title}</h2>
-                                    <p className="text-lg md:text-xl text-slate-600 leading-relaxed italic font-medium mb-8 md:mb-10">
+
+                                    <p className={`text-lg md:text-2xl text-slate-300 font-medium leading-relaxed mb-10 italic ${lang === 'ur' ? 'text-right leading-loose' : 'text-left'}`}>
                                         "{t.about.leadership.message}"
                                     </p>
                                     <div className="flex items-center gap-4 md:gap-6">
@@ -567,8 +547,8 @@ function App() {
                         </div>
                     </div>
                 </footer>
-            </main >
-        </div >
+            </main>
+        </div>
     )
 }
 

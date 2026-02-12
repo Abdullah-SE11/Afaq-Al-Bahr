@@ -187,9 +187,9 @@ body {
 
 
 /* Footer & Contact Section LTR Override in RTL mode - Force Reset All Typography to English Rules */
-/* Global LTR Overrides for Branding Consistency (Nav, Footer, Contact) */
-[dir="rtl"] nav,
-[dir="rtl"] nav *,
+/* Global LTR Overrides for Branding Consistency (Header, Footer, Contact) */
+[dir="rtl"] header,
+[dir="rtl"] header *,
 [dir="rtl"] footer,
 [dir="rtl"] footer *,
 [dir="rtl"] #contact,
@@ -207,14 +207,14 @@ body {
 /* Ensure centering utility works within the LTR sections */
 [dir="rtl"] #contact .text-center,
 [dir="rtl"] #contact .text-center *,
-[dir="rtl"] nav .text-center,
-[dir="rtl"] nav .text-center * {
+[dir="rtl"] header .text-center,
+[dir="rtl"] header .text-center * {
   text-align: center !important;
 }
 
 /* Fix button alignment in contact section - override the global right-align */
 [dir="rtl"] #contact button,
-[dir="rtl"] nav button {
+[dir="rtl"] header button {
   text-align: center !important;
   display: flex !important;
   align-items: center !important;
@@ -222,19 +222,19 @@ body {
 }
 
 /* Explicitly reset text sizes for LTR sections inside RTL context */
-[dir="rtl"] nav .text-sm,
+[dir="rtl"] header .text-sm,
 [dir="rtl"] footer .text-sm,
 [dir="rtl"] #contact .text-sm {
   font-size: 0.875rem !important;
 }
 
-[dir="rtl"] nav .text-xs,
+[dir="rtl"] header .text-xs,
 [dir="rtl"] footer .text-xs,
 [dir="rtl"] #contact .text-xs {
   font-size: 0.75rem !important;
 }
 
-[dir="rtl"] nav .text-lg,
+[dir="rtl"] header .text-lg,
 [dir="rtl"] footer .text-lg,
 [dir="rtl"] #contact .text-lg {
   font-size: 1.125rem !important;
@@ -257,8 +257,8 @@ body {
 }
 
 /* Re-enable Poppins for headings in LTR sections within RTL context */
-[dir="rtl"] nav h2,
-[dir="rtl"] nav h3,
+[dir="rtl"] header h2,
+[dir="rtl"] header h3,
 [dir="rtl"] footer h3,
 [dir="rtl"] footer h4,
 [dir="rtl"] #contact h2,
