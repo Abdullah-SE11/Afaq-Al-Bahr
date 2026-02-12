@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Ship, Plane, Globe, Package, Truck, Anchor, Menu, Facebook, Linkedin, ArrowRight, ExternalLink, Phone, MessageCircle } from 'lucide-react'
 import { SocialLinks } from './components/SocialLinks'
 import { translations } from './data/translations'
@@ -10,7 +10,7 @@ import { translations } from './data/translations'
 function Navbar({ lang, setLang, t }) {
     const [scrolled, setScrolled] = useState(false)
     const [showDropdown, setShowDropdown] = useState(false)
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -103,60 +103,9 @@ function Navbar({ lang, setLang, t }) {
                         )}
                     </div>
 
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="lg:hidden p-2.5 rounded-xl text-afaq-blue bg-slate-50 hover:bg-slate-100 transition-colors"
-                    >
-                        <Menu size={20} />
-                    </button>
                 </div>
             </div>
 
-            {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, x: lang === 'ur' ? -100 : 100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: lang === 'ur' ? -100 : 100 }}
-                        className={`fixed inset-0 z-[1000] bg-white flex flex-col p-8 ${lang === 'ur' ? 'text-right' : 'text-left'}`}
-                    >
-                        <div className="flex justify-between items-center mb-12">
-                            <img src="/logo.png" alt="ABS Logo" className="h-8 w-auto" />
-                            <button
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="p-2.5 rounded-xl bg-slate-50 text-slate-400"
-                            >
-                                <ArrowRight className={lang === 'ur' ? 'rotate-180' : ''} />
-                            </button>
-                        </div>
-
-                        <div className="flex flex-col gap-8">
-                            {navLinks.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.href}
-                                    onClick={() => setMobileMenuOpen(false)}
-                                    className="text-2xl font-black text-afaq-blue uppercase tracking-tighter"
-                                >
-                                    {link.name}
-                                </a>
-                            ))}
-                        </div>
-
-                        <div className="mt-auto space-y-4">
-                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t.navbar.contact}</p>
-                            <a
-                                href="tel:0555365465"
-                                className="flex items-center gap-4 p-5 bg-afaq-blue text-white rounded-2xl shadow-xl"
-                            >
-                                <Phone size={20} />
-                                <span className="text-lg font-bold">055 536 5465</span>
-                            </a>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </header>
     )
 }
