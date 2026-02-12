@@ -154,7 +154,7 @@ function App() {
                                 <Ship size={14} /> {t.hero.tag}
                             </motion.div>
 
-                            <h1 className="text-5xl lg:text-8xl font-black text-white leading-[1.05] mb-8 font-poppins italic tracking-tight">
+                            <h1 className="text-4xl sm:text-5xl lg:text-8xl font-black text-white leading-[1.1] md:leading-[1.05] mb-6 md:mb-8 font-poppins italic tracking-tight">
                                 {t.hero.title_line1} {lang === 'ur' ? ' ' : <br />}
                                 <span className="text-afaq-light">{t.hero.title_line2_1}</span> <span className="text-white">{t.hero.title_line2_2}</span> <br />
                                 <span className="text-afaq-green">{t.hero.title_line3}</span>
@@ -168,7 +168,7 @@ function App() {
 
 
 
-                            <div className="mt-16 flex items-center gap-8 border-t border-white/10 pt-10">
+                            <div className="mt-10 md:mt-16 flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 border-t border-white/10 pt-8 md:pt-10">
                                 <div className="flex -space-x-3 space-x-reverse">
                                     {[1, 2, 3, 4].map(i => (
                                         <div key={i} className="w-10 h-10 rounded-full border-2 border-afaq-blue bg-slate-800 flex items-center justify-center overflow-hidden">
@@ -201,8 +201,8 @@ function App() {
 
                                     {/* Glass Metrics on Image */}
                                     {/* Shipping Option Selector */}
-                                    <div className="absolute bottom-8 inset-x-8">
-                                        <div className="glass-panel p-5 rounded-3xl border-white/20 backdrop-blur-xl shadow-2xl">
+                                    <div className="absolute bottom-4 md:bottom-8 inset-x-4 md:inset-x-8">
+                                        <div className="glass-panel p-4 md:p-5 rounded-2xl md:rounded-3xl border-white/20 backdrop-blur-xl shadow-2xl">
                                             <div className="flex justify-between items-center mb-4">
                                                 <p className="text-white/80 text-xs font-bold uppercase tracking-widest ps-1">{t.hero.shipping_method}</p>
                                                 <div className="flex gap-1 opacity-50">
@@ -296,7 +296,7 @@ function App() {
                 </div >
 
                 {/* Solutions Grid */}
-                < section id="solutions" className="py-24 lg:py-32 bg-slate-50/50" >
+                <section id="solutions" className="py-20 md:py-24 lg:py-32 bg-slate-50/50">
                     <div className="container mx-auto px-6">
                         <div className="max-w-3xl mb-20">
                             <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-6 font-poppins">{t.solutions.title}</h2>
@@ -331,9 +331,9 @@ function App() {
                 </section >
 
                 {/* About Section */}
-                <section id="about" className="py-24 lg:py-32 bg-white">
+                <section id="about" className="py-20 md:py-24 lg:py-32 bg-white">
                     <div className="container mx-auto px-6">
-                        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 lg:gap-12 items-center">
                             <div className="relative group max-w-sm mx-auto lg:mx-0">
                                 <div className="aspect-[16/10] bg-slate-50 rounded-[2rem] overflow-hidden shadow-xl border border-slate-100 relative group-hover:shadow-2xl transition-all duration-500">
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-100 to-transparent"></div>
@@ -420,17 +420,17 @@ function App() {
                 </section>
 
                 {/* Contact Section */}
-                <section id="contact" className="py-24 lg:py-32 bg-gradient-to-br from-slate-50 to-white">
+                <section id="contact" className="py-20 md:py-24 lg:py-32 bg-gradient-to-br from-slate-50 to-white">
                     <div className="container mx-auto px-6">
                         <div className="max-w-6xl mx-auto">
-                            <div className="text-center mb-16">
-                                <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-6 font-poppins">{t.contact.title}</h2>
+                            <div className="text-center mb-12 md:mb-16">
+                                <h2 className="text-3xl md:text-5xl font-extrabold text-afaq-blue mb-4 md:mb-6 font-poppins">{t.contact.title}</h2>
                                 <p className="text-slate-600 text-lg max-w-2xl mx-auto">
                                     {t.contact.description}
                                 </p>
                             </div>
 
-                            <div className="grid lg:grid-cols-2 gap-16">
+                            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
                                 {/* Contact Form */}
                                 <div className="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-slate-100">
                                     <h3 className="text-2xl font-bold text-afaq-blue mb-8 font-poppins">{t.contact.form_title}</h3>
@@ -535,12 +535,12 @@ function App() {
                     </div>
                 </section >
 
-                <footer dir="ltr" className="bg-slate-900 pt-24 pb-12 text-white text-left">
+                <footer dir="ltr" className="bg-slate-900 pt-16 md:pt-24 pb-10 md:pb-12 text-white text-left">
                     <div className="container mx-auto px-6">
-                        <div className="grid lg:grid-cols-4 gap-16 mb-24">
+                        <div className="grid lg:grid-cols-4 gap-12 md:gap-16 mb-16 md:mb-24">
                             <div className="col-span-1 lg:col-span-2">
-                                <div className="flex items-center gap-3 mb-10 bg-white p-2 rounded-lg inline-block w-fit">
-                                    <img src="/logo.png" alt="AFAQ AL BAHR" className="h-16 w-auto" />
+                                <div className="flex items-center gap-3 mb-8 md:mb-10 bg-white p-2 rounded-lg inline-block w-fit">
+                                    <img src="/logo.png" alt="AFAQ AL BAHR" className="h-10 md:h-16 w-auto" />
                                 </div>
                                 <p className="text-slate-400 leading-relaxed mb-10 max-w-md text-lg">
                                     Premium logistics, freight forwarding, and integrated supply chain management solutions since 2022.
