@@ -86,7 +86,7 @@ export function Home({ t, onOpenQuote }) {
                 {t.hero.title_end}
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl">
+              <p className="text-base font-bold sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl">
                 {t.hero.description}
               </p>
 
@@ -332,13 +332,18 @@ export function Home({ t, onOpenQuote }) {
         <div className="container mx-auto px-4 md:px-8 relative z-10 ">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div className="space-y-3 max-w-2xl">
-              <span className="px-3.5 py-1.5 rounded-md bg-slate-100 text-slate-800 text-xs font-bold tracking-widest uppercase">
+               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 {t.services.badge}
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-black font-poppins text-slate-950 tracking-tight">
-                {t.services.title}
+              </div>
+              <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
+                Multimodal{" "}
+                <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent">
+                  Freight
+                </span>{" "}
+                    Services
               </h2>
-              <p className="text-base text-white font-semibold">{t.services.subtitle}</p>
+              <p className="text-base font-bold sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl">{t.services.subtitle}</p>
             </div>
             <a href="#estimator" className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-[#34D399] transition-colors">
               {t.services.action_link}
@@ -360,7 +365,16 @@ export function Home({ t, onOpenQuote }) {
             key={idx}
             className="relative group"
           >
-            <div className="relative glass-dark-card p-8 rounded-3xl space-y-6 flex flex-col justify-between border border-white/15 bg-[#091122]/90 shadow-2xl transition-all duration-300 hover:border-cyan-400/50 hover:scale-[1.02]">
+            <div className="relative p-8 rounded-3xl space-y-5
+                          flex flex-col justify-between
+                          border border-white/20
+                          bg-[#091122]/30
+                          backdrop-blur-xl
+                          shadow-2xl
+                          transition-all duration-300
+                          hover:border-cyan-400/60
+                          hover:shadow-cyan-500/20
+                          hover:scale-[1.02]">
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">

@@ -5,7 +5,9 @@ import {
   Headphones, ArrowRight, ArrowUpRight, Activity, TrendingUp, Check, Anchor
 } from 'lucide-react'
 
+
 export function AboutUs({ t, onOpenQuote }) {
+  
 
   const heroStats = [
     { num: "142", label: "ACTIVE VESSELS", sub: "Ocean & Air Fleet" },
@@ -42,35 +44,42 @@ export function AboutUs({ t, onOpenQuote }) {
   ]
 
   const timelineSteps = [
-    {
-      year: "2012",
-      title: "Founding & Coastal Hub",
-      desc: "Inaugurated our first premier maritime staging hub with 10 reefer units and deep-berth container landing.",
-      badge: "Terminal Operational",
-      active: false
-    },
-    {
-      year: "2016",
-      title: "Multimodal Air & Rail",
-      desc: "Chartered transcontinental scheduled air freight lanes and cross-border road truck fleets.",
-      badge: "Tri-Modal Integration",
-      active: false
-    },
-    {
-      year: "2019",
-      title: "Telemetry Platform Launch",
-      desc: "Rolled out proprietary IoT container tracking, continuous environmental sensors, and predictive ETA algorithms.",
-      badge: "Digital Telemetry Core",
-      active: true
-    },
-    {
-      year: "2022",
-      title: "50+ Global Port Hubs",
-      desc: "Expanded enterprise charter networks into 50+ sovereign markets including Dubai, Karachi, Shanghai, and Hamburg.",
-      badge: "Global Network Scale",
-      active: false
-    }
-  ]
+  {
+    year: "2012",
+    title: "Founding & Coastal Hub",
+    desc: "Inaugurated our first premier maritime staging hub with 10 reefer units and deep-berth container landing.",
+    badge: "Terminal Operational",
+    active: false
+  },
+  {
+    year: "2016",
+    title: "Multimodal Air & Rail",
+    desc: "Chartered transcontinental scheduled air freight lanes and cross-border road truck fleets.",
+    badge: "Tri-Modal Integration",
+    active: false
+  },
+  {
+    year: "2019",
+    title: "Telemetry Platform Launch",
+    desc: "Rolled out proprietary IoT container tracking, continuous environmental sensors, and predictive ETA algorithms.",
+    badge: "Digital Telemetry Core",
+    active: false
+  },
+  {
+    year: "2022",
+    title: "50+ Global Port Hubs",
+    desc: "Expanded enterprise charter networks into 50+ sovereign markets including Dubai, Karachi, Shanghai, and Hamburg.",
+    badge: "Global Network Scale",
+    active: false
+  },
+  {
+    year: "2026",
+    title: "Next-Generation Logistics",
+    desc: "Advancing intelligent logistics through real-time visibility, smarter automation, and connected global supply chain operations.",
+    badge: "Future Logistics Network",
+    active: false
+  }
+]
 
   return (
     <div className="bg-[#060b13] text-slate-100 min-h-screen">
@@ -256,94 +265,206 @@ export function AboutUs({ t, onOpenQuote }) {
       </section>
 
       {/* ==================== 4. THE CORE VALUES GOVERNING EVERY MILE ==================== */}
-      <section
-  className="py-24 text-slate-950 relative bg-cover bg-center bg-no-repeat"
-  style={{
-    backgroundImage: "url('/Assets/corevalues-bg.jpg')",
-  }}
->
-  {/* Background Overlay */}
-  <div className="absolute inset-0 bg-white/25"></div>
+        <section
+          className="py-24 text-slate-950 relative bg-cover bg-center bg-no-repeat"
+          style={{
+          backgroundImage: "url('/Assets/corevalues-bg.jpg')",
+          }}
+        >
+        {/* Background Overlay */}
+            <div className="absolute inset-0 bg-white/10"></div>
 
-  <div className="container mx-auto px-4 md:px-8 relative z-10">
-          <div className="space-y-3 mb-16">
-            <span className="px-3 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-bold tracking-widest uppercase">
-              OPERATIONAL TENETS
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black font-poppins text-slate-950 tracking-tight">
-              The Core Values Governing Every Mile
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {coreValues.map((val, idx) => (
-              <div key={idx} className="glass-light-card p-8 rounded-3xl border border-slate-200 space-y-5 flex flex-col justify-between">
-                <div className="space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-900 flex items-center justify-center font-bold text-lg">
-                    {val.num}
-                  </div>
-                  <h3 className="text-2xl font-bold font-poppins text-slate-950">{val.title}</h3>
-                  <p className="text-xs text-slate-600 leading-relaxed font-light">{val.desc}</p>
+            <div className="container mx-auto px-4 md:px-8 relative z-10">
+                <div className="space-y-3 mb-16">
+                   <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                      OPERATIONAL TENETS
+                   </div>
+                  <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
+                      The Core{" "}
+                      <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent">
+                      Values Governing
+                      </span>{" "}
+                      Every Mile
+                  </h2> 
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-800">{val.link}</span>
-                  <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-slate-950" />
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {coreValues.map((val, idx) => (
+                    <div key={idx} className="group relative">
+
+                      {/* Glass Glow */}
+                      <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500 to-emerald-500 opacity-5 blur-xl transition-opacity duration-300 group-hover:opacity-12"></div>
+
+                      {/* Glass Card */}
+                      <div
+                        className="
+                          relative p-8 rounded-3xl space-y-5
+                          flex flex-col justify-between
+                          border border-white/20
+                          bg-[#091122]/30
+                          backdrop-blur-xl
+                          shadow-2xl
+                          transition-all duration-300
+                          hover:border-cyan-400/60
+                          hover:shadow-cyan-500/20
+                          hover:scale-[1.02]
+                        "
+                      >
+
+                        <div className="space-y-4">
+
+                          {/* Number */}
+                          <div
+                            className="
+                              w-12 h-12 rounded-2xl
+                              bg-white/10
+                              border border-white/10
+                              text-cyan-300
+                              flex items-center justify-center
+                              font-bold text-lg
+                              transition-all duration-300
+                              group-hover:bg-cyan-400
+                              group-hover:text-[#091122]
+                              group-hover:border-cyan-400
+                            "
+                          >
+                            {val.num}
+                          </div>
+
+                          {/* Title */}
+                          <h3
+                            className="
+                              text-2xl font-bold font-poppins
+                              text-white
+                              transition-colors duration-300
+                              group-hover:text-cyan-300
+                            "
+                          >
+                            {val.title}
+                          </h3>
+
+                          {/* Description */}
+                          <p
+                            className="
+                              text-xs text-slate-400
+                              leading-relaxed font-light
+                              transition-colors duration-300
+                              group-hover:text-slate-300
+                            "
+                          >
+                            {val.desc}
+                          </p>
+
+                        </div>
+
+                        {/* Bottom */}
+                        <div
+                          className="
+                            pt-4
+                            border-t border-white/10
+                            flex items-center justify-between
+                            transition-colors duration-300
+                            group-hover:border-cyan-400/30
+                          "
+                        >
+                          <span
+                            className="
+                              text-xs font-bold text-slate-300
+                              transition-colors duration-300
+                              group-hover:text-cyan-300
+                            "
+                          >
+                            {val.link}
+                          </span>
+
+                          <ArrowUpRight
+                            className="
+                              w-4 h-4 text-slate-400
+                              transition-all duration-300
+                              group-hover:text-cyan-400
+                              group-hover:translate-x-1
+                              group-hover:-translate-y-1
+                            "
+                          />
+                        </div>
+
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
       {/* ==================== 5. A DECADE OF TECHNOLOGICAL EXPANSION (TIMELINE) ==================== */}
-      <section className="py-24 bg-slate-950 text-slate-100 border-t border-white/10">
+      
+      <section className="py-24 bg-white text-slate-950 border-t border-slate-200">
         <div className="container mx-auto px-4 md:px-8">
 
+          {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-            <span className="px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold tracking-widest uppercase">
+            <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-bold tracking-widest uppercase">
               HISTORICAL TRAJECTORY
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black font-poppins text-white tracking-tight">
+
+            <h2 className="text-3xl sm:text-5xl font-black font-poppins text-slate-950 tracking-tight">
               A Decade of Technological Expansion
             </h2>
-            <p className="text-base text-slate-400 font-light leading-relaxed">
+
+            <p className="text-base text-slate-600 font-light leading-relaxed">
               From a single port berth provider to a global transcontinental logistics network managing billions in freight.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Timeline Cards */}
+          <div
+            className="grid md:grid-cols-2 lg:grid-cols-5 gap-6"
+            style={{ direction: "rtl" }}
+          >
             {timelineSteps.map((step, idx) => (
               <div
                 key={idx}
-                className={`p-8 rounded-3xl transition-all space-y-6 flex flex-col justify-between ${step.active
-                    ? 'bg-[#09172f] border-2 border-cyan-400 shadow-2xl shadow-cyan-500/20 scale-[1.03]'
-                    : 'glass-dark-card border border-white/10 bg-slate-900/60'
-                  }`}
+                className="group p-8 rounded-3xl transition-all duration-300 space-y-6 flex flex-col justify-between bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-cyan-300 hover:-translate-y-1"
+                style={{ direction: "ltr" }}
               >
+
+                {/* Card Content */}
                 <div className="space-y-4">
+
+                  {/* Year + Dot */}
                   <div className="flex items-center justify-between">
-                    <span className={`text-4xl font-black font-poppins ${step.active ? 'text-cyan-400' : 'text-slate-400'}`}>
+                    <span className="text-4xl font-black font-poppins text-slate-400 group-hover:text-cyan-600 transition-colors duration-300">
                       {step.year}
                     </span>
-                    <span className="w-3 h-3 rounded-full bg-cyan-400"></span>
+
+                    <span className="w-3 h-3 rounded-full bg-slate-300 group-hover:bg-cyan-500 group-hover:shadow-lg group-hover:shadow-cyan-500/40 transition-all duration-300"></span>
                   </div>
-                  <h3 className="text-xl font-bold font-poppins text-white">{step.title}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed font-light">{step.desc}</p>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold font-poppins text-slate-950 group-hover:text-[#093C5D] transition-colors duration-300">
+                    {step.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-xs text-slate-600 leading-relaxed font-light">
+                    {step.desc}
+                  </p>
+
                 </div>
 
-                <div className="pt-4 border-t border-white/10">
-                  <span className={`text-[10px] uppercase font-mono font-bold ${step.active ? 'text-cyan-300' : 'text-slate-500'}`}>
+                {/* Badge */}
+                <div className="pt-4 border-t border-slate-200">
+                  <span className="text-[10px] uppercase font-mono font-bold text-slate-500 group-hover:text-cyan-600 transition-colors duration-300">
                     {step.badge}
                   </span>
                 </div>
+
               </div>
             ))}
           </div>
 
         </div>
       </section>
-
       {/* ==================== 6. WHY MULTINATIONALS ENTRUST THEIR CRITICAL FREIGHT ==================== */}
       <section className="py-24 bg-slate-900 text-slate-100">
         <div className="container mx-auto px-4 md:px-8 space-y-16">

@@ -69,7 +69,7 @@ export const translations = {
         },
         services: {
             badge: "END-TO-END CAPABILITIES",
-            title: "Multimodal Freight Services",
+            // title: "Multimodal Freight Services",
             subtitle: "Optimized for weight, density, schedule sensitivity, and hazardous compliance.",
             action_link: "Custom service architecture ↗",
             cards: [
