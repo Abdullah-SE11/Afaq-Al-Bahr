@@ -1,40 +1,83 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowUpRight } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 export function Navbar({ currentPage, navigateTo, t }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeNav, setActiveNav] = useState(currentPage)
 
+  // Keep active navigation synced with current page
+  useEffect(() => {
+    setActiveNav(currentPage)
+  }, [currentPage])
+
+  // Header scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30)
     }
 
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
- const handleNavClick = (page) => {
-  setActiveNav(page)
-  navigateTo(page)
-  setMobileMenuOpen(false)
-}
+  const handleNavClick = (event, page) => {
+    event.preventDefault()
+
+    setActiveNav(page)
+    navigateTo(page)
+    setMobileMenuOpen(false)
+
+    // Scroll to top when changing page
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
+
+  const navItems = [
+    {
+      id: 'home',
+      label: t.navbar.home,
+    },
+    {
+      id: 'about',
+      label: t.navbar.about,
+    },
+    {
+      id: 'services',
+      label: t.navbar.services,
+    },
+    {
+      id: 'contact',
+      label: t.navbar.contact,
+    },
+    // {
+    //   id: 'terms',
+    //   label: 'Terms & Conditions',
+    // },
+  ]
 
   return (
-<header
-  className={`relative w-full z-50 flex-shrink-0 transition-all duration-300 ${
-    scrolled
-      ? 'bg-white shadow-md border-b border-slate-200 py-2'
-      : 'bg-white border-b border-slate-200 py-3'
-  }`}
->
-      <div className="container mx-auto px-4 md:px-8 flex items-center justify-between  ">
+    <header
+      className={`relative w-full z-50 flex-shrink-0 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white shadow-md border-b border-slate-200 py-2'
+          : 'bg-white border-b border-slate-200 py-3'
+      }`}
+    >
+      <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
 
-        {/* Logo */}
-        <button
-          onClick={() => handleNavClick('home')}
+        {/* =====================================================
+            LOGO
+        ====================================================== */}
+        <a
+          href="#home"
+          onClick={(e) => handleNavClick(e, 'home')}
           className="flex items-center gap-3 group text-left"
         >
           <div className="group-hover:scale-105 transition-transform flex items-center justify-center">
@@ -54,80 +97,95 @@ export function Navbar({ currentPage, navigateTo, t }) {
               SHIPPING L.L.C.
             </span>
           </div>
-        </button>
+        </a>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-3 text-sm font-medium text-slate-700">
 
-          <button
-            onClick={() => handleNavClick('home')}
-            className={`px-4 py-2 rounded-md font-medium transition-all duration-200 ${
-              activeNav === 'home'
-                ? 'bg-[#093C5D] text-white shadow-md'
-                : 'text-slate-700 hover:bg-[#093C5D] hover:text-white'
-            }`}
-          >
-            {t.navbar.home}
-          </button>
+        {/* =====================================================
+            DESKTOP NAVIGATION
+        ====================================================== */}
+        <nav className="hidden lg:flex items-center gap-2">
 
-          <button
-            onClick={() => handleNavClick('about')}
-            className={`px-4 py-2 rounded-md font-medium transition-all duration-200 ${
-              activeNav === 'about'
-                ? 'bg-[#093C5D] text-white shadow-md'
-                : 'text-slate-700 hover:bg-[#093C5D] hover:text-white'
-            }`}
-          >
-            {t.navbar.about}
-          </button>
+          {navItems.map((item) => {
 
-          <button
-                    onClick={() => handleNavClick('services')}
-                    className={`px-4 py-2 rounded-md font-medium transition-all duration-200 ${
-                      activeNav === 'services'
-                        ? 'bg-[#093C5D] text-white shadow-md'
-                        : 'text-slate-700 hover:bg-[#093C5D] hover:text-white'
-            }`}
-          >
-            {t.navbar.services}
-          </button>
+            const isActive = activeNav === item.id
 
-          <button
-            onClick={() => handleNavClick('contact')}
-            className={`px-4 py-2 rounded-md font-medium transition-all duration-200 ${
-              activeNav === 'contact'
-                ? 'bg-[#093C5D] text-white shadow-md'
-                : 'text-slate-700 hover:bg-[#093C5D] hover:text-white'
-            }`}
-          >
-            {t.navbar.contact}
-          </button>
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => handleNavClick(e, item.id)}
+                className={`
+                  relative
+                  px-4
+                  py-2
+                  rounded-md
+                  text-sm
+                  font-medium
+                  transition-all
+                  duration-200
+                  select-none
+                  ${
+                    isActive
+                      ? 'bg-[#093C5D] text-white shadow-md'
+                      : 'text-slate-700 hover:bg-[#093C5D] hover:text-white hover:shadow-md'
+                  }
+                `}
+              >
+                {item.label}
+              </a>
+            )
+          })}
 
-          <button
-            onClick={() => handleNavClick('terms')}
-            className={`px-4 py-2 rounded-md font-medium transition-all duration-200 ${
-              activeNav === 'terms'
-                ? 'bg-[#093C5D] text-white shadow-md'
-                : 'text-slate-700 hover:bg-[#093C5D] hover:text-white'
-            }`}
-          >
-            Terms & Conditions
-          </button>
 
-          <button
-            onClick={() => handleNavClick('contact')}
-            className="ml-2 px-5 py-2.5 rounded-full bg-[#5DF8D8] text-[#093C5D] text-xs font-bold shadow-sm hover:bg-[#34D399] hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+          {/* Get Quote */}
+          {/* <a
+            href="#contact"
+            onClick={(e) => handleNavClick(e, 'contact')}
+            className="
+              ml-2
+              px-5
+              py-2.5
+              rounded-full
+              bg-[#5DF8D8]
+              text-[#093C5D]
+              text-xs
+              font-bold
+              shadow-sm
+              hover:bg-[#34D399]
+              hover:shadow-lg
+              hover:-translate-y-0.5
+              active:scale-95
+              transition-all
+              duration-200
+            "
           >
             Get a Quote
-          </button>
+          </a> */}
 
         </nav>
 
-        {/* Mobile Toggle */}
+
+        {/* =====================================================
+            MOBILE MENU BUTTON
+        ====================================================== */}
         <div className="flex lg:hidden items-center">
+
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-[#093C5D] text-white hover:bg-[#3B7597] transition-colors"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+            className="
+              p-2
+              rounded-lg
+              bg-[#093C5D]
+              text-white
+              hover:bg-[#3B7597]
+              hover:shadow-md
+              active:scale-95
+              transition-all
+              duration-200
+            "
           >
             {mobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -135,64 +193,120 @@ export function Navbar({ currentPage, navigateTo, t }) {
               <Menu className="w-6 h-6" />
             )}
           </button>
+
         </div>
+
       </div>
 
-      {/* Mobile Drawer Menu */}
+
+      {/* =====================================================
+          MOBILE NAVIGATION
+      ====================================================== */}
       <AnimatePresence>
+
         {mobileMenuOpen && (
+
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-slate-200 px-6 py-6 space-y-3 shadow-lg"
+            initial={{
+              opacity: 0,
+              height: 0,
+              y: -10,
+            }}
+            animate={{
+              opacity: 1,
+              height: 'auto',
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              height: 0,
+              y: -10,
+            }}
+            transition={{
+              duration: 0.25,
+              ease: 'easeOut',
+            }}
+            className="
+              lg:hidden
+              overflow-hidden
+              bg-white
+              border-t
+              border-slate-200
+              shadow-lg
+            "
           >
 
-            <button
-              onClick={() => handleNavClick('home')}
-              className="block w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-slate-100 hover:text-[#093C5D] transition-colors"
-            >
-              {t.navbar.home}
-            </button>
+            <nav className="px-5 py-5 space-y-2">
 
-            <button
-              onClick={() => handleNavClick('about')}
-              className="block w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-slate-100 hover:text-[#093C5D] transition-colors"
-            >
-              {t.navbar.about}
-            </button>
+              {navItems.map((item) => {
 
-            <button
-              onClick={() => handleNavClick('services')}
-              className="block w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-slate-100 hover:text-[#093C5D] transition-colors"
-            >
-              {t.navbar.services}
-            </button>
+                const isActive = activeNav === item.id
 
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="block w-full text-left px-4 py-3 rounded-lg bg-[#093C5D] text-white font-semibold"
-            >
-              {t.navbar.contact}
-            </button>
+                return (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    onClick={(e) => handleNavClick(e, item.id)}
+                    className={`
+                      flex
+                      items-center
+                      w-full
+                      px-4
+                      py-3
+                      rounded-lg
+                      text-sm
+                      font-medium
+                      transition-all
+                      duration-200
+                      ${
+                        isActive
+                          ? 'bg-[#093C5D] text-white shadow-md'
+                          : 'text-slate-700 hover:bg-[#093C5D] hover:text-white hover:shadow-md hover:translate-x-1'
+                      }
+                    `}
+                  >
+                    {item.label}
+                  </a>
+                )
+              })}
 
-            <button
-              onClick={() => handleNavClick('terms')}
-              className="block w-full text-left px-4 py-3 rounded-lg text-slate-700 font-medium hover:bg-slate-100 hover:text-[#093C5D] transition-colors"
-            >
-              Terms & Conditions
-            </button>
 
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="w-full mt-2 px-5 py-3 rounded-full bg-[#5DF8D8] text-[#093C5D] font-bold hover:bg-[#34D399] transition-colors"
-            >
-              Get a Quote
-            </button>
+              {/* Mobile Get Quote */}
+              {/* <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, 'contact')}
+                className="
+                  flex
+                  items-center
+                  justify-center
+                  w-full
+                  mt-3
+                  px-5
+                  py-3
+                  rounded-full
+                  bg-[#5DF8D8]
+                  text-[#093C5D]
+                  font-bold
+                  text-sm
+                  shadow-sm
+                  hover:bg-[#34D399]
+                  hover:shadow-lg
+                  active:scale-95
+                  transition-all
+                  duration-200
+                "
+              >
+                Get a Quote
+              </a> */}
+
+            </nav>
 
           </motion.div>
+
         )}
+
       </AnimatePresence>
+
     </header>
   )
 }

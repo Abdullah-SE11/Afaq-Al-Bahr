@@ -67,21 +67,21 @@ export default function App() {
               className="w-full max-w-md p-6 md:p-8 rounded-3xl bg-[#091122] border border-white/20 relative space-y-5 shadow-2xl"
             >
               {/* Close button */}
-              {/* <button
+              <button
                 onClick={() => setQuoteModalOpen(false)}
                 className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
-              </button> */}
+              </button>
 
               {/* Header */}
-              {/* <div className="flex items-center gap-3 pr-8">
+              <div className="flex items-center gap-3 pr-8">
                 <img src="as/logo.png" alt="ABS Logo" className="h-10 w-auto object-contain bg-white p-1 rounded-lg" />
                 <div>
                   <h3 className="text-lg font-bold font-poppins text-white leading-tight">Contact Afaq Al Bahr</h3>
                   <p className="text-xs text-slate-400">Choose a line to chat directly on WhatsApp</p>
                 </div>
-              </div> */}
+              </div>
 
               {/* Live badge */}
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 w-fit">

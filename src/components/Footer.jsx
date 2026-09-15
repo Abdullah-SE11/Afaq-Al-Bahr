@@ -28,7 +28,7 @@ export function Footer({ navigateTo, t }) {
 
       {/* Quick Links */}
       <div>
-        <h4 className="text-sm font-bold mb-4 text-white">
+        <h4 className="text-1xl font-bold mb-4 text-white">
           Quick Links
         </h4>
 
@@ -62,7 +62,7 @@ export function Footer({ navigateTo, t }) {
 
       {/* Services */}
       <div>
-        <h4 className="text-sm font-bold mb-4 text-white">
+        <h4 className="text-1xl font-bold mb-4 text-white">
           Services
         </h4>
 
@@ -96,7 +96,7 @@ export function Footer({ navigateTo, t }) {
 
       {/* Contact */}
       <div>
-        <h4 className="text-sm font-bold mb-4 text-white">
+        <h4 className="text-1xl font-bold mb-4 text-white">
           Contact & Global Operations
         </h4>
 

@@ -103,12 +103,12 @@ export function Contact({ t }) {
             Avg. Response Time: 42 mins
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-poppins tracking-tight leading-[1.05]">
-            Let's Move{' '}
-            <span className="text-[#5DF8D8]">
+          <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
+            Let's Move{" "}
+            <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent">
               Your Cargo
-            </span>
-          </h1>
+            </span>{" "}
+          </h2>
 
           <p className="max-w-2xl text-sm md:text-base text-slate-300 font-light leading-relaxed">
             Reach our international freight specialists. Get an instant freight
