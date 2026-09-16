@@ -67,9 +67,9 @@ export function Home({ t, onOpenQuote }) {
         }}
       >
         {/* Dark Overlays for Ultra High Contrast & Text Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#060b13]/95 via-[#060b13]/80 to-[#060b13]/40"></div>
-        <div className="absolute inset-0 bg-[#060b13]/30"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060b13] via-transparent to-[#060b13]/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060b13]/75 via-[#060b13]/35 to-[#060b13]/5"></div>
+        <div className="absolute inset-0 bg-[#060b13]/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060b13] via-transparent to-[#060b13]/10"></div>
 
         {/* Ambient Glows */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none"></div>

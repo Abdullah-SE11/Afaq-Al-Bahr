@@ -26,7 +26,7 @@ export function Services({ t, onOpenQuote }) {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                'linear-gradient(rgba(67,205,219,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(67,205,219,0.12) 1px, transparent 1px)',
+                'absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(93,248,216,0.14),transparent_40%),radial-gradient(circle_at_20%_80%,rgba(111,209,215,0.12),transparent_40%)]',
               backgroundSize: '55px 55px',
             }}
           />
