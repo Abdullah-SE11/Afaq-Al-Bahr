@@ -104,6 +104,26 @@ body {
   animation: pulseGlow 4s infinite ease-in-out;
 }
 
+@keyframes scrollTimelineRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-timeline-marquee {
+  display: flex;
+  width: max-content;
+  animation: scrollTimelineRight 35s linear infinite;
+}
+
+.pause-on-hover:hover .animate-timeline-marquee,
+.animate-timeline-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* Urdu RTL Styles */
 [dir="rtl"], [dir="rtl"] * {
   font-family: 'Noto Nastaliq Urdu', serif !important;

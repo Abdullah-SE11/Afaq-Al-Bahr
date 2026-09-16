@@ -43,12 +43,33 @@ export function AboutUs({ t, onOpenQuote }) {
     }
   ]
 
-  const timelineSteps = [
+const timelineSteps = [
   {
     year: "2012",
     title: "Founding & Coastal Hub",
     desc: "Inaugurated our first premier maritime staging hub with 10 reefer units and deep-berth container landing.",
     badge: "Terminal Operational",
+    active: false
+  },
+  {
+    year: "2013",
+    title: "Regional Expansion",
+    desc: "Expanded regional freight operations and strengthened connections with key coastal and inland trade routes.",
+    badge: "Regional Network",
+    active: false
+  },
+  {
+    year: "2014",
+    title: "Fleet Development",
+    desc: "Expanded our logistics fleet and improved road freight capabilities to support growing cargo volumes.",
+    badge: "Fleet Expansion",
+    active: false
+  },
+  {
+    year: "2015",
+    title: "Integrated Logistics",
+    desc: "Introduced integrated freight coordination across maritime, road, and warehouse operations.",
+    badge: "Integrated Operations",
     active: false
   },
   {
@@ -59,6 +80,20 @@ export function AboutUs({ t, onOpenQuote }) {
     active: false
   },
   {
+    year: "2017",
+    title: "Global Trade Connections",
+    desc: "Strengthened international trade corridors and expanded partnerships across major commercial markets.",
+    badge: "Global Connectivity",
+    active: false
+  },
+  {
+    year: "2018",
+    title: "Smart Cargo Operations",
+    desc: "Modernized cargo handling processes with improved tracking, documentation, and operational visibility.",
+    badge: "Smart Operations",
+    active: false
+  },
+  {
     year: "2019",
     title: "Telemetry Platform Launch",
     desc: "Rolled out proprietary IoT container tracking, continuous environmental sensors, and predictive ETA algorithms.",
@@ -66,10 +101,45 @@ export function AboutUs({ t, onOpenQuote }) {
     active: false
   },
   {
+    year: "2020",
+    title: "Digital Logistics Transformation",
+    desc: "Accelerated digital logistics operations with connected shipment monitoring and improved remote coordination.",
+    badge: "Digital Transformation",
+    active: false
+  },
+  {
+    year: "2021",
+    title: "Supply Chain Resilience",
+    desc: "Expanded operational capabilities and strengthened supply chain continuity across international freight routes.",
+    badge: "Resilient Supply Chain",
+    active: false
+  },
+  {
     year: "2022",
     title: "50+ Global Port Hubs",
     desc: "Expanded enterprise charter networks into 50+ sovereign markets including Dubai, Karachi, Shanghai, and Hamburg.",
     badge: "Global Network Scale",
+    active: false
+  },
+  {
+    year: "2023",
+    title: "Advanced Cargo Visibility",
+    desc: "Enhanced real-time shipment visibility and connected logistics workflows across global transportation networks.",
+    badge: "Real-Time Visibility",
+    active: false
+  },
+  {
+    year: "2024",
+    title: "Intelligent Logistics Systems",
+    desc: "Advanced automation, data-driven planning, and connected logistics systems to improve cargo coordination.",
+    badge: "Intelligent Logistics",
+    active: false
+  },
+  {
+    year: "2025",
+    title: "Connected Global Operations",
+    desc: "Expanded connected logistics capabilities with smarter monitoring, automation, and integrated supply chain management.",
+    badge: "Connected Operations",
     active: false
   },
   {
@@ -581,51 +651,50 @@ export function AboutUs({ t, onOpenQuote }) {
             </p>
           </div>
 
-          {/* Timeline Cards */}
-          <div
-            className="grid md:grid-cols-2 lg:grid-cols-5 gap-6"
-            style={{ direction: "rtl" }}
-          >
-            {timelineSteps.map((step, idx) => (
-              <div
-                key={idx}
-                className="group p-8 rounded-3xl transition-all duration-300 space-y-6 flex flex-col justify-between bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-cyan-300 hover:-translate-y-1"
-                style={{ direction: "ltr" }}
-              >
+          {/* Timeline Cards Animated Flow (Left to Right, Pause on Hover) */}
+          <div className="relative w-full overflow-hidden pause-on-hover py-4">
+            {/* Edge Fade Gradients */}
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 md:w-36 z-10 bg-gradient-to-r from-white via-white/80 to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 md:w-36 z-10 bg-gradient-to-l from-white via-white/80 to-transparent" />
 
-                {/* Card Content */}
-                <div className="space-y-4">
+            {/* Seamless Animated Track */}
+            <div className="animate-timeline-marquee flex gap-6">
+              {[...timelineSteps, ...timelineSteps].map((step, idx) => (
+                <div
+                  key={idx}
+                  className="w-[280px] sm:w-[320px] md:w-[360px] flex-shrink-0 group p-8 rounded-3xl transition-all duration-300 space-y-6 flex flex-col justify-between bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-cyan-300 hover:-translate-y-1 cursor-pointer"
+                >
+                  {/* Card Content */}
+                  <div className="space-y-4">
+                    {/* Year + Dot */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-4xl font-black font-poppins text-slate-400 group-hover:text-cyan-600 transition-colors duration-300">
+                        {step.year}
+                      </span>
 
-                  {/* Year + Dot */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-4xl font-black font-poppins text-slate-400 group-hover:text-cyan-600 transition-colors duration-300">
-                      {step.year}
-                    </span>
+                      <span className="w-3 h-3 rounded-full bg-slate-300 group-hover:bg-cyan-500 group-hover:shadow-lg group-hover:shadow-cyan-500/40 transition-all duration-300"></span>
+                    </div>
 
-                    <span className="w-3 h-3 rounded-full bg-slate-300 group-hover:bg-cyan-500 group-hover:shadow-lg group-hover:shadow-cyan-500/40 transition-all duration-300"></span>
+                    {/* Title */}
+                    <h3 className="text-xl font-bold font-poppins text-slate-950 group-hover:text-[#093C5D] transition-colors duration-300">
+                      {step.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-xs text-slate-600 leading-relaxed font-light">
+                      {step.desc}
+                    </p>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold font-poppins text-slate-950 group-hover:text-[#093C5D] transition-colors duration-300">
-                    {step.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-xs text-slate-600 leading-relaxed font-light">
-                    {step.desc}
-                  </p>
-
+                  {/* Badge */}
+                  <div className="pt-4 border-t border-slate-200">
+                    <span className="text-[10px] uppercase font-mono font-bold text-slate-500 group-hover:text-cyan-600 transition-colors duration-300">
+                      {step.badge}
+                    </span>
+                  </div>
                 </div>
-
-                {/* Badge */}
-                <div className="pt-4 border-t border-slate-200">
-                  <span className="text-[10px] uppercase font-mono font-bold text-slate-500 group-hover:text-cyan-600 transition-colors duration-300">
-                    {step.badge}
-                  </span>
-                </div>
-
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
         </div>
