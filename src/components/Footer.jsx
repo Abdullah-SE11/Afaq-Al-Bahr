@@ -1,5 +1,5 @@
 import React from 'react'
-import { Globe, Phone, MessageCircle, Mail, MapPin } from 'lucide-react'
+import { Globe, Phone, MessageCircle, Mail, MapPin, Facebook, Linkedin } from 'lucide-react'
 
 export function Footer({ navigateTo, t }) {
   return (
@@ -11,18 +11,52 @@ export function Footer({ navigateTo, t }) {
 
       {/* Company */}
       <div>
-        <div className="mb-3">
+        <div
+          onClick={() => navigateTo?.('home')}
+          className="flex items-center gap-3.5 mb-4 cursor-pointer group w-fit"
+        >
           <img
             src="/Assets/logo.png"
             alt="Afaq Al Bahr"
-            className="h-10 w-auto"
+            className="h-12 md:h-14 w-auto object-contain bg-white rounded-xl group-hover:scale-105 transition-transform duration-300"
           />
+          {/* <div>
+            <span className="text-xl md:text-2xl font-black tracking-tight text-white font-poppins block leading-tight">
+              AFAQ AL BAHR
+            </span>
+            <span className="text-[11px] font-bold tracking-widest text-[#5DF8D8] uppercase block">
+              SHIPPING L.L.C.
+            </span>
+          </div> */}
         </div>
 
         <p className="text-sm text-slate-300 leading-relaxed mt-4 max-w-xs">
           Pioneering global supply chain solutions with speed, precision,
-          and state-of-the-art tracking intelligence across 50+ countries.
+          and state of the art tracking intelligence across 50+ countries.
         </p>
+
+        {/* Social Links */}
+        <div className="flex items-center gap-3 mt-5">
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            className="w-9 h-9 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center text-slate-300 hover:text-[#06334d] hover:bg-[#5DF8D8] hover:border-[#5DF8D8] hover:scale-105 transition-all duration-300 shadow-sm"
+          >
+            <Facebook className="w-4 h-4" />
+          </a>
+
+          <a
+            href="https://www.linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="w-9 h-9 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center text-slate-300 hover:text-[#06334d] hover:bg-[#5DF8D8] hover:border-[#5DF8D8] hover:scale-105 transition-all duration-300 shadow-sm"
+          >
+            <Linkedin className="w-4 h-4" />
+          </a>
+        </div>
       </div>
 
 
@@ -33,27 +67,45 @@ export function Footer({ navigateTo, t }) {
         </h4>
 
         <div className="space-y-2 text-sm text-slate-300">
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('home')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Home
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('about')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             About Us
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('about')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Global Network
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('home')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Track Shipment
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('contact')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Careers
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('about')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             News & Insights
           </p>
         </div>
@@ -67,27 +119,45 @@ export function Footer({ navigateTo, t }) {
         </h4>
 
         <div className="space-y-2 text-sm text-slate-300">
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('services')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Road Freight
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('services')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Sea Freight
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('services')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Air Freight
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('services')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Warehousing & Distribution
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('services')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Express Delivery
           </p>
 
-          <p className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+          <p
+            onClick={() => navigateTo?.('services')}
+            className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+          >
             Supply Chain Management
           </p>
         </div>

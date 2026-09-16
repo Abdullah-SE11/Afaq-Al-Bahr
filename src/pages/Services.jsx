@@ -13,86 +13,7 @@ import {
 
 export function Services({ t, onOpenQuote }) {
 
-  const services = [
-    {
-      title: 'Road Freight',
-      tag: 'DOMESTIC & REGIONAL',
-      image: '/Assets/road-freight.jpg',
-      desc: 'Reliable full-truckload and less-than-truckload ground transport with GPS monitoring and cross-border road permits.',
-      highlights: [
-        'Cross-docking facilities',
-        'ADR/Hazardous cargo certified',
-        'Scheduled line-hauls',
-      ],
-      footer: 'Route Coverage: Continental',
-      icon: <Truck className="w-4 h-4" />,
-    },
-    {
-      title: 'Air Freight',
-      tag: 'TIME-SENSITIVE PRIORITY',
-      image: '/Assets/air-freight.jpg',
-      desc: 'Fast international air shipping with priority customs clearance and temperature-controlled cargo solutions.',
-      highlights: [
-        'Next-flight-out dispatch',
-        'Direct airport-to-door',
-        'Dangerous goods compliant',
-      ],
-      footer: 'Speed: 24 - 48 Hours Global',
-      icon: <Plane className="w-4 h-4" />,
-    },
-    {
-      title: 'Sea Freight',
-      tag: 'HIGH-VOLUME OCEAN',
-      image: '/Assets/sea-freight.jpg',
-      desc: 'Cost-effective global container shipping connecting major ocean trade lanes with FCL and LCL solutions.',
-      highlights: [
-        'Port-to-port and door-to-door',
-        'Reefer refrigerated containers',
-        'Customs brokerage',
-      ],
-      footer: 'Tier: Trans-Pacific & Atlantic',
-      icon: <Ship className="w-4 h-4" />,
-    },
-    {
-      title: 'Warehousing & Distribution',
-      tag: 'SMART STORAGE',
-      image: '/Assets/warehouse.jpg',
-      desc: 'Secure climate-controlled storage, bonded warehouses, automated fulfillment, and real-time inventory management.',
-      highlights: [
-        'Automated WMS system',
-        'Cross-docking & palletizing',
-        '24/7 CCTV & security',
-      ],
-      footer: 'Scale: 1.2M+ sq. ft. Warehouses',
-      icon: <Warehouse className="w-4 h-4" />,
-    },
-    {
-      title: 'Express Delivery',
-      tag: 'RAPID DISPATCH',
-      image: '/Assets/express-delivery.jpg',
-      desc: 'Fast courier and parcel delivery solutions for critical documents, spare parts, and time-sensitive shipments.',
-      highlights: [
-        'Guaranteed time windows',
-        'Real-time SMS/Email alerts',
-        'Dedicated courier service',
-      ],
-      footer: 'Priority: Mission Critical',
-      icon: <Zap className="w-4 h-4" />,
-    },
-    {
-      title: 'Supply Chain Management',
-      tag: 'ENTERPRISE INTEGRATION',
-      image: '/Assets/supply-chain.jpg',
-      desc: 'End-to-end supply chain orchestration, vendor management, predictive demand forecasting, and sustainable routing.',
-      highlights: [
-        'ERP / EDI API integrations',
-        'Reverse logistics management',
-        'Dedicated account team',
-      ],
-      footer: 'Scope: Global Enterprise 4PL',
-      icon: <Network className="w-4 h-4" />,
-    },
-  ]
+  const services = t?.services?.items || t?.services?.cards || []
 
   return (
     <div className="min-h-screen bg-[#F5F7FC] text-[#102033]">
@@ -119,23 +40,22 @@ export function Services({ t, onOpenQuote }) {
 
             <div className="max-w-3xl">
 
-              <div className="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/30">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-300" />
-
-                <span className="text-[9px] font-bold tracking-widest uppercase text-cyan-300">
-                  GLOBAL MULTIMODAL NETWORK 2025
-                </span>
+            <div className="lg:col-span-7 mb-6 space-y-6">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                 GLOBAL MULTIMODAL NETWORK 2025
               </div>
+            </div>
 
               <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
                 Complete{" "}
-                <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent ">
                   Logistics
                 </span>{" "}
                 Solutions
               </h2> 
 
-              <p className="mt-5 max-w-2xl text-sm md:text-base leading-relaxed text-slate-300">
+              <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-3xl mt-4">
                 End-to-end multimodal transport, precision freight forwarding,
                 and smart warehousing engineered for modern global commerce.
                 Synchronized across sky, ocean, and continent.

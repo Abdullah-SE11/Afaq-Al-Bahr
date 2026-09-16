@@ -1,5 +1,5 @@
 import React from 'react';
-import { Anchor, Plane, Truck, ExternalLink, ShieldCheck, Headphones, Zap, Box, Compass } from 'lucide-react';
+import { Anchor, Plane, Truck, ExternalLink, ShieldCheck, Headphones, Zap, Box, Compass, Ship, Warehouse, Network } from 'lucide-react';
 
 export const translations = {
     en: {
@@ -72,6 +72,86 @@ export const translations = {
             // title: "Multimodal Freight Services",
             subtitle: "Optimized for weight, density, schedule sensitivity, and hazardous compliance.",
             action_link: "Custom service architecture ↗",
+            items: [
+                {
+                    title: 'Road Freight',
+                    tag: 'DOMESTIC & REGIONAL',
+                    image: '/Assets/road-freight.jpg',
+                    desc: 'Reliable full-truckload and less-than-truckload ground transport with GPS monitoring and cross-border road permits.',
+                    highlights: [
+                        'Cross-docking facilities',
+                        'ADR/Hazardous cargo certified',
+                        'Scheduled line-hauls',
+                    ],
+                    footer: 'Route Coverage: Continental',
+                    icon: <Truck className="w-4 h-4" />,
+                },
+                {
+                    title: 'Air Freight',
+                    tag: 'TIME-SENSITIVE PRIORITY',
+                    image: '/Assets/air-freight.jpg',
+                    desc: 'Fast international air shipping with priority customs clearance and temperature-controlled cargo solutions.',
+                    highlights: [
+                        'Next-flight-out dispatch',
+                        'Direct airport-to-door',
+                        'Dangerous goods compliant',
+                    ],
+                    footer: 'Speed: 24 - 48 Hours Global',
+                    icon: <Plane className="w-4 h-4" />,
+                },
+                {
+                    title: 'Sea Freight',
+                    tag: 'HIGH-VOLUME OCEAN',
+                    image: '/Assets/sea-freight.jpg',
+                    desc: 'Cost-effective global container shipping connecting major ocean trade lanes with FCL and LCL solutions.',
+                    highlights: [
+                        'Port-to-port and door-to-door',
+                        'Reefer refrigerated containers',
+                        'Customs brokerage',
+                    ],
+                    footer: 'Tier: Trans-Pacific & Atlantic',
+                    icon: <Ship className="w-4 h-4" />,
+                },
+                {
+                    title: 'Warehousing & Distribution',
+                    tag: 'SMART STORAGE',
+                    image: '/Assets/warehouse.jpg',
+                    desc: 'Secure climate-controlled storage, bonded warehouses, automated fulfillment, and real-time inventory management.',
+                    highlights: [
+                        'Automated WMS system',
+                        'Cross-docking & palletizing',
+                        '24/7 CCTV & security',
+                    ],
+                    footer: 'Scale: 1.2M+ sq. ft. Warehouses',
+                    icon: <Warehouse className="w-4 h-4" />,
+                },
+                {
+                    title: 'Express Delivery',
+                    tag: 'RAPID DISPATCH',
+                    image: '/Assets/express-delivery.jpg',
+                    desc: 'Fast courier and parcel delivery solutions for critical documents, spare parts, and time-sensitive shipments.',
+                    highlights: [
+                        'Guaranteed time windows',
+                        'Real-time SMS/Email alerts',
+                        'Dedicated courier service',
+                    ],
+                    footer: 'Priority: Mission Critical',
+                    icon: <Zap className="w-4 h-4" />,
+                },
+                {
+                    title: 'Supply Chain Management',
+                    tag: 'ENTERPRISE INTEGRATION',
+                    image: '/Assets/supply-chain.jpg',
+                    desc: 'End-to-end supply chain orchestration, vendor management, predictive demand forecasting, and sustainable routing.',
+                    highlights: [
+                        'ERP / EDI API integrations',
+                        'Reverse logistics management',
+                        'Dedicated account team',
+                    ],
+                    footer: 'Scope: Global Enterprise 4PL',
+                    icon: <Network className="w-4 h-4" />,
+                },
+            ],
             cards: [
                 {
                     tag: "FTL • LTL • FLEET",

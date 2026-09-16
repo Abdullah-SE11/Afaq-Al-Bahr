@@ -58,7 +58,7 @@ export function Home({ t, onOpenQuote }) {
 
       {/* HERO SECTION */}
       <section
-        className="relative bg-dark-hero bg-cyber-grid min-h-[90vh] flex items-center pt-8 pb-16 overflow-hidden bg-cover bg-center pt-32 pb-24"
+        className="relative min-h-[90vh] flex items-center overflow-hidden bg-cover bg-center pt-32 pb-24"
         style={{
           backgroundImage: "url('/Assets/Hero.jpg')",
           backgroundSize: "cover",
@@ -66,9 +66,14 @@ export function Home({ t, onOpenQuote }) {
           backgroundRepeat: "no-repeat",
         }}
       >
+        {/* Dark Overlays for Ultra High Contrast & Text Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060b13]/95 via-[#060b13]/80 to-[#060b13]/40"></div>
+        <div className="absolute inset-0 bg-[#060b13]/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060b13] via-transparent to-[#060b13]/50"></div>
 
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
-        <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-emerald-500/10 rounded-full blur-[130px] pointer-events-none"></div>
+        {/* Ambient Glows */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none"></div>
+        <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-emerald-500/15 rounded-full blur-[130px] pointer-events-none"></div>
 
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -80,13 +85,13 @@ export function Home({ t, onOpenQuote }) {
                 {t.hero.telemetry}
               </div>
 
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-poppins leading-[1.08] tracking-tight text-white">
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-poppins leading-[1.08] tracking-tight text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                 {t.hero.title_main}{' '}
-                <span className="text-gradient-cyan">{t.hero.title_highlight}</span>{' '}
+                <span className="text-gradient-cyan drop-shadow-md">{t.hero.title_highlight}</span>{' '}
                 {t.hero.title_end}
               </h1>
 
-              <p className="text-base font-bold sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl">
+              <p className="text-base sm:text-xl text-slate-100 font-normal leading-relaxed max-w-2xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                 {t.hero.description}
               </p>
 
@@ -190,7 +195,7 @@ export function Home({ t, onOpenQuote }) {
             </div>
 
             {/* Right Column: Radar Widget */}
-            <div className="lg:col-span-5">
+            {/* <div className="lg:col-span-5">
               <div className="relative">
                 <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500 to-emerald-500 opacity-20 blur-xl"></div>
                 <div className="relative glass-dark-card p-6 md:p-8 rounded-3xl border border-white/15 bg-[#091122]/90 space-y-6 shadow-2xl">
@@ -243,7 +248,7 @@ export function Home({ t, onOpenQuote }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
           </div>
 
