@@ -491,12 +491,13 @@ export function Home({ t, onOpenQuote }) {
 
             {/* Action Link */}
             <a
+            
               href="#estimator"
-              className="inline-flex items-center gap-2.5 text-sm sm:text-base font-bold text-slate-700 hover:text-[#3B7597] transition-colors shrink-0"
+              className="inline-flex items-center gap-2.5 text-sm sm:text-base font-bold text-slate-700 hover:text-[#3B7597] transition-colors shrink-0 "
             >
               {t.services.action_link}
 
-              <ArrowUpRight className="w-5 h-5" />
+              {/* <ArrowUpRight className="w-5 h-5" /> */}
             </a>
 
           </div>
