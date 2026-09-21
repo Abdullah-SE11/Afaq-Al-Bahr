@@ -420,66 +420,69 @@ export function Services({ t, onOpenQuote }) {
 
             {/* Table Rows */}
             {[
-              {
-                mode: "Air Freight",
-                sub: "Dedicated Cargo Jet",
-                icon: "✈",
-                time: "1 – 3 Days",
-                timeSub: "Express Priority",
-                cost: "$$$$$",
-                costLabel: "Premium",
-                carbon: "~500 g CO₂e",
-                carbonClass: "bg-[#FCE5E5] text-[#D45555]",
-                fit: "Pharma, high-tech components, aerospace parts, and urgent",
-                iconClass: "text-[#26384A]",
-                bar: "w-[75%]",
-                barClass: "bg-[#C72F2F]",
-              },
-              {
-                mode: "Sea Freight",
-                sub: "Ocean Liner Vessel",
-                icon: "◉",
-                time: "18 – 35 Days",
-                timeSub: "Standard Sea",
-                cost: "$",
-                costLabel: "Lowest Cost",
-                carbon: "~10 g CO₂e",
-                carbonClass: "bg-[#E5F1FC] text-[#47718E]",
-                fit: "Heavy machinery, raw dry bulk, consumer retail volumes",
-                iconClass: "text-[#315B78]",
-                bar: "w-[18%]",
-                barClass: "bg-[#31C7C1]",
-              },
-              {
-                mode: "Road Freight",
-                sub: "FTL / LTL Carrier",
-                icon: "◉",
-                time: "2 – 6 Days",
-                timeSub: "Door-to-Door",
-                cost: "$$",
-                costLabel: "Moderate",
-                carbon: "~120 g CO₂e",
-                carbonClass: "bg-[#E5F1FC] text-[#47718E]",
-                fit: "Regional retail stocking, perishable agriculture, fast manufacturing lines",
-                iconClass: "text-[#315B78]",
-                bar: "w-[35%]",
-                barClass: "bg-[#24617F]",
-              },
-              {
-                mode: "Express Delivery",
-                sub: "Next Flight Out",
-                icon: "ϟ",
-                time: "12 – 24 Hours",
-                timeSub: "Fastest Transit",
-                cost: "$$$$$",
-                costLabel: "Critical Premium",
-                carbon: "~650 g CO₂e",
-                carbonClass: "bg-[#FCE5E5] text-[#D45555]",
-                fit: "Legal documentation, mission-critical stock, emergency medical supplies",
-                iconClass: "text-[#26384A]",
-                bar: "w-[88%]",
-                barClass: "bg-[#C72F2F]",
-              },
+          {
+            mode: "Air Freight",
+            sub: "Dedicated Cargo Jet",
+            icon: Plane,
+            time: "1 – 3 Days",
+            timeSub: "Express Priority",
+            cost: "$$$$$",
+            costLabel: "Premium",
+            carbon: "~500 g CO₂e",
+            carbonClass: "bg-[#FCE5E5] text-[#D45555]",
+            fit: "Pharma, high-tech components, aerospace parts, and urgent",
+            iconClass: "text-[#26384A]",
+            bar: "w-[75%]",
+            barClass: "bg-[#C72F2F]",
+          },
+
+          {
+            mode: "Sea Freight",
+            sub: "Ocean Liner Vessel",
+            icon: Ship,
+            time: "18 – 35 Days",
+            timeSub: "Standard Sea",
+            cost: "$",
+            costLabel: "Lowest Cost",
+            carbon: "~10 g CO₂e",
+            carbonClass: "bg-[#E5F1FC] text-[#47718E]",
+            fit: "Heavy machinery, raw dry bulk, consumer retail volumes",
+            iconClass: "text-[#315B78]",
+            bar: "w-[18%]",
+            barClass: "bg-[#31C7C1]",
+          },
+
+          {
+            mode: "Road Freight",
+            sub: "FTL / LTL Carrier",
+            icon: Truck,
+            time: "2 – 6 Days",
+            timeSub: "Door-to-Door",
+            cost: "$$",
+            costLabel: "Moderate",
+            carbon: "~120 g CO₂e",
+            carbonClass: "bg-[#E5F1FC] text-[#47718E]",
+            fit: "Regional retail stocking, perishable agriculture, fast manufacturing lines",
+            iconClass: "text-[#315B78]",
+            bar: "w-[35%]",
+            barClass: "bg-[#24617F]",
+          },
+
+          {
+            mode: "Express Delivery",
+            sub: "Next Flight Out",
+            icon: Zap,
+            time: "12 – 24 Hours",
+            timeSub: "Fastest Transit",
+            cost: "$$$$$",
+            costLabel: "Critical Premium",
+            carbon: "~650 g CO₂e",
+            carbonClass: "bg-[#FCE5E5] text-[#D45555]",
+            fit: "Legal documentation, mission-critical stock, emergency medical supplies",
+            iconClass: "text-[#26384A]",
+            bar: "w-[88%]",
+            barClass: "bg-[#C72F2F]",
+          },
             ].map((row, index) => (
 
               <div
@@ -505,25 +508,22 @@ export function Services({ t, onOpenQuote }) {
                 {/* Logistics Mode */}
                 <div className="flex items-center gap-3">
 
-                  <div
-                    className="
-                      shrink-0
-                      w-8 h-8
-                      md:w-9 md:h-9
-                      rounded-md
-                      bg-[#EAF1FC]
-                      flex
-                      items-center
-                      justify-center
-                      text-sm
-                      md:text-base
-                      font-bold
-                    "
-                  >
-                    <span className={row.iconClass}>
-                      {row.icon}
-                    </span>
-                  </div>
+                <div
+                  className="
+                    shrink-0
+                    w-8 h-8
+                    md:w-9 md:h-9
+                    rounded-md
+                    bg-[#EAF1FC]
+                    flex
+                    items-center
+                    justify-center
+                  "
+                >
+                  <row.icon
+                    className={`w-4 h-4 md:w-5 md:h-5 ${row.iconClass}`}
+                  />
+                </div>
 
                   <div>
                     <h3 className="text-[11px] md:text-xs font-bold text-[#26384A] leading-tight">
