@@ -313,106 +313,341 @@ export function Services({ t, onOpenQuote }) {
 
 
       {/* COMPARISON */}
-        <section className="py-20 md:py-24 bg-[#EAF1FC]">
-
+      <section className="py-20 md:py-24 bg-[#EAF1FC] text-[#102033]">
         <div className="container mx-auto px-4 md:px-8">
 
-            {/* Section Heading */}
-            <div className="mb-10">
+          {/* Section Heading */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
 
-            <span className="text-xs font-bold text-[#53718A] uppercase tracking-[0.18em]">
+            <div className="max-w-2xl">
+
+              <span className="text-[9px] md:text-[10px] font-bold text-[#53718A] uppercase tracking-[0.18em]">
                 STRATEGIC MODAL TRADE-OFFS
-            </span>
+              </span>
 
-            <h2 className="text-3xl md:text-4xl font-black font-poppins text-[#102033] mt-3 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-[42px] font-black font-poppins text-[#102033] mt-2 leading-[1.08] tracking-tight">
                 Freight Comparison Matrix & Simulator
-            </h2>
+              </h2>
 
-            <p className="text-sm md:text-base text-[#718095] mt-3 max-w-3xl leading-relaxed">
-                Evaluate lead-time against cost parameters and greenhouse
-                impact to orchestrate an optimized logistics deployment.
-            </p>
+              <p className="text-xs sm:text-sm md:text-[13px] text-[#718095] mt-3 max-w-xl leading-relaxed">
+                Evaluate lead-time against cost parameters and greenhouse impact to
+                orchestrate an optimized logistics deployment.
+              </p>
 
             </div>
 
 
-            {/* Comparison Table */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-[0_6px_24px_rgba(30,55,80,0.10)] border border-[#DCE5F0]">
+            {/* Top Buttons */}
+            <div className="flex items-center bg-[#DDE8F8] rounded-lg p-1 self-start lg:self-end">
+
+              <button
+                className="
+                  px-4 md:px-5
+                  py-2
+                  rounded-md
+                  bg-white
+                  text-[9px] md:text-[10px]
+                  font-bold
+                  text-[#26384A]
+                  shadow-sm
+                "
+              >
+                Matrix Comparison
+              </button>
+
+              <button
+                className="
+                  px-4 md:px-5
+                  py-2
+                  rounded-md
+                  text-[9px] md:text-[10px]
+                  font-medium
+                  text-[#526A80]
+                "
+              >
+                Interactive Simulator
+              </button>
+
+            </div>
+
+          </div>
+
+
+          {/* Comparison Table */}
+          <div className="bg-white rounded-2xl overflow-hidden shadow-[0_6px_24px_rgba(30,55,80,0.08)] border border-[#DCE5F0]">
 
             {/* Table Header */}
-            <div className="grid grid-cols-1 md:grid-cols-4 bg-[#DDE8F8] px-6 md:px-8 py-5 gap-3 md:gap-6">
+            <div
+              className="
+                hidden
+                md:grid
+                grid-cols-[1.3fr_0.85fr_1fr_0.9fr_1.7fr_0.65fr]
+                items-center
+                bg-[#DDE8F8]
+                px-5
+                lg:px-6
+                py-4
+                gap-4
+              "
+            >
 
-                <span className="text-xs md:text-sm font-bold uppercase tracking-wide text-[#526A80]">
+              <span className="text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.08em] text-[#526A80]">
                 Logistics Mode
-                </span>
+              </span>
 
-                <span className="text-xs md:text-sm font-bold uppercase tracking-wide text-[#526A80]">
-                Transit Time
-                </span>
+              <span className="text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.08em] text-[#526A80]">
+                Avg Transit Time
+              </span>
 
-                <span className="text-xs md:text-sm font-bold uppercase tracking-wide text-[#526A80]">
-                Cost
-                </span>
+              <span className="text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.08em] text-[#526A80]">
+                Cost Index
+              </span>
 
-                <span className="text-xs md:text-sm font-bold uppercase tracking-wide text-[#526A80]">
-                Best Fit
-                </span>
+              <span className="text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.08em] text-[#526A80]">
+                Carbon Footprint
+              </span>
+
+              <span className="text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.08em] text-[#526A80]">
+                Best Fit Profile
+              </span>
+
+              <span className="text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.08em] text-[#526A80] text-right">
+                Instant Action
+              </span>
 
             </div>
 
 
             {/* Table Rows */}
             {[
-                ['Air Freight', '1 – 3 Days', 'Premium', 'Urgent / High Value'],
-                ['Sea Freight', '18 – 35 Days', 'Lowest', 'Heavy / High Volume'],
-                ['Road Freight', '2 – 6 Days', 'Moderate', 'Regional Delivery'],
-                ['Express Delivery', '12 – 24 Hours', 'Critical', 'Mission Critical'],
+              {
+                mode: "Air Freight",
+                sub: "Dedicated Cargo Jet",
+                icon: "✈",
+                time: "1 – 3 Days",
+                timeSub: "Express Priority",
+                cost: "$$$$$",
+                costLabel: "Premium",
+                carbon: "~500 g CO₂e",
+                carbonClass: "bg-[#FCE5E5] text-[#D45555]",
+                fit: "Pharma, high-tech components, aerospace parts, and urgent",
+                iconClass: "text-[#26384A]",
+                bar: "w-[75%]",
+                barClass: "bg-[#C72F2F]",
+              },
+              {
+                mode: "Sea Freight",
+                sub: "Ocean Liner Vessel",
+                icon: "◉",
+                time: "18 – 35 Days",
+                timeSub: "Standard Sea",
+                cost: "$",
+                costLabel: "Lowest Cost",
+                carbon: "~10 g CO₂e",
+                carbonClass: "bg-[#E5F1FC] text-[#47718E]",
+                fit: "Heavy machinery, raw dry bulk, consumer retail volumes",
+                iconClass: "text-[#315B78]",
+                bar: "w-[18%]",
+                barClass: "bg-[#31C7C1]",
+              },
+              {
+                mode: "Road Freight",
+                sub: "FTL / LTL Carrier",
+                icon: "◉",
+                time: "2 – 6 Days",
+                timeSub: "Door-to-Door",
+                cost: "$$",
+                costLabel: "Moderate",
+                carbon: "~120 g CO₂e",
+                carbonClass: "bg-[#E5F1FC] text-[#47718E]",
+                fit: "Regional retail stocking, perishable agriculture, fast manufacturing lines",
+                iconClass: "text-[#315B78]",
+                bar: "w-[35%]",
+                barClass: "bg-[#24617F]",
+              },
+              {
+                mode: "Express Delivery",
+                sub: "Next Flight Out",
+                icon: "ϟ",
+                time: "12 – 24 Hours",
+                timeSub: "Fastest Transit",
+                cost: "$$$$$",
+                costLabel: "Critical Premium",
+                carbon: "~650 g CO₂e",
+                carbonClass: "bg-[#FCE5E5] text-[#D45555]",
+                fit: "Legal documentation, mission-critical stock, emergency medical supplies",
+                iconClass: "text-[#26384A]",
+                bar: "w-[88%]",
+                barClass: "bg-[#C72F2F]",
+              },
             ].map((row, index) => (
 
-                <div
+              <div
                 key={index}
                 className="
-                    grid
-                    grid-cols-1
-                    md:grid-cols-4
-                    gap-3
-                    md:gap-6
-                    px-6
-                    md:px-8
-                    py-6
-                    border-b
-                    border-[#EDF1F5]
-                    last:border-0
-                    hover:bg-[#F8FAFD]
-                    transition-colors
+                  grid
+                  grid-cols-1
+                  md:grid-cols-[1.3fr_0.85fr_1fr_0.9fr_1.7fr_0.65fr]
+                  gap-5
+                  md:gap-4
+                  px-5
+                  lg:px-6
+                  py-5
+                  md:py-5
+                  border-b
+                  border-[#EDF1F5]
+                  last:border-0
+                  hover:bg-[#F8FAFD]
+                  transition-colors
                 "
-                >
+              >
 
-                <span className="text-base md:text-lg font-bold text-[#26384A]">
-                    {row[0]}
-                </span>
+                {/* Logistics Mode */}
+                <div className="flex items-center gap-3">
 
-                <span className="text-sm md:text-base text-[#657487]">
-                    {row[1]}
-                </span>
+                  <div
+                    className="
+                      shrink-0
+                      w-8 h-8
+                      md:w-9 md:h-9
+                      rounded-md
+                      bg-[#EAF1FC]
+                      flex
+                      items-center
+                      justify-center
+                      text-sm
+                      md:text-base
+                      font-bold
+                    "
+                  >
+                    <span className={row.iconClass}>
+                      {row.icon}
+                    </span>
+                  </div>
 
-                <span className="text-sm md:text-base text-[#657487]">
-                    {row[2]}
-                </span>
+                  <div>
+                    <h3 className="text-[11px] md:text-xs font-bold text-[#26384A] leading-tight">
+                      {row.mode}
+                    </h3>
 
-                <span className="text-sm md:text-base text-[#657487]">
-                    {row[3]}
-                </span>
+                    <p className="text-[8px] md:text-[9px] text-[#8A99A8] mt-1">
+                      {row.sub}
+                    </p>
+                  </div>
 
                 </div>
 
+
+                {/* Transit Time */}
+                <div className="flex flex-col justify-center">
+
+                  <span className="text-[11px] md:text-xs font-bold text-[#26384A]">
+                    {row.time}
+                  </span>
+
+                  <span className="text-[8px] md:text-[9px] text-[#718095] mt-1">
+                    {row.timeSub}
+                  </span>
+
+                </div>
+
+
+                {/* Cost */}
+                <div className="flex flex-col justify-center">
+
+                  <div className="flex items-center gap-1">
+
+                    <span
+                      className={`text-[10px] md:text-[11px] font-black ${
+                        row.cost === "$" || row.cost === "$$"
+                          ? "text-[#2E8F86]"
+                          : "text-[#C72F2F]"
+                      }`}
+                    >
+                      {row.cost}
+                    </span>
+
+                    <span className="text-[8px] md:text-[9px] text-[#7D8995]">
+                      {row.costLabel}
+                    </span>
+
+                  </div>
+
+                  {/* Price Bar */}
+                  <div className="w-20 md:w-24 h-1.5 bg-[#E4EBF3] rounded-full mt-2 overflow-hidden">
+
+                    <div
+                      className={`h-full ${row.bar} ${row.barClass} rounded-full`}
+                    />
+
+                  </div>
+
+                </div>
+
+
+                {/* Carbon */}
+                <div className="flex items-center md:justify-start">
+
+                  <span
+                    className={`
+                      inline-flex
+                      px-2
+                      py-1
+                      rounded
+                      text-[8px]
+                      md:text-[9px]
+                      font-medium
+                      ${row.carbonClass}
+                    `}
+                  >
+                    {row.carbon}
+                  </span>
+
+                </div>
+
+
+                {/* Best Fit */}
+                <div className="flex items-center">
+
+                  <p className="text-[9px] md:text-[10px] text-[#718095] leading-relaxed">
+                    {row.fit}
+                  </p>
+
+                </div>
+
+
+                {/* Configure */}
+                <div className="flex items-center md:justify-end">
+
+                  <button
+                    className="
+                      px-3
+                      md:px-3.5
+                      py-1.5
+                      rounded-md
+                      bg-[#E5EFFC]
+                      text-[#315B78]
+                      text-[8px]
+                      md:text-[9px]
+                      font-bold
+                      hover:bg-[#D8E8FA]
+                      transition-colors
+                      whitespace-nowrap
+                    "
+                  >
+                    Configure
+                  </button>
+
+                </div>
+
+              </div>
+
             ))}
 
-            </div>
+          </div>
 
         </div>
-
-        </section>
+      </section>
 
 
       {/* CTA */}
