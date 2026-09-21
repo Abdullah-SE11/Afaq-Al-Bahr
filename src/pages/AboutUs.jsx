@@ -21,25 +21,25 @@ export function AboutUs({ t, onOpenQuote }) {
       num: "1.",
       title: "Reliability",
       desc: "Uncompromising commitment to scheduled vessel departures, guaranteed delivery windows, and zero-damage cargo integrity.",
-      link: "Explore SLA guarantees ->"
+      link: "Explore SLA guarantees"
     },
     {
       num: "2.",
-      title: "Safety & Security",
-      desc: "Stringent HACCP & C-TPAT safety protocols, tamperproof cryptographic seals, and accredited international cargo security specialists.",
-      link: "View security standards ->"
+      title: "Speed & Velocity",
+      desc: "Optimized multimodal dispatches, priority airport airlifts, and direct EDI-backed electronic customs clearances.",
+      link: "Peak SLA velocity"
     },
     {
       num: "3.",
-      title: "Speed & Velocity",
-      desc: "Optimized multimodal dispatches, priority airport airlifts, and direct EDI-backed electronic customs clearances.",
-      link: "Peak SLA velocity ->"
+      title: "Safety & Security",
+      desc: "Stringent HACCP & C-TPAT safety protocols, tamperproof cryptographic seals, and accredited international cargo security specialists.",
+      link: "View security standards"
     },
     {
       num: "4.",
       title: "Client Satisfaction",
       desc: "Dedicated enterprise account desks, transparent live telemetry dashboards, and proactive exception resolution.",
-      link: "Get dedicated desk ->"
+      link: "Get dedicated desk"
     }
   ]
 
@@ -423,8 +423,10 @@ const timelineSteps = [
         </div>
       </section>
 
+     
+      <div className='bg-[#EAF1FC]'>
       {/* ==================== 3. PURPOSE & VISION CARDS ==================== */}
-      <section className="py-16 bg-[#EAF2FF] border-b border-slate-200">
+      <section className="py-16  border-b border-slate-200">
         <div className="container mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8">
 
           {/* Card 1: Purpose */}
@@ -500,136 +502,164 @@ const timelineSteps = [
       </section>
 
       {/* ==================== 4. THE CORE VALUES GOVERNING EVERY MILE ==================== */}
-        <section
-          className="py-24 text-slate-950 relative bg-cover bg-center bg-no-repeat"
-          style={{
-          backgroundImage: "url('/Assets/corevalues-bg.jpg')",
-          }}
-        >
-        {/* Background Overlay */}
-            <div className="absolute inset-0 bg-white/10"></div>
+      <section className="py-18 md:py-22 lg:py-24  text-slate-950 relative">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
 
-            <div className="container mx-auto px-4 md:px-8 relative z-10">
-                <div className="space-y-3 mb-16">
-                   <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                      OPERATIONAL TENETS
-                   </div>
-                  <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
-                      The Core{" "}
-                      <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent">
-                      Values Governing
-                      </span>{" "}
-                      Every Mile
-                  </h2> 
-                </div>
+          {/* Section Heading */}
+          <div className="space-y-3 mb-10 md:mb-12">
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                  {coreValues.map((val, idx) => (
-                    <div key={idx} className="group relative">
+            <span className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-[#6B8298] uppercase tracking-[0.18em]">
+              OPERATIONAL TENETS
+            </span>
 
-                      {/* Glass Glow */}
-                      <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500 to-emerald-500 opacity-5 blur-xl transition-opacity duration-300 group-hover:opacity-12"></div>
+            <h2 className="text-3xl sm:text-4xl md:text-[42px] lg:text-[46px] font-black font-poppins tracking-tight text-[#071525] leading-[1.1]">
+              The Core{" "}
+              <span className="text-[#071525]">
+                Values Governing
+              </span>{" "}
+              Every Mile
+            </h2>
 
-                      {/* Glass Card */}
-                      <div
-                        className="
-                          relative p-8 rounded-3xl space-y-5
-                          flex flex-col justify-between
-                          border border-white/20
-                          bg-[#091122]/30
-                          backdrop-blur-xl
-                          shadow-2xl
-                          transition-all duration-300
-                          hover:border-cyan-400/60
-                          hover:shadow-cyan-500/20
-                          hover:scale-[1.02]
-                        "
-                      >
+          </div>
 
-                        <div className="space-y-4">
 
-                          {/* Number */}
-                          <div
-                            className="
-                              w-12 h-12 rounded-2xl
-                              bg-white/10
-                              border border-white/10
-                              text-cyan-300
-                              flex items-center justify-center
-                              font-bold text-lg
-                              transition-all duration-300
-                              group-hover:bg-cyan-400
-                              group-hover:text-[#091122]
-                              group-hover:border-cyan-400
-                            "
-                          >
-                            {val.num}
-                          </div>
+          {/* Core Values Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
 
-                          {/* Title */}
-                          <h3
-                            className="
-                              text-2xl font-bold font-poppins
-                              text-white
-                              transition-colors duration-300
-                              group-hover:text-cyan-300
-                            "
-                          >
-                            {val.title}
-                          </h3>
+            {coreValues.map((val, idx) => (
 
-                          {/* Description */}
-                          <p
-                            className="
-                              text-xs text-slate-400
-                              leading-relaxed font-light
-                              transition-colors duration-300
-                              group-hover:text-slate-300
-                            "
-                          >
-                            {val.desc}
-                          </p>
+              <div key={idx} className="group relative">
 
-                        </div>
+                {/* Card */}
+                <div
+                  className="
+                    relative
+                    min-h-[210px]
+                    md:min-h-[220px]
+                    lg:min-h-[225px]
+                    p-6
+                    md:p-7
+                    rounded-xl
+                    bg-white
+                    border border-[#E1E7EF]
+                    shadow-[0_4px_14px_rgba(30,60,90,0.05)]
+                    flex flex-col
+                    justify-between
+                    transition-all
+                    duration-300
+                    hover:-translate-y-1
+                    hover:shadow-[0_8px_20px_rgba(30,60,90,0.09)]
+                  "
+                >
 
-                        {/* Bottom */}
-                        <div
-                          className="
-                            pt-4
-                            border-t border-white/10
-                            flex items-center justify-between
-                            transition-colors duration-300
-                            group-hover:border-cyan-400/30
-                          "
-                        >
-                          <span
-                            className="
-                              text-xs font-bold text-slate-300
-                              transition-colors duration-300
-                              group-hover:text-cyan-300
-                            "
-                          >
-                            {val.link}
-                          </span>
+                  <div className="space-y-4">
 
-                          <ArrowUpRight
-                            className="
-                              w-4 h-4 text-slate-400
-                              transition-all duration-300
-                              group-hover:text-cyan-400
-                              group-hover:translate-x-1
-                              group-hover:-translate-y-1
-                            "
-                          />
-                        </div>
-
-                      </div>
+                    {/* Number / Icon */}
+                    <div
+                      className="
+                        w-10 h-10
+                        md:w-11 md:h-11
+                        rounded-lg
+                        bg-[#EAF1FC]
+                        border border-[#DCE6F2]
+                        text-[#315B78]
+                        flex items-center justify-center
+                        font-bold
+                        text-sm
+                        md:text-base
+                        transition-all
+                        duration-300
+                        group-hover:bg-[#DCEBFA]
+                      "
+                    >
+                      {val.num}
                     </div>
-                  ))}
+
+
+                    {/* Title */}
+                    <h3
+                      className="
+                        text-base
+                        md:text-[17px]
+                        lg:text-[18px]
+                        font-bold
+                        font-poppins
+                        text-[#071525]
+                        leading-tight
+                      "
+                    >
+                      {val.title}
+                    </h3>
+
+
+                    {/* Description */}
+                    <p
+                      className="
+                        text-[10px]
+                        md:text-[11px]
+                        lg:text-xs
+                        text-[#718196]
+                        leading-relaxed
+                        font-light
+                      "
+                    >
+                      {val.desc}
+                    </p>
+
+                  </div>
+
+
+                  {/* Bottom */}
+                  <div
+                    className="
+                      pt-4
+                      mt-5
+                      border-t
+                      border-[#E8EDF3]
+                      flex
+                      items-center
+                      justify-between
+                    "
+                  >
+
+                    <span
+                      className="
+                        text-[9px]
+                        md:text-[10px]
+                        font-bold
+                        text-[#668098]
+                        uppercase
+                        tracking-wide
+                      "
+                    >
+                      {val.link}
+                    </span>
+
+                    <ArrowUpRight
+                      className="
+                        w-4
+                        h-4
+                        text-[#7A91A5]
+                        transition-all
+                        duration-300
+                        group-hover:text-[#24617F]
+                        group-hover:translate-x-1
+                        group-hover:-translate-y-1
+                      "
+                    />
+
+                  </div>
+
                 </div>
               </div>
-        </section>
+
+            ))}
+
+          </div>
+
+        </div>
+      </section>
+      </div>
 
       {/* ==================== 5. A DECADE OF TECHNOLOGICAL EXPANSION (TIMELINE) ==================== */}
       
@@ -700,87 +730,90 @@ const timelineSteps = [
         </div>
       </section>
       {/* ==================== 6. WHY MULTINATIONALS ENTRUST THEIR CRITICAL FREIGHT ==================== */}
-      <section className="py-20 md:py-24 bg-[#EAF2FF] text-[#071525]">
-        <div className="container mx-auto px-4 md:px-8 space-y-10">
+      <section className="py-20 md:py-24 lg:py-28 bg-[#EAF2FF] text-[#071525]">
+        <div className="container mx-auto px-4 md:px-8 lg:px-10 space-y-12">
 
           {/* Section Heading */}
-          <div className="text-center max-w-3xl mx-auto space-y-2">
-            <span className="text-[9px] md:text-[10px] font-bold text-[#5B7892] uppercase tracking-[0.18em] ">
+          <div className="text-center max-w-4xl mx-auto space-y-4">
+
+            <span className="text-[10px] md:text-[11px] font-bold text-[#5B7892] uppercase tracking-[0.2em]">
               PROVEN OPERATIONAL BENCHMARKS
             </span>
 
-            <h2 className="text-3xl sm:text-5xl font-black font-poppins text-[#071525] tracking-tight leading-tight ">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-black font-poppins text-[#071525] tracking-tight leading-[1.08]">
               Why Multinationals Entrust Their Critical
               <br className="hidden md:block" />
               Freight to Afaq Al Bahr
             </h2>
 
-            <p className="text-base text-slate-600 font-light leading-relaxed">
-              Institutional certifications, massive cargo volume visibility, and elite Tier-1 carrier integration.
+            <p className="text-sm sm:text-base md:text-[16px] text-slate-600 font-light leading-relaxed max-w-2xl mx-auto">
+              Institutional certifications, massive cargo volume visibility, and elite
+              Tier-1 carrier integration.
             </p>
           </div>
 
 
           {/* 3 Metric Cards */}
-          <div className="grid md:grid-cols-3 gap-4 md:gap-5">
+          <div className="grid md:grid-cols-3 gap-5 lg:gap-6">
 
             {/* Card 1 */}
-            <div className="bg-white rounded-xl border border-[#DCE5F0] shadow-[0_4px_14px_rgba(20,50,80,0.05)] p-6 md:p-7 min-h-[270px] flex flex-col">
+            <div className="bg-white rounded-2xl border border-[#DCE5F0] shadow-[0_6px_20px_rgba(20,50,80,0.06)] p-6 md:p-7 lg:p-8 min-h-[290px] flex flex-col">
 
               {/* Icon */}
-              <div className="w-10 h-10 rounded-lg bg-[#E7EFF8] flex items-center justify-center mb-5">
+              <div className="w-11 h-11 rounded-xl bg-[#E7EFF8] flex items-center justify-center mb-6">
                 <Check className="w-5 h-5 text-[#174D6C]" />
               </div>
 
-              <span className="text-[9px] font-bold text-[#708398] uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#708398] uppercase tracking-[0.12em]">
                 ANNUAL FREIGHT HANDLED
               </span>
 
-              <div className="text-4xl md:text-[42px] leading-none font-black text-[#071525] font-poppins mt-2">
+              <div className="text-4xl md:text-[44px] lg:text-[46px] leading-none font-black text-[#071525] font-poppins mt-2">
                 $2.4B+
               </div>
 
-              <p className="text-[10px] md:text-[11px] text-[#718196] leading-relaxed font-light mt-4">
-                High-value electronics, sensitive pharmaceuticals, and aerospace components
-                safely routed across sea and sky corridors.
+              <p className="text-[11px] md:text-xs text-[#718196] leading-relaxed font-light mt-5 max-w-md">
+                High-value electronics, sensitive pharmaceuticals, and aerospace
+                components safely routed across sea and sky corridors.
               </p>
 
-              <div className="mt-auto pt-5 flex items-center gap-2 text-[9px] text-[#668098]">
-                <Check className="w-3.5 h-3.5 text-[#4C718A]" />
+              <div className="mt-auto pt-6 flex items-center gap-2 text-[10px] md:text-[11px] text-[#668098]">
+                <Check className="w-4 h-4 text-[#4C718A]" />
                 Fully insured cargo protection
               </div>
             </div>
 
 
             {/* Card 2 */}
-            <div className="bg-white rounded-xl border border-[#DCE5F0] shadow-[0_4px_14px_rgba(20,50,80,0.05)] p-6 md:p-7 min-h-[270px] flex flex-col">
+            <div className="bg-white rounded-2xl border border-[#DCE5F0] shadow-[0_6px_20px_rgba(20,50,80,0.06)] p-6 md:p-7 lg:p-8 min-h-[290px] flex flex-col">
 
               {/* Icon */}
-              <div className="w-10 h-10 rounded-lg bg-[#062A49] flex items-center justify-center mb-5">
+              <div className="w-11 h-11 rounded-xl bg-[#062A49] flex items-center justify-center mb-6">
                 <div className="w-5 h-5 rounded-full border-2 border-[#38E7D0]" />
               </div>
 
-              <span className="text-[9px] font-bold text-[#708398] uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#708398] uppercase tracking-[0.12em]">
                 LOSS PREVENTION
               </span>
 
-              <div className="text-4xl md:text-[42px] leading-none font-black text-[#071525] font-poppins mt-2">
+              <div className="text-4xl md:text-[44px] lg:text-[46px] leading-none font-black text-[#071525] font-poppins mt-2">
                 99.4%
               </div>
 
-              <p className="text-[10px] md:text-[11px] text-[#718196] leading-relaxed font-light mt-4">
+              <p className="text-[11px] md:text-xs text-[#718196] leading-relaxed font-light mt-5 max-w-md">
                 Consistently outperforming industry averages with flawless container
                 integrity and rigorous automated seal checks at terminal gates.
               </p>
 
               {/* Trend */}
-              <div className="mt-auto pt-4">
-                <div className="flex items-center justify-between mb-2 text-[8px] text-[#708398]">
+              <div className="mt-auto pt-5">
+
+                <div className="flex items-center justify-between mb-2 text-[9px] md:text-[10px] text-[#708398]">
                   <span>Claims-Free Trend</span>
                   <span>+9.4% YoY</span>
                 </div>
 
-                <div className="relative h-7">
+                <div className="relative h-8">
                   <svg
                     viewBox="0 0 240 40"
                     className="w-full h-full"
@@ -793,7 +826,12 @@ const timelineSteps = [
                       strokeWidth="2"
                     />
 
-                    <circle cx="235" cy="5" r="3" fill="#24617F" />
+                    <circle
+                      cx="235"
+                      cy="5"
+                      r="3"
+                      fill="#24617F"
+                    />
                   </svg>
                 </div>
               </div>
@@ -801,43 +839,45 @@ const timelineSteps = [
 
 
             {/* Card 3 */}
-            <div className="bg-white rounded-xl border border-[#DCE5F0] shadow-[0_4px_14px_rgba(20,50,80,0.05)] p-6 md:p-7 min-h-[270px] flex flex-col">
+            <div className="bg-white rounded-2xl border border-[#DCE5F0] shadow-[0_6px_20px_rgba(20,50,80,0.06)] p-6 md:p-7 lg:p-8 min-h-[290px] flex flex-col">
 
               {/* Icon */}
-              <div className="w-10 h-10 rounded-lg bg-[#E7EFF8] flex items-center justify-center mb-5">
-                <span className="text-lg">◇</span>
+              <div className="w-11 h-11 rounded-xl bg-[#E7EFF8] flex items-center justify-center mb-6">
+                <span className="text-xl text-[#174D6C]">◇</span>
               </div>
 
-              <span className="text-[9px] font-bold text-[#708398] uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#708398] uppercase tracking-[0.12em]">
                 CARRIER ALLIANCES
               </span>
 
-              <div className="text-[25px] md:text-[27px] leading-tight font-black text-[#071525] font-poppins mt-2">
+              <div className="text-2xl md:text-[28px] lg:text-[30px] leading-tight font-black text-[#071525] font-poppins mt-2">
                 Tier-1 Direct Slots
               </div>
 
-              <p className="text-[10px] md:text-[11px] text-[#718196] leading-relaxed font-light mt-4">
+              <p className="text-[11px] md:text-xs text-[#718196] leading-relaxed font-light mt-5 max-w-md">
                 Guaranteed vessel and carrier capacity across global shipping
                 alliances including Maersk, CMA CGM, HMM, and MSC.
               </p>
 
               {/* Alliance Tags */}
-              <div className="mt-auto pt-4 grid grid-cols-2 gap-2">
-                <span className="text-[8px] text-center font-medium text-[#526B81] bg-[#EAF1FC] rounded-md px-2 py-2">
+              <div className="mt-auto pt-5 grid grid-cols-2 gap-2.5">
+
+                <span className="text-[9px] md:text-[10px] text-center font-medium text-[#526B81] bg-[#EAF1FC] rounded-lg px-2.5 py-2.5">
                   Maersk Direct
                 </span>
 
-                <span className="text-[8px] text-center font-medium text-[#526B81] bg-[#EAF1FC] rounded-md px-2 py-2">
+                <span className="text-[9px] md:text-[10px] text-center font-medium text-[#526B81] bg-[#EAF1FC] rounded-lg px-2.5 py-2.5">
                   CMA CGM Line
                 </span>
 
-                <span className="text-[8px] text-center font-medium text-[#526B81] bg-[#EAF1FC] rounded-md px-2 py-2">
+                <span className="text-[9px] md:text-[10px] text-center font-medium text-[#526B81] bg-[#EAF1FC] rounded-lg px-2.5 py-2.5">
                   MSC Express Space
                 </span>
 
-                <span className="text-[8px] text-center font-medium text-[#526B81] bg-[#EAF1FC] rounded-md px-2 py-2">
+                <span className="text-[9px] md:text-[10px] text-center font-medium text-[#526B81] bg-[#EAF1FC] rounded-lg px-2.5 py-2.5">
                   Flexi Priority
                 </span>
+
               </div>
             </div>
 
@@ -845,80 +885,101 @@ const timelineSteps = [
 
 
           {/* Security Banner */}
-          <div className="bg-[#032B43] rounded-xl border border-[#071525] shadow-[0_5px_16px_rgba(4,25,40,0.18)] px-6 py-6 md:px-7 md:py-6">
+          <div className="bg-[#032B43] rounded-2xl border border-[#071525] shadow-[0_8px_24px_rgba(4,25,40,0.2)] px-6 py-7 md:px-8 md:py-8">
 
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-7">
 
               {/* Left Content */}
-              <div className="flex-1 space-y-2">
-                <span className="text-[8px] md:text-[9px] uppercase font-bold text-[#45E7D2] tracking-[0.16em]">
+              <div className="flex-1 space-y-3">
+
+                <span className="text-[9px] md:text-[10px] uppercase font-bold text-[#45E7D2] tracking-[0.18em]">
                   HIGHEST OPERATIONAL SECURITY
                 </span>
 
-                <h3 className="text-lg md:text-xl font-bold text-white font-poppins leading-tight">
+                <h3 className="text-xl md:text-2xl font-bold text-white font-poppins leading-tight">
                   ISO 9001, TAPA TSR Level 1 & C-TPAT Certified Facilities
                 </h3>
 
-                <p className="text-[9px] md:text-[10px] text-[#B8CBD7] font-light leading-relaxed max-w-2xl">
+                <p className="text-[10px] md:text-[11px] text-[#B8CBD7] font-light leading-relaxed max-w-2xl">
                   Every facility adheres to international customs enforcement standards,
                   automated biometric perimeter controls, and digital chain-of-custody protocols.
                 </p>
+
               </div>
 
 
               {/* Certification Badges */}
-              <div className="flex flex-wrap justify-center lg:justify-end gap-2 max-w-md">
+              <div className="flex flex-wrap justify-center lg:justify-end gap-2.5 max-w-lg">
 
-                <div className="bg-[#0A4565] border border-[#155776] rounded-lg px-4 py-2.5 min-w-[135px]">
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-full bg-[#0B5C78] flex items-center justify-center">
-                      <span className="text-[#45E7D2] text-[10px]">✥</span>
+                {/* ISO */}
+                <div className="bg-[#0A4565] border border-[#155776] rounded-xl px-4 py-3 min-w-[145px]">
+
+                  <div className="flex items-center gap-2.5">
+
+                    <div className="w-6 h-6 rounded-full bg-[#0B5C78] flex items-center justify-center">
+                      <span className="text-[#45E7D2] text-[11px]">
+                        ✥
+                      </span>
                     </div>
 
                     <div>
-                      <span className="text-[9px] font-bold text-white block">
+                      <span className="text-[10px] font-bold text-white block">
                         ISO 9001:2015
                       </span>
-                      <span className="text-[7px] text-[#A8C2D0]">
+
+                      <span className="text-[8px] text-[#A8C2D0]">
                         Quality Management
                       </span>
                     </div>
+
                   </div>
                 </div>
 
 
-                <div className="bg-[#0A4565] border border-[#155776] rounded-lg px-4 py-2.5 min-w-[135px]">
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-full bg-[#0B5C78] flex items-center justify-center">
-                      <Check className="w-3 h-3 text-[#45E7D2]" />
+                {/* TAPA */}
+                <div className="bg-[#0A4565] border border-[#155776] rounded-xl px-4 py-3 min-w-[145px]">
+
+                  <div className="flex items-center gap-2.5">
+
+                    <div className="w-6 h-6 rounded-full bg-[#0B5C78] flex items-center justify-center">
+                      <Check className="w-3.5 h-3.5 text-[#45E7D2]" />
                     </div>
 
                     <div>
-                      <span className="text-[9px] font-bold text-white block">
+                      <span className="text-[10px] font-bold text-white block">
                         TAPA TSR Tier 1
                       </span>
-                      <span className="text-[7px] text-[#A8C2D0]">
+
+                      <span className="text-[8px] text-[#A8C2D0]">
                         Highest Security Protocol
                       </span>
                     </div>
+
                   </div>
                 </div>
 
 
-                <div className="bg-[#0A4565] border border-[#155776] rounded-lg px-4 py-2.5 min-w-[135px]">
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-full bg-[#0B5C78] flex items-center justify-center">
-                      <span className="text-[#45E7D2] text-[10px]">✥</span>
+                {/* AEO */}
+                <div className="bg-[#0A4565] border border-[#155776] rounded-xl px-4 py-3 min-w-[145px]">
+
+                  <div className="flex items-center gap-2.5">
+
+                    <div className="w-6 h-6 rounded-full bg-[#0B5C78] flex items-center justify-center">
+                      <span className="text-[#45E7D2] text-[11px]">
+                        ✥
+                      </span>
                     </div>
 
                     <div>
-                      <span className="text-[9px] font-bold text-white block">
+                      <span className="text-[10px] font-bold text-white block">
                         AEO / C-TPAT
                       </span>
-                      <span className="text-[7px] text-[#A8C2D0]">
+
+                      <span className="text-[8px] text-[#A8C2D0]">
                         Intl. Trade Pre-Check
                       </span>
                     </div>
+
                   </div>
                 </div>
 
