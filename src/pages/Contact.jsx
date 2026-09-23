@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { WhatsAppIcon } from '../components/WhatsAppWidget'
+import { InteractiveArcMap } from '../components/InteractiveArcMap'
 import {
   Phone,
   MessageCircle,
@@ -20,11 +21,11 @@ export function Contact({ t }) {
   const [activeFaq, setActiveFaq] = useState(null)
   const [selectedHub, setSelectedHub] = useState(0)
 
-  const directLines = [
-    { label: "Dispatch Line 1 (Dubai)", num: "056 826 2134", wa: "971568262134" },
-    { label: "Dispatch Line 2 (Dubai)", num: "055 935 9616", wa: "971559359616" },
-    { label: "Dispatch Line 3 (Dubai)", num: "055 536 5465", wa: "971555365465" }
-  ]
+const directLines = [
+  { label: "Dispatch Line 1 (Dubai)", num: "+971 56 826 2134", wa: "971568262134" },
+  { label: "Dispatch Line 2 (Dubai)", num: "+971 55 935 9616", wa: "971559359616" },
+  { label: "Dispatch Line 3 (Dubai)", num: "+971 55 536 5465", wa: "971555365465" }
+];
 
 const hubsData = [
   {
@@ -109,15 +110,6 @@ const hubsData = [
 
         <div className="container mx-auto px-4 md:px-8 py-16 md:py-24 relative z-10">
           <div className="max-w-5xl space-y-6">
-
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                DIRECT DISPATCH & TELEMETRY
-                <span className="text-slate-400">•</span>
-                Avg. Response Time: 42 mins
-              </div>
-        </div>
 
             <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
               Let's Move{" "}
@@ -312,13 +304,15 @@ const hubsData = [
                 </p>
 
 
-                <a
-                  href={`tel:${directLines[0].num}`}
-                  className="inline-flex items-center gap-3 w-full justify-center bg-[#5DF8D8] hover:bg-[#34D399] text-[#062b40] px-5 py-3.5 rounded-2xl text-sm md:text-base font-black transition-all hover:scale-[1.02] shadow-lg shadow-emerald-500/20"
-                >
-                  <Phone className="w-5 h-5" />
-                  {directLines[0].num}
-                </a>
+                  <a
+                    href="https://wa.me/971568262134"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 w-full justify-center bg-[#5DF8D8] hover:bg-[#34D399] text-[#062b40] px-5 py-3.5 rounded-2xl text-sm md:text-base font-black transition-all hover:scale-[1.02] shadow-lg shadow-emerald-500/20"
+                  >
+                    <Phone className="w-5 h-5" />
+                    +971 56 826 2134
+                  </a>
 
               </div>
 
@@ -503,36 +497,9 @@ const hubsData = [
           {/* Main Grid */}
           <div className="grid lg:grid-cols-12 gap-5">
 
-            {/* ================= MAP ================= */}
-            <div className="lg:col-span-7 xl:col-span-8 bg-[#052f48] rounded-2xl border border-white/15 p-4 md:p-5 shadow-2xl">
-
-              <div className="flex justify-between items-center mb-4">
-
-                <span className="text-[10px] sm:text-xs uppercase tracking-wider text-slate-200 font-bold flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#5DF8D8] animate-pulse"></span>
-                  LIVE SATELLITE TELEMETRY
-                </span>
-
-                <span className="text-[10px] sm:text-xs text-[#5DF8D8] font-mono font-bold">
-                  {hubsData[selectedHub].coord}
-                </span>
-
-              </div>
-
-
-              {/* EMBEDDED MAP */}
-              <div className="h-64 sm:h-72 md:h-80 rounded-xl overflow-hidden border border-white/10">
-                <iframe
-                  title={`Map - ${hubsData[selectedHub].name}`}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: 'saturate(0.85) contrast(1.1)' }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src={`https://www.openstreetmap.org/export/embed.html?bbox=${hubsData[selectedHub].position[1] - 5},${hubsData[selectedHub].position[0] - 3},${hubsData[selectedHub].position[1] + 5},${hubsData[selectedHub].position[0] + 3}&layer=mapnik&marker=${hubsData[selectedHub].position[0]},${hubsData[selectedHub].position[1]}`}
-                />
-              </div>
-
+            {/* ================= INTERACTIVE ARCS MAP ================= */}
+            <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
+              <InteractiveArcMap />
             </div>
 
 
@@ -634,7 +601,7 @@ const hubsData = [
           {/* ================= FAQ HEADER ================= */}
           <div className="text-center mb-10 md:mb-12 space-y-3">
 
-            <span className="px-3.5 py-1 rounded-full bg-cyan-100 border border-cyan-300 text-cyan-800 text-[11px] sm:text-xs font-bold uppercase tracking-widest inline-block">
+            <span className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
               OPERATIONAL CLARITY
             </span>
 

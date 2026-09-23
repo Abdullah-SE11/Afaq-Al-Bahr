@@ -29,9 +29,9 @@ export function WhatsAppWidget() {
   const [isOpen, setIsOpen] = useState(false)
 
   const lines = [
-    { num: "056 826 2134", wa: "971568262134", label: "Dispatch Line 1" },
-    { num: "055 935 9616", wa: "971559359616", label: "Dispatch Line 2" },
-    { num: "055 536 5465", wa: "971555365465", label: "Customer Support" }
+    { num: "+971 56 826 2134", wa: "971568262134", label: "Customer Support" },
+    // { num: "055 935 9616", wa: "971559359616", label: "Dispatch Line 2" },
+    // { num: "055 536 5465", wa: "971555365465", label: "Customer Support" }
   ]
 
   return (
@@ -84,7 +84,7 @@ export function WhatsAppWidget() {
 
       {/* FLOATING BUTTON */}
       <div className="relative group">
-        <span className="absolute -inset-1 rounded-full bg-emerald-400 opacity-60 animate-ping pointer-events-none"></span>
+        <span className=" rounded-full bg-emerald-400 opacity-60 pointer-events-none"></span>
         
         <button
           onClick={() => setIsOpen(!isOpen)}

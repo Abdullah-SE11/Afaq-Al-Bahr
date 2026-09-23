@@ -90,16 +90,6 @@ export function Home({ t, onOpenQuote }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                {/* Live telemetry badge */}
-                <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#51e5d2]/30 bg-[#051e30]/70 px-4 py-2 backdrop-blur-sm">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#51e5d2] opacity-60" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#51e5d2]" />
-                  </span>
-                  <span className="text-[10px] font-extrabold uppercase tracking-[.1em] text-[#72f1df]">
-                    {t.hero.telemetry}
-                  </span>
-                </div>
 
                 {/* Headline */}
                 <h1 className="max-w-[700px] text-5xl font-black leading-[0.95] tracking-[-0.04em] sm:text-6xl xl:text-[5.5rem] font-poppins">
@@ -553,7 +543,7 @@ export function Home({ t, onOpenQuote }) {
           <div className="text-center max-w-3xl mx-auto space-y-5 mb-12 md:mb-16">
 
             {/* Badge */}
-            <span className="inline-flex items-center px-4 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+            <span className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
               {t.trust.badge}
             </span>
 
@@ -749,8 +739,7 @@ export function Home({ t, onOpenQuote }) {
             <div className="space-y-4 max-w-3xl">
 
               {/* Badge */}
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#D8E8FA] border border-[#C5DCF5] text-[#53718A] text-[10px] sm:text-[11px] font-bold tracking-wider uppercase">
-                <span className="w-2 h-2 rounded-full bg-[#3B7597]"></span>
+              <div className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-[#6B8298] uppercase tracking-[0.18em]">
                 {t.services.badge}
               </div>
 

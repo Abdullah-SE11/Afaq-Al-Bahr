@@ -721,14 +721,13 @@ const timelineSteps = [
       </section>
       </div>
 
-      {/* ==================== 5. A DECADE OF TECHNOLOGICAL EXPANSION (TIMELINE) ==================== */}
-      
+      {/* ==================== 5. A DECADE OF TECHNOLOGICAL EXPANSION (TIMELINE) ==================== */}    
       <section className="py-24 bg-white text-slate-950 border-t border-slate-200">
         <div className="container mx-auto px-4 md:px-8">
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-            <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-bold tracking-widest uppercase">
+            <span className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
               HISTORICAL TRAJECTORY
             </span>
 
