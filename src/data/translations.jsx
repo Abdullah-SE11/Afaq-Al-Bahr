@@ -13,7 +13,7 @@ export const translations = {
             rights: "© 2026 AFAQ AL BAHR SHIPPING L.L.C. All rights reserved. • ISO 9001 Certified"
         },
         hero: {
-            telemetry: "LIVE FLEET TELEMETRY ACTIVE • 2,130 Active Vessels & Flights",
+            telemetry: "GLOBAL LOGISTICS NETWORK • SEA • AIR • ROAD • RAIL",
             title_main: "Moving Your",
             title_highlight: "Business",
             title_end: "Forward",

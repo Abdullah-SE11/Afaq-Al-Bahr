@@ -76,7 +76,7 @@ export default function App() {
 
               {/* Header */}
               <div className="flex items-center gap-3 pr-8">
-                <img src="as/logo.png" alt="ABS Logo" className="h-10 w-auto object-contain bg-white p-1 rounded-lg" />
+                <img src="Assets/logo.png" alt="ABS Logo" className="h-10 w-auto object-contain bg-white p-1 rounded-lg" />
                 <div>
                   <h3 className="text-lg font-bold font-poppins text-white leading-tight">Contact Afaq Al Bahr</h3>
                   <p className="text-xs text-slate-400">Choose a line to chat directly on WhatsApp</p>
