@@ -13,7 +13,6 @@ export const translations = {
             rights: "© 2026 AFAQ AL BAHR SHIPPING L.L.C. All rights reserved. • ISO 9001 Certified"
         },
         hero: {
-            telemetry: "LIVE FLEET TELEMETRY ACTIVE • 2,130 Active Vessels & Flights",
             title_main: "Moving Your",
             title_highlight: "Business",
             title_end: "Forward",
@@ -157,19 +156,19 @@ export const translations = {
                     tag: "FTL • LTL • FLEET",
                     title: "Road Freight",
                     desc: "Full-truckload (FTL) and less-than-truckload (LTL) scheduled network with multi-temperature refrigerated trailers and border-pass clearance.",
-                    link: "Ocean routes operational >"
+                    link: "Ocean routes operational"
                 },
                 {
                     tag: "FCL • LCL OCEAN",
                     title: "Sea Freight",
                     desc: "Full-container-load (FCL) and consolidation (LCL) global shipping spanning key trans-oceanic lanes with dedicated port terminal berths.",
-                    link: "180+ Oceanic Corridors >"
+                    link: "180+ Oceanic Corridors "
                 },
                 {
                     tag: "CHARTER • CARGO LIFT",
                     title: "Air Freight",
                     desc: "Priority chartered airfreighters and consolidated belly-cargo space for mission-critical industries: aerospace, and high-value shipments.",
-                    link: "Direct flight schedulers >"
+                    link: "Direct flight schedulers "
                 },
                 {
                     tag: "BONDED • ROBOTIC",
@@ -181,13 +180,13 @@ export const translations = {
                     tag: "SAME-DAY • TIME-CRITICAL",
                     title: "Express Delivery",
                     desc: "Time-definite and velocity-optimized delivery corridor with GPS-tracked last-mile fleet routing and electronic POD signoff.",
-                    link: "Accelerated SLA conditions >"
+                    link: "Accelerated SLA conditions "
                 },
                 {
                     tag: "CUSTOMS • CAPS",
                     title: "Supply Chain Solutions",
                     desc: "Comprehensive international customs clearance, broker compliance, custom supply chain risk modeling, and lean terminal logistics.",
-                    link: "Enterprise digital audit >"
+                    link: "Enterprise digital audit "
                 }
             ]
         },

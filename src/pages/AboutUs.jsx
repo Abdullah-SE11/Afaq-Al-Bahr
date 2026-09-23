@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 
 
+
 export function AboutUs({ t, onOpenQuote }) {
   
 
@@ -155,121 +156,126 @@ const timelineSteps = [
     <div className="bg-[#060b13] text-slate-100 min-h-screen">
 
       {/* ==================== 1. HERO SECTION ==================== */}
-<section
-  className="relative bg-dark-hero bg-cyber-grid pt-12 pb-20 overflow-hidden border-b border-white/10 bg-cover bg-center bg-no-repeat"
-  style={{
-    backgroundImage: "url('/Assets/about-bg.jpg')",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
-  {/* Dark Image Overlay */}
-  <div className="absolute inset-0 bg-[#060b13]/85"></div>
+      <section
+        className="relative bg-dark-hero bg-cyber-grid pt-12 pb-20 overflow-hidden border-b border-white/10 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/Assets/about-bg.jpg')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Dark Image Overlay */}
+        <div className="absolute inset-0 bg-[#060b13]/85"></div>
 
-  {/* Subtle Cyan Glow */}
-  <div className="absolute inset-0 bg-gradient-to-br from-[#093C5D]/30 via-transparent to-[#5DF8D8]/10"></div>
+        {/* Subtle Cyan Glow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#093C5D]/30 via-transparent to-[#5DF8D8]/10"></div>
 
-  <div className="container mx-auto px-4 md:px-8 relative z-10 space-y-10">
+        {/* ==================== HERO CONTENT ==================== */}
+        <div className="container mx-auto px-4 md:px-8 relative z-10 space-y-10">
 
-    <div className="max-w-4xl space-y-5">
-      <span className="px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold tracking-widest uppercase">
-        MARITIME • AIR • CONTINENTAL
-      </span>
+          {/* Hero Text */}
+          <div className="max-w-4xl space-y-5">
 
-      <h1 className="text-4xl sm:text-6xl font-black font-poppins text-white tracking-tight leading-[1.1]">
-        Decades of Maritime & Global <br className="hidden sm:block" />
-        <span className="text-gradient-cyan">
-          Freight Excellence
-        </span>
-      </h1>
+            {/* Heading */}
+            <h1 className="text-4xl sm:text-6xl font-black font-poppins text-white tracking-tight leading-[1.1]">
+              Decades of Maritime & Global{" "}
+              <br className="hidden sm:block" />
 
-      <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-3xl">
-        Built on trust, speed, and precision engineering of global supply chain networks. We operate multimodal routes across ocean corridors, oceanic docks, and continental highways with telemetry.
-      </p>
-    </div>
+              <span className="text-gradient-cyan">
+                Freight Excellence
+              </span>
+            </h1>
 
-    {/* Top 4 Stat Badges Bar */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {heroStats.map((stat, idx) => (
-        <div
-          key={idx}
-          className="glass-dark-card p-5 rounded-2xl border border-white/10 bg-[#091122]/80 backdrop-blur-xl space-y-1"
-        >
-          <span className="text-[10px] uppercase font-bold text-cyan-400 tracking-wider block">
-            {stat.label}
-          </span>
-
-          <div className="text-3xl font-black text-white font-poppins">
-            {stat.num}
+            {/* Description */}
+            <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-3xl">
+              Built on trust, speed, and precision engineering of global supply
+              chain networks. We operate multimodal routes across ocean corridors,
+              oceanic docks, and continental highways with telemetry.
+            </p>
           </div>
 
-          <span className="text-xs text-slate-400 font-light">
-            {stat.sub}
-          </span>
-        </div>
-      ))}
-    </div>
+            {/* ==================== TOP 4 STAT BADGES ==================== */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-    {/* Featured Telemetry Image Box */}
-    <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl group">
+            {heroStats.map((stat, idx) => (
+              <div
+                key={idx}
+                className="glass-dark-card p-5 rounded-2xl border border-white/10 bg-[#091122]/80 backdrop-blur-xl space-y-1"
+              >
+                <span className="text-[10px] uppercase font-bold text-cyan-400 tracking-wider block">
+                  {stat.label}
+                </span>
 
-      <img
-        src="/Assets/Featured Telemetry.jpg"
-        alt="Global Freight Telemetry Network"
-        className="w-full h-[380px] md:h-[480px] object-cover filter brightness-[0.75] contrast-[1.1] group-hover:scale-105 transition-transform duration-700"
-      />
+                <div className="text-3xl font-black text-white font-poppins">
+                  {stat.num}
+                </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#060b13] via-transparent to-black/40"></div>
+                <span className="text-xs text-slate-400 font-light">
+                  {stat.sub}
+                </span>
+              </div>
+            ))}
 
-      {/* Floating Radar Node Badges */}
-      <div className="absolute top-6 left-6 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-950/80 border border-cyan-400/40 text-cyan-300 text-xs font-mono">
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-        AIR HUB NORTH AMERICA
-      </div>
-
-      <div className="absolute top-6 right-6 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-950/80 border border-emerald-400/40 text-emerald-300 text-xs font-mono">
-        <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-        OCEAN FREIGHT PACIFIC
-      </div>
-
-      {/* Bottom Info Overlay */}
-      <div className="absolute bottom-6 inset-x-6 flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
-
-        <div className="glass-dark-card p-5 rounded-2xl border-white/20 bg-slate-950/80 max-w-lg space-y-1 backdrop-blur-xl">
-          <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block">
-            INT. SHIPMENT TELEMETRY • AIR & SEA
-          </span>
-
-          <h3 className="text-lg font-bold text-white font-poppins">
-            Dynamic Synchronization from Sea Lanes to Sky Corridors
-          </h3>
-
-          <p className="text-xs text-slate-300 font-light">
-            From maritime docks, ocean vessels, and chartered freighters to continental road fleets, providing continuous temperature & location monitoring.
-          </p>
-        </div>
-
-        <div className="px-5 py-3 rounded-2xl bg-cyan-500/20 border border-cyan-400/40 backdrop-blur-xl flex items-center gap-3">
-          <Ship className="w-6 h-6 text-cyan-300 animate-pulse" />
-
-          <div>
-            <span className="text-base font-black text-white font-mono block">
-              1,294 VESSELS
-            </span>
-
-            <span className="text-[10px] text-cyan-200 uppercase font-semibold">
-              Active Telemetry Tracked Online
-            </span>
           </div>
+
+          {/* ==================== FEATURED TELEMETRY IMAGE ==================== */}
+          <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl group">
+
+            {/* Main Image */}
+            <img
+              src="/Assets/Featured Telemetry.jpg"
+              alt="Global Freight Telemetry Network"
+              className="w-full h-[380px] md:h-[480px] object-cover filter brightness-[0.75] contrast-[1.1] group-hover:scale-105 transition-transform duration-700"
+            />
+
+            {/* Image Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#060b13] via-transparent to-black/40"></div>
+
+            {/* ==================== BOTTOM INFO OVERLAY ==================== */}
+            <div className="absolute bottom-6 inset-x-6 flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+
+              {/* Information Card */}
+              <div className="glass-dark-card p-5 rounded-2xl border-white/20 bg-slate-950/80 max-w-lg space-y-1 backdrop-blur-xl">
+
+                <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest block">
+                  INT. SHIPMENT TELEMETRY • AIR & SEA
+                </span>
+
+                <h3 className="text-lg font-bold text-white font-poppins">
+                  Dynamic Synchronization from Sea Lanes to Sky Corridors
+                </h3>
+
+                <p className="text-xs text-slate-300 font-light">
+                  From maritime docks, ocean vessels, and chartered freighters to
+                  continental road fleets, providing continuous temperature &
+                  location monitoring.
+                </p>
+
+              </div>
+
+              {/* Vessel Status */}
+              <div className="px-5 py-3 rounded-2xl bg-cyan-500/20 border border-cyan-400/40 backdrop-blur-xl flex items-center gap-3">
+
+                <Ship className="w-6 h-6 text-cyan-300 animate-pulse" />
+
+                <div>
+                  <span className="text-base font-black text-white font-mono block">
+                    1,294 VESSELS
+                  </span>
+
+                  <span className="text-[10px] text-cyan-200 uppercase font-semibold">
+                    Active Telemetry Tracked Online
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
         </div>
-
-      </div>
-    </div>
-
-  </div>
-</section>
-
+      </section>
       {/* ==================== 2. FROM REGIONAL COASTLINES TO CONTINENTAL TRADE ==================== */}
       <section className="py-24 bg-white text-slate-950 border-b border-slate-200">
         <div className="container mx-auto px-4 md:px-8">
@@ -530,7 +536,7 @@ const timelineSteps = [
 
               <div key={idx} className="group relative">
 
-                {/* Card */}
+                {/* ================= CARD ================= */}
                 <div
                   className="
                     relative
@@ -540,18 +546,27 @@ const timelineSteps = [
                     p-6
                     md:p-7
                     rounded-xl
+
                     bg-white
-                    border border-[#E1E7EF]
+                    border
+                    border-[#E1E7EF]
                     shadow-[0_4px_14px_rgba(30,60,90,0.05)]
-                    flex flex-col
+
+                    flex
+                    flex-col
                     justify-between
+
                     transition-all
                     duration-300
+
+                    hover:bg-[#06283D]
+                    hover:border-[#5DF8D8]
+                    hover:shadow-[0_0_25px_rgba(93,248,216,0.25)]
                     hover:-translate-y-1
-                    hover:shadow-[0_8px_20px_rgba(30,60,90,0.09)]
                   "
                 >
 
+                  {/* ================= TOP CONTENT ================= */}
                   <div className="space-y-4">
 
                     {/* Number / Icon */}
@@ -560,16 +575,28 @@ const timelineSteps = [
                         w-10 h-10
                         md:w-11 md:h-11
                         rounded-lg
+
                         bg-[#EAF1FC]
-                        border border-[#DCE6F2]
+                        border
+                        border-[#DCE6F2]
                         text-[#315B78]
-                        flex items-center justify-center
+
+                        flex
+                        items-center
+                        justify-center
+
                         font-bold
                         text-sm
                         md:text-base
+
+                        group-hover:bg-[#093C5D]
+                        group-hover:border-[#5DF8D8]/40
+                        group-hover:text-[#5DF8D8]
+                        group-hover:shadow-[0_0_15px_rgba(93,248,216,0.2)]
+                        group-hover:scale-105
+
                         transition-all
                         duration-300
-                        group-hover:bg-[#DCEBFA]
                       "
                     >
                       {val.num}
@@ -584,8 +611,15 @@ const timelineSteps = [
                         lg:text-[18px]
                         font-bold
                         font-poppins
+
                         text-[#071525]
+
                         leading-tight
+
+                        group-hover:text-white
+
+                        transition-colors
+                        duration-300
                       "
                     >
                       {val.title}
@@ -598,9 +632,16 @@ const timelineSteps = [
                         text-[10px]
                         md:text-[11px]
                         lg:text-xs
+
                         text-[#718196]
+
                         leading-relaxed
                         font-light
+
+                        group-hover:text-slate-300
+
+                        transition-colors
+                        duration-300
                       "
                     >
                       {val.desc}
@@ -609,16 +650,23 @@ const timelineSteps = [
                   </div>
 
 
-                  {/* Bottom */}
+                  {/* ================= BOTTOM ================= */}
                   <div
                     className="
                       pt-4
                       mt-5
+
                       border-t
                       border-[#E8EDF3]
+
+                      group-hover:border-white/10
+
                       flex
                       items-center
                       justify-between
+
+                      transition-colors
+                      duration-300
                     "
                   >
 
@@ -627,30 +675,42 @@ const timelineSteps = [
                         text-[9px]
                         md:text-[10px]
                         font-bold
+
                         text-[#668098]
+
                         uppercase
                         tracking-wide
+
+                        group-hover:text-[#5DF8D8]
+
+                        transition-colors
+                        duration-300
                       "
                     >
                       {val.link}
                     </span>
 
+
                     <ArrowUpRight
                       className="
                         w-4
                         h-4
+
                         text-[#7A91A5]
-                        transition-all
-                        duration-300
-                        group-hover:text-[#24617F]
+
+                        group-hover:text-[#5DF8D8]
                         group-hover:translate-x-1
                         group-hover:-translate-y-1
+
+                        transition-all
+                        duration-300
                       "
                     />
 
                   </div>
 
                 </div>
+
               </div>
 
             ))}
@@ -661,14 +721,13 @@ const timelineSteps = [
       </section>
       </div>
 
-      {/* ==================== 5. A DECADE OF TECHNOLOGICAL EXPANSION (TIMELINE) ==================== */}
-      
+      {/* ==================== 5. A DECADE OF TECHNOLOGICAL EXPANSION (TIMELINE) ==================== */}    
       <section className="py-24 bg-white text-slate-950 border-t border-slate-200">
         <div className="container mx-auto px-4 md:px-8">
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-            <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-bold tracking-widest uppercase">
+            <span className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
               HISTORICAL TRAJECTORY
             </span>
 

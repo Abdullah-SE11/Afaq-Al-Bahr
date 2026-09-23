@@ -23,9 +23,9 @@ export default function App() {
   }
 
   const waLines = [
-    { label: "Dispatch Line 1", num: "056 826 2134", wa: "971568262134" },
-    { label: "Dispatch Line 2", num: "055 935 9616", wa: "971559359616" },
-    { label: "Customer Support", num: "055 536 5465", wa: "971555365465" }
+    { label: "Customer Support", num: "+971 56 826 2134", wa: "971568262134" },
+    { label: "Dispatch Line 1 (Dubai)", num: "+971 55 935 9616", wa: "971559359616" },
+    { label: "Dispatch Line 2 (Dubai)", num: "+971 55 536 5465", wa: "971555365465" }
   ]
 
   return (
@@ -76,7 +76,7 @@ export default function App() {
 
               {/* Header */}
               <div className="flex items-center gap-3 pr-8">
-                <img src="as/logo.png" alt="ABS Logo" className="h-10 w-auto object-contain bg-white p-1 rounded-lg" />
+                <img src="/Assets/logo.png" alt="ABS Logo" className="h-10 w-auto object-contain bg-white p-1 rounded-lg" />
                 <div>
                   <h3 className="text-lg font-bold font-poppins text-white leading-tight">Contact Afaq Al Bahr</h3>
                   <p className="text-xs text-slate-400">Choose a line to chat directly on WhatsApp</p>

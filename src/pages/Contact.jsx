@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { WhatsAppIcon } from '../components/WhatsAppWidget'
+import { InteractiveArcMap } from '../components/InteractiveArcMap'
 import {
   Phone,
   MessageCircle,
@@ -19,11 +21,11 @@ export function Contact({ t }) {
   const [activeFaq, setActiveFaq] = useState(null)
   const [selectedHub, setSelectedHub] = useState(0)
 
-  const directLines = [
-    { label: "Dispatch Line 1 (Dubai)", num: "056 826 2134", wa: "971568262134" },
-    { label: "Dispatch Line 2 (Dubai)", num: "055 935 9616", wa: "971559359616" },
-    { label: "Dispatch Line 3 (Dubai)", num: "055 536 5465", wa: "971555365465" }
-  ]
+const directLines = [
+  { label: "Dispatch Line 1 (Dubai)", num: "+971 56 826 2134", wa: "971568262134" },
+  { label: "Dispatch Line 2 (Dubai)", num: "+971 55 935 9616", wa: "971559359616" },
+  { label: "Dispatch Line 3 (Dubai)", num: "+971 55 536 5465", wa: "971555365465" }
+];
 
 const hubsData = [
   {
@@ -109,15 +111,6 @@ const hubsData = [
         <div className="container mx-auto px-4 md:px-8 py-16 md:py-24 relative z-10">
           <div className="max-w-5xl space-y-6">
 
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                DIRECT DISPATCH & TELEMETRY
-                <span className="text-slate-400">•</span>
-                Avg. Response Time: 42 mins
-              </div>
-        </div>
-
             <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
               Let's Move{" "}
               <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent">
@@ -178,13 +171,7 @@ const hubsData = [
 
                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#25D366] flex items-center justify-center shadow-lg shadow-emerald-500/30 shrink-0">
 
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="w-8 h-8 md:w-9 md:h-9 fill-white"
-                        aria-hidden="true"
-                      >
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.67-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                      </svg>
+                      <WhatsAppIcon className="w-8 h-8 md:w-9 md:h-9" />
 
                     </div>
 
@@ -232,13 +219,7 @@ const hubsData = [
 
                           <div className="w-12 h-12 rounded-xl bg-[#25D366] flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300 shrink-0">
 
-                            <svg
-                              viewBox="0 0 24 24"
-                              className="w-6 h-6 fill-white"
-                              aria-hidden="true"
-                            >
-                              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.67-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.273.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                            </svg>
+                            <WhatsAppIcon className="w-6 h-6" />
 
                           </div>
 
@@ -323,13 +304,15 @@ const hubsData = [
                 </p>
 
 
-                <a
-                  href={`tel:${directLines[0].num}`}
-                  className="inline-flex items-center gap-3 w-full justify-center bg-[#5DF8D8] hover:bg-[#34D399] text-[#062b40] px-5 py-3.5 rounded-2xl text-sm md:text-base font-black transition-all hover:scale-[1.02] shadow-lg shadow-emerald-500/20"
-                >
-                  <Phone className="w-5 h-5" />
-                  {directLines[0].num}
-                </a>
+                  <a
+                    href="https://wa.me/971568262134"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 w-full justify-center bg-[#5DF8D8] hover:bg-[#34D399] text-[#062b40] px-5 py-3.5 rounded-2xl text-sm md:text-base font-black transition-all hover:scale-[1.02] shadow-lg shadow-emerald-500/20"
+                  >
+                    <Phone className="w-5 h-5" />
+                    +971 56 826 2134
+                  </a>
 
               </div>
 
@@ -466,175 +449,148 @@ const hubsData = [
       </section>
 
       {/* ================= TELEMETRY SECTION ================= */}
-<section className="py-16 md:py-20 bg-[#073d5a] text-white relative overflow-hidden">
+      <section className="py-16 md:py-20 bg-[#073d5a] text-white relative overflow-hidden">
 
-  {/* Background Glow */}
-  <div className="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_20%_30%,#6FD1D7,transparent_30%),radial-gradient(circle_at_80%_70%,#5DF8D8,transparent_30%)]"></div>
+        {/* Background Glow */}
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_20%_30%,#6FD1D7,transparent_30%),radial-gradient(circle_at_80%_70%,#5DF8D8,transparent_30%)]"></div>
 
-  <div className="container mx-auto px-4 md:px-8 relative z-10">
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
 
-    {/* Header */}
-    <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-8">
+          {/* Header */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-8">
 
-      <div>
-        <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#5DF8D8] font-bold">
-          GEOSPATIAL TELEMETRY
-        </span>
+            <div>
+              <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[#5DF8D8] font-bold">
+                GEOSPATIAL TELEMETRY
+              </span>
 
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-poppins mt-2">
-          Interactive Regional Logistics Hubs
-        </h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-poppins mt-2">
+                Interactive Regional Logistics Hubs
+              </h2>
 
-        <p className="text-xs sm:text-sm text-slate-200 mt-2 max-w-2xl leading-relaxed">
-          Select a core maritime terminal to view channel throughput,
-          real-time weather clearance, and docking status.
-        </p>
-      </div>
+              <p className="text-xs sm:text-sm text-slate-200 mt-2 max-w-2xl leading-relaxed">
+                Select a core maritime terminal to view channel throughput,
+                real-time weather clearance, and docking status.
+              </p>
+            </div>
 
-      {/* Hub Buttons */}
-      <div className="flex flex-wrap gap-2">
-        {hubsData.map((hub, idx) => (
-          <button
-            key={idx}
-            onClick={() => setSelectedHub(idx)}
-            className={`px-4 py-2.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all shadow-md ${
-              selectedHub === idx
-                ? "bg-[#5DF8D8] text-[#062b40] scale-105 shadow-cyan-400/20"
-                : "bg-[#052e46] text-slate-200 hover:bg-[#0b4c68]"
-            }`}
-          >
-            {hub.name}
-          </button>
-        ))}
-      </div>
-
-    </div>
-
-
-    {/* Main Grid */}
-    <div className="grid lg:grid-cols-12 gap-5">
-
-      {/* ================= MAP ================= */}
-      <div className="lg:col-span-7 xl:col-span-8 bg-[#052f48] rounded-2xl border border-white/15 p-4 md:p-5 shadow-2xl">
-
-        <div className="flex justify-between items-center mb-4">
-
-          <span className="text-[10px] sm:text-xs uppercase tracking-wider text-slate-200 font-bold flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#5DF8D8] animate-pulse"></span>
-            LIVE SATELLITE TELEMETRY
-          </span>
-
-          <span className="text-[10px] sm:text-xs text-[#5DF8D8] font-mono font-bold">
-            {hubsData[selectedHub].coord}
-          </span>
-
-        </div>
-
-
-        {/* EMBEDDED MAP */}
-        <div className="h-64 sm:h-72 md:h-80 rounded-xl overflow-hidden border border-white/10">
-          <iframe
-            title={`Map - ${hubsData[selectedHub].name}`}
-            width="100%"
-            height="100%"
-            style={{ border: 0, filter: 'saturate(0.85) contrast(1.1)' }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            src={`https://www.openstreetmap.org/export/embed.html?bbox=${hubsData[selectedHub].position[1] - 5},${hubsData[selectedHub].position[0] - 3},${hubsData[selectedHub].position[1] + 5},${hubsData[selectedHub].position[0] + 3}&layer=mapnik&marker=${hubsData[selectedHub].position[0]},${hubsData[selectedHub].position[1]}`}
-          />
-        </div>
-
-      </div>
-
-
-      {/* ================= HUB INFORMATION ================= */}
-      <div className="lg:col-span-5 xl:col-span-4 bg-[#052f48] rounded-2xl border border-white/15 p-5 md:p-6 flex flex-col justify-between shadow-2xl space-y-5">
-
-        <div>
-
-          <div className="flex items-center justify-between">
-
-            <span className="text-[10px] uppercase tracking-wider text-slate-300 font-bold">
-              {hubsData[selectedHub].code}
-            </span>
-
-            <span className="px-2.5 py-1 rounded-full bg-emerald-400/20 border border-emerald-400/30 text-[#5DF8D8] text-[10px] font-bold">
-              {hubsData[selectedHub].status}
-            </span>
+            {/* Hub Buttons */}
+            <div className="flex flex-wrap gap-2">
+              {hubsData.map((hub, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedHub(idx)}
+                  className={`px-4 py-2.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all shadow-md ${
+                    selectedHub === idx
+                      ? "bg-[#5DF8D8] text-[#062b40] scale-105 shadow-cyan-400/20"
+                      : "bg-[#052e46] text-slate-200 hover:bg-[#0b4c68]"
+                  }`}
+                >
+                  {hub.name}
+                </button>
+              ))}
+            </div>
 
           </div>
 
 
-          <h3 className="text-xl md:text-2xl font-bold font-poppins mt-2 text-white">
-            {hubsData[selectedHub].title}
-          </h3>
+          {/* Main Grid */}
+          <div className="grid lg:grid-cols-12 gap-5">
 
-          <p className="text-xs md:text-sm text-slate-300 leading-relaxed mt-2">
-            {hubsData[selectedHub].desc}
-          </p>
-
-
-          {/* Statistics */}
-          <div className="space-y-2.5 mt-5">
-
-            <div className="bg-[#0b4564] rounded-lg px-3.5 py-2.5 flex justify-between items-center">
-
-              <span className="text-[11px] md:text-xs text-slate-300 font-medium">
-                Throughput Volume
-              </span>
-
-              <span className="text-[11px] md:text-xs font-bold text-white font-poppins">
-                {hubsData[selectedHub].volume}
-              </span>
-
+            {/* ================= INTERACTIVE ARCS MAP ================= */}
+            <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
+              <InteractiveArcMap />
             </div>
 
 
-            <div className="bg-[#0b4564] rounded-lg px-3.5 py-2.5 flex justify-between items-center">
+            {/* ================= HUB INFORMATION ================= */}
+            <div className="lg:col-span-5 xl:col-span-4 bg-[#052f48] rounded-2xl border border-white/15 p-5 md:p-6 flex flex-col justify-between shadow-2xl space-y-5">
 
-              <span className="text-[11px] md:text-xs text-slate-300 font-medium">
-                Average Dwell Time
-              </span>
+              <div>
 
-              <span className="text-[11px] md:text-xs font-bold text-[#5DF8D8] font-poppins">
-                {hubsData[selectedHub].dwell}
-              </span>
+                <div className="flex items-center justify-between">
 
-            </div>
+                  <span className="text-[10px] uppercase tracking-wider text-slate-300 font-bold">
+                    {hubsData[selectedHub].code}
+                  </span>
+
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-400/20 border border-emerald-400/30 text-[#5DF8D8] text-[10px] font-bold">
+                    {hubsData[selectedHub].status}
+                  </span>
+
+                </div>
 
 
-            <div className="bg-[#0b4564] rounded-lg px-3.5 py-2.5 flex justify-between items-center">
+                <h3 className="text-xl md:text-2xl font-bold font-poppins mt-2 text-white">
+                  {hubsData[selectedHub].title}
+                </h3>
 
-              <span className="text-[11px] md:text-xs text-slate-300 font-medium">
-                Duty Desk Manager
-              </span>
+                <p className="text-xs md:text-sm text-slate-300 leading-relaxed mt-2">
+                  {hubsData[selectedHub].desc}
+                </p>
 
-              <span className="text-[11px] md:text-xs font-bold text-white font-poppins">
-                {hubsData[selectedHub].manager}
-              </span>
+
+                {/* Statistics */}
+                <div className="space-y-2.5 mt-5">
+
+                  <div className="bg-[#0b4564] rounded-lg px-3.5 py-2.5 flex justify-between items-center">
+
+                    <span className="text-[11px] md:text-xs text-slate-300 font-medium">
+                      Throughput Volume
+                    </span>
+
+                    <span className="text-[11px] md:text-xs font-bold text-white font-poppins">
+                      {hubsData[selectedHub].volume}
+                    </span>
+
+                  </div>
+
+
+                  <div className="bg-[#0b4564] rounded-lg px-3.5 py-2.5 flex justify-between items-center">
+
+                    <span className="text-[11px] md:text-xs text-slate-300 font-medium">
+                      Average Dwell Time
+                    </span>
+
+                    <span className="text-[11px] md:text-xs font-bold text-[#5DF8D8] font-poppins">
+                      {hubsData[selectedHub].dwell}
+                    </span>
+
+                  </div>
+
+
+                  <div className="bg-[#0b4564] rounded-lg px-3.5 py-2.5 flex justify-between items-center">
+
+                    <span className="text-[11px] md:text-xs text-slate-300 font-medium">
+                      Duty Desk Manager
+                    </span>
+
+                    <span className="text-[11px] md:text-xs font-bold text-white font-poppins">
+                      {hubsData[selectedHub].manager}
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* Terminal Button */}
+              <a
+                href={`tel:${directLines[0].num}`}
+                className="w-full text-center bg-[#5DF8D8] hover:bg-[#34D399] text-[#062b40] py-3 rounded-lg text-xs md:text-sm font-bold transition-all hover:scale-[1.02] shadow-lg shadow-cyan-400/20 block"
+              >
+                <Radio className="w-4 h-4 inline mr-2" />
+                Connect with Terminal Radio
+              </a>
 
             </div>
 
           </div>
 
         </div>
-
-
-        {/* Terminal Button */}
-        <a
-          href={`tel:${directLines[0].num}`}
-          className="w-full text-center bg-[#5DF8D8] hover:bg-[#34D399] text-[#062b40] py-3 rounded-lg text-xs md:text-sm font-bold transition-all hover:scale-[1.02] shadow-lg shadow-cyan-400/20 block"
-        >
-          <Radio className="w-4 h-4 inline mr-2" />
-          Connect with Terminal Radio
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
+      </section>
 
 
       {/* ================= FAQ ================= */}
@@ -645,7 +601,7 @@ const hubsData = [
           {/* ================= FAQ HEADER ================= */}
           <div className="text-center mb-10 md:mb-12 space-y-3">
 
-            <span className="px-3.5 py-1 rounded-full bg-cyan-100 border border-cyan-300 text-cyan-800 text-[11px] sm:text-xs font-bold uppercase tracking-widest inline-block">
+            <span className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
               OPERATIONAL CLARITY
             </span>
 

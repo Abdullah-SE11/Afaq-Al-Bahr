@@ -40,13 +40,6 @@ export function Services({ t, onOpenQuote }) {
 
             <div className="max-w-3xl">
 
-            <div className="lg:col-span-7 mb-6 space-y-6">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                 GLOBAL MULTIMODAL NETWORK 2025
-              </div>
-            </div>
-
               <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
                 Complete{" "}
                 <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent ">
