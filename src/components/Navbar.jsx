@@ -56,15 +56,15 @@ export function Navbar({ currentPage, navigateTo, t }) {
       id: 'contact',
       label: t.navbar.contact,
     },
-    // {
-    //   id: 'terms',
-    //   label: 'Terms & Conditions',
-    // },
+    {
+      id: 'terms',
+      label: 'Terms & Conditions',
+    },
   ]
 
   return (
     <header
-      className={`relative w-full z-50 flex-shrink-0 transition-all duration-300 ${
+      className={` ${
         scrolled
           ? 'bg-white shadow-md border-b border-slate-200 py-2'
           : 'bg-white border-b border-slate-200 py-3'

@@ -19,83 +19,52 @@ export function Services({ t, onOpenQuote }) {
     <div className="min-h-screen bg-[#F5F7FC] text-[#102033]">
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[#062B43] py-16 md:py-20">
+      <section className="relative overflow-hidden bg-[#06334d] text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(93,248,216,0.14),transparent_35%),radial-gradient(circle_at_20%_80%,rgba(111,209,215,0.12),transparent_35%)]" />
+        <div className="absolute -right-20 top-10 h-80 w-80 rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-emerald-500/10 blur-3xl" />
 
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                'absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(93,248,216,0.14),transparent_40%),radial-gradient(circle_at_20%_80%,rgba(111,209,215,0.12),transparent_40%)]',
-              backgroundSize: '55px 55px',
-            }}
-          />
-        </div>
-
-        <div className="absolute -right-20 top-10 w-96 h-96 rounded-full bg-cyan-500/10 blur-3xl" />
-
-        <div className="container mx-auto px-4 md:px-8 relative z-10">
-
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
-
-            <div className="max-w-3xl">
-
-              <h2 className="text-3xl sm:text-6xl font-black font-poppins tracking-tight text-white">
+        <div className="relative z-10 container mx-auto px-4 py-16 md:px-8 md:py-24">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-4xl">
+              <h2 className="mt-0 text-4xl font-black font-poppins tracking-tight text-white sm:text-5xl md:text-6xl">
                 Complete{" "}
-                <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent ">
+                <span className="bg-gradient-to-r from-[#27C7E8] via-[#31C7C1] to-[#34D399] bg-clip-text text-transparent">
                   Logistics
                 </span>{" "}
                 Solutions
-              </h2> 
+              </h2>
 
-              <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-3xl mt-4">
+              <p className="mt-5 max-w-2xl text-base text-slate-300 md:text-lg">
                 End-to-end multimodal transport, precision freight forwarding,
                 and smart warehousing engineered for modern global commerce.
                 Synchronized across sky, ocean, and continent.
               </p>
-
             </div>
 
-            <div className="flex gap-2 shrink-0">
-
-              <div className="bg-[#0C4565] border border-[#17617F] rounded-xl px-5 py-4 min-w-[135px]">
-                <p className="text-[7px] uppercase tracking-wider text-slate-300">
-                  ACTIVE SHIPMENTS
+            <div className="grid w-full max-w-md grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-white/10 bg-[#0C4565]/80 p-4 shadow-lg backdrop-blur-md">
+                <p className="text-[9px] uppercase tracking-[0.18em] text-slate-300">
+                  Active Shipments
                 </p>
-
-                <div className="flex items-center gap-1">
-                  <span className="text-2xl font-black text-white">
-                    14,892
-                  </span>
-
-                  <Globe className="w-4 h-4 text-cyan-300" />
+                <div className="mt-3 flex items-center gap-2">
+                  <span className="text-2xl font-black text-white">14,892</span>
+                  <Globe className="h-4 w-4 text-cyan-300" />
                 </div>
-
-                <p className="text-[8px] text-cyan-200">
-                  Real-time GPS Lock
-                </p>
+                <p className="mt-2 text-[10px] text-cyan-200">Real-time GPS Lock</p>
               </div>
 
-              <div className="bg-[#0C4565] border border-[#17617F] rounded-xl px-5 py-4 min-w-[135px]">
-                <p className="text-[7px] uppercase tracking-wider text-slate-300">
-                  ON-TIME DELIVERY
+              <div className="rounded-2xl border border-white/10 bg-[#0C4565]/80 p-4 shadow-lg backdrop-blur-md">
+                <p className="text-[9px] uppercase tracking-[0.18em] text-slate-300">
+                  On-Time Delivery
                 </p>
-
-                <div className="flex items-center gap-1">
-                  <span className="text-2xl font-black text-white">
-                    99.82%
-                  </span>
-
-                  <CheckCircle2 className="w-4 h-4 text-cyan-300" />
+                <div className="mt-3 flex items-center gap-2">
+                  <span className="text-2xl font-black text-white">99.82%</span>
+                  <CheckCircle2 className="h-4 w-4 text-cyan-300" />
                 </div>
-
-                <p className="text-[8px] text-cyan-200">
-                  On-Schedule SLA
-                </p>
+                <p className="mt-2 text-[10px] text-cyan-200">On-Schedule SLA</p>
               </div>
-
             </div>
-
           </div>
         </div>
       </section>

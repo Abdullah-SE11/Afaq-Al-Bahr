@@ -9,6 +9,9 @@ import { Home } from './pages/Home'
 import { AboutUs } from './pages/AboutUs'
 import { Services } from './pages/Services'
 import { Contact } from './pages/Contact'
+import { TermsConditions } from './pages/TermsConditions'
+import { PrivacyPolicy } from './pages/PrivacyPolicy'
+import { SecurityStandards } from './pages/SecurityStandards'
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -40,10 +43,13 @@ export default function App() {
 
       {/* PAGE CONTENT */}
       <main className="flex-1">
-        {currentPage === 'home' && <Home t={t} onOpenQuote={() => setQuoteModalOpen(true)} />}
+        {currentPage === 'home' && <Home t={t} onOpenQuote={() => setQuoteModalOpen(true)} navigateTo={navigateTo} />}
         {currentPage === 'about' && <AboutUs t={t} onOpenQuote={() => setQuoteModalOpen(true)} />}
         {currentPage === 'services' && <Services t={t} onOpenQuote={() => setQuoteModalOpen(true)} />}
         {currentPage === 'contact' && <Contact t={t} />}
+        {currentPage === 'terms' && <TermsConditions navigateTo={navigateTo} t={t} />}
+        {currentPage === 'privacy' && <PrivacyPolicy navigateTo={navigateTo} t={t} />}
+        {currentPage === 'security' && <SecurityStandards navigateTo={navigateTo} t={t} />}
       </main>
 
       {/* FLOATING WHATSAPP WIDGET */}

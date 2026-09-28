@@ -211,15 +211,24 @@ export function Footer({ navigateTo, t }) {
 
       <div className="flex flex-wrap gap-4">
 
-        <span className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+        <span
+          onClick={() => navigateTo?.('terms')}
+          className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+        >
           Terms & Conditions
         </span>
 
-        <span className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+        <span
+          onClick={() => navigateTo?.('privacy')}
+          className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+        >
           Privacy Policy
         </span>
 
-        <span className="hover:text-[#5DF8D8] cursor-pointer transition-colors">
+        <span
+          onClick={() => navigateTo?.('security')}
+          className="hover:text-[#5DF8D8] cursor-pointer transition-colors"
+        >
           Security Standards
         </span>
 
