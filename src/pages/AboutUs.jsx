@@ -1,178 +1,64 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import {
-  Ship, Plane, ShieldCheck, Globe, Award, CheckCircle2, Lock, Zap,
+  Ship,Plane,Clock3, ShieldCheck, Globe, Award, CheckCircle2, Lock, Zap,
   Headphones, ArrowRight, ArrowUpRight, Activity, TrendingUp, Check, Anchor
 } from 'lucide-react'
 
 
 
 export function AboutUs({ t, onOpenQuote }) {
-  
+  const [selectedCertificate, setSelectedCertificate] = React.useState(null)
 
-  const heroStats = [
-    { num: "142", label: "ACTIVE VESSELS", sub: "Ocean & Air Fleet" },
-    { num: "68", label: "AIR FREIGHT HUBS", sub: "Daily Dispatchers" },
-    { num: "54", label: "PORT TERMINALS", sub: "Global Hubs" },
-    { num: "99.8%", label: "ON-TIME RATE", sub: "Fleet Transit" }
-  ]
+  const {
+    certificateItems = [],
+    heroStats = [],
+    coreValues = [],
+    timelineSteps = []
+  } = t.about || {}
 
-  const coreValues = [
-    {
-      num: "1.",
-      title: "Reliability",
-      desc: "Uncompromising commitment to scheduled vessel departures, guaranteed delivery windows, and zero-damage cargo integrity.",
-      link: "Explore SLA guarantees"
-    },
-    {
-      num: "2.",
-      title: "Speed & Velocity",
-      desc: "Optimized multimodal dispatches, priority airport airlifts, and direct EDI-backed electronic customs clearances.",
-      link: "Peak SLA velocity"
-    },
-    {
-      num: "3.",
-      title: "Safety & Security",
-      desc: "Stringent HACCP & C-TPAT safety protocols, tamperproof cryptographic seals, and accredited international cargo security specialists.",
-      link: "View security standards"
-    },
-    {
-      num: "4.",
-      title: "Client Satisfaction",
-      desc: "Dedicated enterprise account desks, transparent live telemetry dashboards, and proactive exception resolution.",
-      link: "Get dedicated desk"
-    }
-  ]
-
-const timelineSteps = [
-  {
-    year: "2012",
-    title: "Founding & Coastal Hub",
-    desc: "Inaugurated our first premier maritime staging hub with 10 reefer units and deep-berth container landing.",
-    badge: "Terminal Operational",
-    active: false
-  },
-  {
-    year: "2013",
-    title: "Regional Expansion",
-    desc: "Expanded regional freight operations and strengthened connections with key coastal and inland trade routes.",
-    badge: "Regional Network",
-    active: false
-  },
-  {
-    year: "2014",
-    title: "Fleet Development",
-    desc: "Expanded our logistics fleet and improved road freight capabilities to support growing cargo volumes.",
-    badge: "Fleet Expansion",
-    active: false
-  },
-  {
-    year: "2015",
-    title: "Integrated Logistics",
-    desc: "Introduced integrated freight coordination across maritime, road, and warehouse operations.",
-    badge: "Integrated Operations",
-    active: false
-  },
-  {
-    year: "2016",
-    title: "Multimodal Air & Rail",
-    desc: "Chartered transcontinental scheduled air freight lanes and cross-border road truck fleets.",
-    badge: "Tri-Modal Integration",
-    active: false
-  },
-  {
-    year: "2017",
-    title: "Global Trade Connections",
-    desc: "Strengthened international trade corridors and expanded partnerships across major commercial markets.",
-    badge: "Global Connectivity",
-    active: false
-  },
-  {
-    year: "2018",
-    title: "Smart Cargo Operations",
-    desc: "Modernized cargo handling processes with improved tracking, documentation, and operational visibility.",
-    badge: "Smart Operations",
-    active: false
-  },
-  {
-    year: "2019",
-    title: "Telemetry Platform Launch",
-    desc: "Rolled out proprietary IoT container tracking, continuous environmental sensors, and predictive ETA algorithms.",
-    badge: "Digital Telemetry Core",
-    active: false
-  },
-  {
-    year: "2020",
-    title: "Digital Logistics Transformation",
-    desc: "Accelerated digital logistics operations with connected shipment monitoring and improved remote coordination.",
-    badge: "Digital Transformation",
-    active: false
-  },
-  {
-    year: "2021",
-    title: "Supply Chain Resilience",
-    desc: "Expanded operational capabilities and strengthened supply chain continuity across international freight routes.",
-    badge: "Resilient Supply Chain",
-    active: false
-  },
-  {
-    year: "2022",
-    title: "50+ Global Port Hubs",
-    desc: "Expanded enterprise charter networks into 50+ sovereign markets including Dubai, Karachi, Shanghai, and Hamburg.",
-    badge: "Global Network Scale",
-    active: false
-  },
-  {
-    year: "2023",
-    title: "Advanced Cargo Visibility",
-    desc: "Enhanced real-time shipment visibility and connected logistics workflows across global transportation networks.",
-    badge: "Real-Time Visibility",
-    active: false
-  },
-  {
-    year: "2024",
-    title: "Intelligent Logistics Systems",
-    desc: "Advanced automation, data-driven planning, and connected logistics systems to improve cargo coordination.",
-    badge: "Intelligent Logistics",
-    active: false
-  },
-  {
-    year: "2025",
-    title: "Connected Global Operations",
-    desc: "Expanded connected logistics capabilities with smarter monitoring, automation, and integrated supply chain management.",
-    badge: "Connected Operations",
-    active: false
-  },
-  {
-    year: "2026",
-    title: "Next-Generation Logistics",
-    desc: "Advancing intelligent logistics through real-time visibility, smarter automation, and connected global supply chain operations.",
-    badge: "Future Logistics Network",
-    active: false
+  const heroStatIconMap = {
+    ship: Ship,
+    plane: Plane,
+    anchor: Anchor,
+    clock: Clock3,
   }
-]
+
+  const heroStatsMapped = heroStats.map((stat) => ({
+    ...stat,
+    icon: heroStatIconMap[stat.icon] || Clock3,
+  }))
 
   return (
     <div className="bg-[#060b13] text-slate-100 min-h-screen">
 
       {/* ==================== 1. HERO SECTION ==================== */}
-      <section
-        className="relative bg-dark-hero bg-cyber-grid pt-12 pb-20 overflow-hidden border-b border-white/10 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/Assets/about-bg.jpg')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Dark Image Overlay */}
-        <div className="absolute inset-0 bg-[#060b13]/85"></div>
+      <section className="relative pt-12 pb-20 overflow-hidden border-b border-white/10">
+        <div className="absolute inset-0 z-0">
+          <video
+            className="h-full w-full object-cover object-center"
+            src="/Assets/about hero.mp4"
+            poster="/Assets/about-bg.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            onError={(e) => {
+              e.target.style.display = 'none'
+            }}
+          />
+        </div>
+
+        {/* Dark Video Overlay */}
+        <div className="absolute inset-0 bg-[#060b13]/40 z-10"></div>
 
         {/* Subtle Cyan Glow */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#093C5D]/30 via-transparent to-[#5DF8D8]/10"></div>
+        {/* <div className="absolute inset-0 bg-gradient-to-br from-[#093C5D]/30 via-transparent to-[#5DF8D8]/10"></div> */}
 
         {/* ==================== HERO CONTENT ==================== */}
-        <div className="container mx-auto px-4 md:px-8 relative z-10 space-y-10">
+        <div className="container mx-auto px-4 md:px-8 relative z-20 space-y-10">
 
           {/* Hero Text */}
           <div className="max-w-4xl space-y-5">
@@ -196,27 +82,94 @@ const timelineSteps = [
           </div>
 
             {/* ==================== TOP 4 STAT BADGES ==================== */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {heroStatsMapped.map((stat, idx) => {
+              const Icon = stat.icon
 
-            {heroStats.map((stat, idx) => (
-              <div
-                key={idx}
-                className="glass-dark-card p-5 rounded-2xl border border-white/10 bg-[#091122]/80 backdrop-blur-xl space-y-1"
-              >
-                <span className="text-[10px] uppercase font-bold text-cyan-400 tracking-wider block">
-                  {stat.label}
-                </span>
+              return (
+                <div
+                  key={idx}
+                  className="
+                    group
+                    glass-dark-card
+                    relative
+                    space-y-1
+                    overflow-hidden
+                    rounded-2xl
+                    border
+                    border-white/10
+                    bg-[#091122]/80
+                    p-5
+                    backdrop-blur-xl
+                    transition-all
+                    duration-300
+                    hover:-translate-y-1
+                    hover:border-cyan-400/40
+                    hover:bg-[#0b172d]/90
+                  "
+                >
+                  {/* Icon */}
+                  <div
+                    className="
+                      absolute
+                      right-4
+                      top-4
+                      flex
+                      h-10
+                      w-10
+                      items-center
+                      justify-center
+                      rounded-xl
+                      border
+                      border-cyan-400/20
+                      bg-cyan-400/10
+                      text-cyan-400
+                      transition-all
+                      duration-300
+                      group-hover:scale-110
+                      group-hover:bg-cyan-400/20
+                      group-hover:text-cyan-300
+                    "
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={1.8} />
+                  </div>
 
-                <div className="text-3xl font-black text-white font-poppins">
-                  {stat.num}
+                  {/* Label */}
+                  <span className="block pr-10 text-[10px] font-bold uppercase tracking-wider text-cyan-400">
+                    {stat.label}
+                  </span>
+
+                  {/* Number */}
+                  <div className="font-poppins text-3xl font-black text-white">
+                    {stat.num}
+                  </div>
+
+                  {/* Description */}
+                  <span className="text-xs font-light text-slate-400">
+                    {stat.sub}
+                  </span>
+
+                  {/* Bottom glow */}
+                  <div
+                    className="
+                      pointer-events-none
+                      absolute
+                      -bottom-8
+                      left-1/2
+                      h-16
+                      w-24
+                      -translate-x-1/2
+                      rounded-full
+                      bg-cyan-400/10
+                      blur-2xl
+                      transition-opacity
+                      duration-300
+                      group-hover:bg-cyan-400/20
+                    "
+                  />
                 </div>
-
-                <span className="text-xs text-slate-400 font-light">
-                  {stat.sub}
-                </span>
-              </div>
-            ))}
-
+              )
+            })}
           </div>
 
           {/* ==================== FEATURED TELEMETRY IMAGE ==================== */}
@@ -429,7 +382,6 @@ const timelineSteps = [
         </div>
       </section>
 
-     
       <div className='bg-[#EAF1FC]'>
       {/* ==================== 3. PURPOSE & VISION CARDS ==================== */}
       <section className="py-16  border-b border-slate-200">
@@ -864,35 +816,9 @@ const timelineSteps = [
                 integrity and rigorous automated seal checks at terminal gates.
               </p>
 
-              {/* Trend */}
-              <div className="mt-auto pt-5">
-
-                <div className="flex items-center justify-between mb-2 text-[9px] md:text-[10px] text-[#708398]">
-                  <span>Claims-Free Trend</span>
-                  <span>+9.4% YoY</span>
-                </div>
-
-                <div className="relative h-8">
-                  <svg
-                    viewBox="0 0 240 40"
-                    className="w-full h-full"
-                    preserveAspectRatio="none"
-                  >
-                    <polyline
-                      points="5,31 45,26 80,28 120,19 155,17 190,12 235,5"
-                      fill="none"
-                      stroke="#24617F"
-                      strokeWidth="2"
-                    />
-
-                    <circle
-                      cx="235"
-                      cy="5"
-                      r="3"
-                      fill="#24617F"
-                    />
-                  </svg>
-                </div>
+              <div className="mt-auto pt-6 flex items-center gap-2 text-[10px] md:text-[11px] text-[#668098]">
+                <Check className="w-4 h-4 text-[#4C718A]" />
+                Claims-free performance benchmark
               </div>
             </div>
 
@@ -969,82 +895,133 @@ const timelineSteps = [
 
               {/* Certification Badges */}
               <div className="flex flex-wrap justify-center lg:justify-end gap-2.5 max-w-lg">
+                {certificateItems.map((item) => (
+                  <button
+                    key={item.title}
+                    type="button"
+                    onClick={() => setSelectedCertificate(item)}
+                    className="group bg-[#0A4565] border border-[#155776] rounded-xl px-4 py-3 min-w-[145px] text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#5DE8D5] hover:shadow-lg hover:shadow-cyan-500/10"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-6 h-6 rounded-full bg-[#0B5C78] flex items-center justify-center">
+                        <span className="text-[11px]" style={{ color: item.accent }}>
+                          {item.title.includes('ISO') ? '✥' : '✓'}
+                        </span>
+                      </div>
 
-                {/* ISO */}
-                <div className="bg-[#0A4565] border border-[#155776] rounded-xl px-4 py-3 min-w-[145px]">
+                      <div>
+                        <span className="text-[10px] font-bold text-white block">
+                          {item.title}
+                        </span>
 
-                  <div className="flex items-center gap-2.5">
-
-                    <div className="w-6 h-6 rounded-full bg-[#0B5C78] flex items-center justify-center">
-                      <span className="text-[#45E7D2] text-[11px]">
-                        ✥
-                      </span>
+                        <span className="text-[8px] text-[#A8C2D0]">
+                          {item.subtitle}
+                        </span>
+                      </div>
                     </div>
-
-                    <div>
-                      <span className="text-[10px] font-bold text-white block">
-                        ISO 9001:2015
-                      </span>
-
-                      <span className="text-[8px] text-[#A8C2D0]">
-                        Quality Management
-                      </span>
-                    </div>
-
-                  </div>
-                </div>
-
-
-                {/* TAPA */}
-                <div className="bg-[#0A4565] border border-[#155776] rounded-xl px-4 py-3 min-w-[145px]">
-
-                  <div className="flex items-center gap-2.5">
-
-                    <div className="w-6 h-6 rounded-full bg-[#0B5C78] flex items-center justify-center">
-                      <Check className="w-3.5 h-3.5 text-[#45E7D2]" />
-                    </div>
-
-                    <div>
-                      <span className="text-[10px] font-bold text-white block">
-                        TAPA TSR Tier 1
-                      </span>
-
-                      <span className="text-[8px] text-[#A8C2D0]">
-                        Highest Security Protocol
-                      </span>
-                    </div>
-
-                  </div>
-                </div>
-
-
-                {/* AEO */}
-                <div className="bg-[#0A4565] border border-[#155776] rounded-xl px-4 py-3 min-w-[145px]">
-
-                  <div className="flex items-center gap-2.5">
-
-                    <div className="w-6 h-6 rounded-full bg-[#0B5C78] flex items-center justify-center">
-                      <span className="text-[#45E7D2] text-[11px]">
-                        ✥
-                      </span>
-                    </div>
-
-                    <div>
-                      <span className="text-[10px] font-bold text-white block">
-                        AEO / C-TPAT
-                      </span>
-
-                      <span className="text-[8px] text-[#A8C2D0]">
-                        Intl. Trade Pre-Check
-                      </span>
-                    </div>
-
-                  </div>
-                </div>
-
+                  </button>
+                ))}
               </div>
             </div>
           </div>
+
+          {selectedCertificate && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-[#021019]/50 px-3 py-6"
+              onClick={() => setSelectedCertificate(null)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 20 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-[520px] overflow-hidden rounded-[24px] border border-white/10 bg-[#F8FBFF] shadow-[0_25px_70px_rgba(0,0,0,0.45)]"
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(69,231,210,0.12),_transparent_42%)]" />
+
+                <div className="relative p-4 sm:p-5">
+                  <div className="mb-3 flex items-center justify-between">
+                    <div>
+                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#2F6F8B]">
+                        Certification Preview
+                      </span>
+                      <h3 className="mt-1 text-xl font-black text-[#071525] font-poppins">
+                        {selectedCertificate.title}
+                      </h3>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCertificate(null)}
+                      className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-semibold text-slate-600 hover:bg-slate-100"
+                    >
+                      Close
+                    </button>
+                  </div>
+
+                  <div className="rounded-[18px] border-[5px] border-[#0A4565] bg-white p-3 shadow-inner shadow-slate-200">
+                    <div className="rounded-[14px] border-2 border-[#D9EAF3] bg-[linear-gradient(135deg,#F9FDFF_0%,#EAF6FF_100%)] p-4 sm:p-5">
+                      <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <div>
+                          <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#3A6F8E]">
+                            Afaq Al Bahr Shipping
+                          </p>
+                          <p className="mt-1 text-[10px] text-slate-500">Global Logistics & Freight Solutions</p>
+                        </div>
+
+                        <div
+                          className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#0A4565] bg-white text-base font-black"
+                          style={{ color: selectedCertificate.accent }}
+                        >
+                          ✓
+                        </div>
+                      </div>
+
+                      <div className="space-y-3 pt-4">
+                        <div className="text-center">
+                          <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#3A6F8E]">
+                            Certificate of Compliance
+                          </p>
+                          <h4 className="mt-2 text-xl sm:text-2xl font-black text-[#071525] font-poppins">
+                            {selectedCertificate.title}
+                          </h4>
+                        </div>
+
+                        <div className="grid gap-2.5 sm:grid-cols-2">
+                          <div className="rounded-xl border border-slate-200 bg-white px-3 py-2.5">
+                            <p className="text-[8px] uppercase tracking-[0.2em] text-slate-500">Scope</p>
+                            <p className="mt-1 text-xs font-semibold text-slate-800">{selectedCertificate.subtitle}</p>
+                          </div>
+
+                          <div className="rounded-xl border border-slate-200 bg-white px-3 py-2.5">
+                            <p className="text-[8px] uppercase tracking-[0.2em] text-slate-500">Issued</p>
+                            <p className="mt-1 text-xs font-semibold text-slate-800">{selectedCertificate.year}</p>
+                          </div>
+                        </div>
+
+                        <div className="rounded-xl border border-[#C6E6E2] bg-[#F1FBFA] px-3 py-2.5 text-xs leading-relaxed text-slate-700">
+                          {selectedCertificate.detail}
+                        </div>
+
+                        <div className="flex items-center justify-between border-t border-slate-200 pt-3">
+                          <div>
+                            <p className="text-[8px] uppercase tracking-[0.2em] text-slate-500">Authorized by</p>
+                            <p className="mt-1 text-xs font-bold text-[#071525]">Operations & Compliance Board</p>
+                          </div>
+
+                          <div className="text-right">
+                            <div className="mx-auto mb-1 h-8 w-8 rounded-full border-2 border-[#0A4565] bg-[#EAF9F9]" />
+                            <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#3A6F8E]">Certified</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
 
         </div>
       </section>

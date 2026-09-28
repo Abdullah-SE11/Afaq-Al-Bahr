@@ -6,7 +6,7 @@ import {
   BarChart3, Check, ArrowUpRight
 } from 'lucide-react'
 
-export function Home({ t, onOpenQuote }) {
+export function Home({ t, onOpenQuote, navigateTo }) {
   const [trackingId, setTrackingId] = useState('')
   const [trackingResult, setTrackingResult] = useState(null)
   const [isTrackingLoading, setIsTrackingLoading] = useState(false)
@@ -685,7 +685,11 @@ export function Home({ t, onOpenQuote }) {
 
                   {/* ================= BOTTOM LINK ================= */}
                   <a
-                    href="#services"
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if (card.page && navigateTo) navigateTo(card.page)
+                    }}
                     className="
                       inline-flex
                       items-center
