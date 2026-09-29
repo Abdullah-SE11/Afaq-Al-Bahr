@@ -1,34 +1,42 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 export function Navbar({ currentPage, navigateTo, t }) {
-  const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeNav, setActiveNav] = useState(currentPage)
+  const headerRef = useRef(null)
 
-  // Keep active navigation synced with current page
   useEffect(() => {
-    setActiveNav(currentPage)
-  }, [currentPage])
+    if (!mobileMenuOpen) return
 
-  // Header scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30)
+    const handlePointerDown = (event) => {
+      if (!headerRef.current?.contains(event.target)) {
+        setMobileMenuOpen(false)
+      }
+    }
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false)
+    }
+    const handleResize = () => {
+      if (window.matchMedia('(min-width: 1280px)').matches) {
+        setMobileMenuOpen(false)
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('resize', handleResize)
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('resize', handleResize)
     }
-  }, [])
+  }, [mobileMenuOpen])
 
   const handleNavClick = (event, page) => {
     event.preventDefault()
 
-    setActiveNav(page)
     navigateTo(page)
     setMobileMenuOpen(false)
 
@@ -63,129 +71,58 @@ export function Navbar({ currentPage, navigateTo, t }) {
   ]
 
   return (
-    <header
-      className={` ${
-        scrolled
-          ? 'bg-white shadow-md border-b border-slate-200 py-2'
-          : 'bg-white border-b border-slate-200 py-3'
-      }`}
-    >
-      <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
-
-        {/* =====================================================
-            LOGO
-        ====================================================== */}
+    <header ref={headerRef} className="relative z-40 w-full bg-transparent py-3 sm:py-4">
+      <div className="container mx-auto flex min-h-11 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, 'home')}
-          className="flex items-center gap-3 group text-left"
+          className="group flex min-w-0 items-center gap-3 text-left"
         >
-          <div className="group-hover:scale-105 transition-transform flex items-center justify-center">
+          <div className="flex shrink-0 items-center justify-center transition-transform duration-200 group-hover:scale-105">
             <img
               src="/Assets/logo.png"
               alt="Afaq Al Bahr Shipping Logo"
-              className="h-8 md:h-10 w-auto object-contain"
+              className="h-9 w-auto object-contain sm:h-10"
             />
           </div>
 
-          <div>
-            <span className="text-lg md:text-xl font-extrabold tracking-tight text-[#093C5D] font-poppins block leading-none">
+          <div className="min-w-0">
+            <span className="block truncate font-poppins text-[15px] font-extrabold leading-none text-[#093C5D] sm:text-base">
               AFAQ AL BAHR
             </span>
 
-            <span className="text-[10px] font-semibold tracking-widest text-[#3B7597] uppercase">
+            <span className="mt-1 block text-[9px] font-semibold uppercase tracking-[0.18em] text-slate-500">
               SHIPPING L.L.C.
             </span>
           </div>
         </a>
 
-
-        {/* =====================================================
-            DESKTOP NAVIGATION
-        ====================================================== */}
-        <nav className="hidden lg:flex items-center gap-2">
-
+        <nav aria-label="Main navigation" className="relative hidden w-auto items-center gap-1 p-0 xl:flex">
           {navItems.map((item) => {
-
-            const isActive = activeNav === item.id
+            const isActive = currentPage === item.id
 
             return (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(e) => handleNavClick(e, item.id)}
-                className={`
-                  relative
-                  px-4
-                  py-2
-                  rounded-md
-                  text-sm
-                  font-medium
-                  transition-all
-                  duration-200
-                  select-none
-                  ${
-                    isActive
-                      ? 'bg-[#093C5D] text-white shadow-md'
-                      : 'text-slate-700 hover:bg-[#093C5D] hover:text-white hover:shadow-md'
-                  }
-                `}
+                aria-current={isActive ? 'page' : undefined}
+                className={`relative rounded-md px-3 py-2.5 text-sm font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:origin-center after:rounded-full after:bg-[#159A9C] after:transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#159A9C] focus-visible:ring-offset-2 ${isActive ? 'text-[#093C5D] after:scale-x-100' : 'text-slate-600 after:scale-x-0 hover:text-[#093C5D] hover:after:scale-x-100'}`}
               >
                 {item.label}
               </a>
             )
           })}
-
-
-          {/* Get Quote */}
-          {/* <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, 'contact')}
-            className="
-              ml-2
-              px-5
-              py-2.5
-              rounded-full
-              bg-[#5DF8D8]
-              text-[#093C5D]
-              text-xs
-              font-bold
-              shadow-sm
-              hover:bg-[#34D399]
-              hover:shadow-lg
-              hover:-translate-y-0.5
-              active:scale-95
-              transition-all
-              duration-200
-            "
-          >
-            Get a Quote
-          </a> */}
-
         </nav>
 
-
-        {/* =====================================================
-            MOBILE MENU BUTTON
-        ====================================================== */}
-        <div className="flex lg:hidden items-center">
-
+        <div className="flex shrink-0 items-center xl:hidden">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-controls="mobile-navigation"
             aria-expanded={mobileMenuOpen}
-            className="
-              p-2
-              rounded-lg
-              bg-[#093C5D]
-              text-white
-              hover:bg-[#3B7597]
-              hover:shadow-md
-              active:scale-95
-              transition-all
-              duration-200
-            "
+            className="rounded-full border border-slate-300/80 bg-transparent p-2.5 text-[#093C5D] transition-colors hover:border-[#159A9C] hover:text-[#0b7890] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#159A9C] focus-visible:ring-offset-2 active:scale-95"
           >
             {mobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -195,17 +132,10 @@ export function Navbar({ currentPage, navigateTo, t }) {
           </button>
 
         </div>
-
       </div>
 
-
-      {/* =====================================================
-          MOBILE NAVIGATION
-      ====================================================== */}
       <AnimatePresence>
-
         {mobileMenuOpen && (
-
           <motion.div
             initial={{
               opacity: 0,
@@ -226,85 +156,27 @@ export function Navbar({ currentPage, navigateTo, t }) {
               duration: 0.25,
               ease: 'easeOut',
             }}
-            className="
-              lg:hidden
-              overflow-hidden
-              bg-white
-              border-t
-              border-slate-200
-              shadow-lg
-            "
+            className="overflow-hidden bg-transparent xl:hidden"
           >
-
-            <nav className="px-5 py-5 space-y-2">
-
+            <nav id="mobile-navigation" aria-label="Mobile navigation" className="relative mx-auto grid w-full max-w-7xl gap-1 px-4 pb-2 pt-3 sm:px-6 sm:pb-3">
               {navItems.map((item) => {
-
-                const isActive = activeNav === item.id
+                const isActive = currentPage === item.id
 
                 return (
                   <a
                     key={item.id}
                     href={`#${item.id}`}
                     onClick={(e) => handleNavClick(e, item.id)}
-                    className={`
-                      flex
-                      items-center
-                      w-full
-                      px-4
-                      py-3
-                      rounded-lg
-                      text-sm
-                      font-medium
-                      transition-all
-                      duration-200
-                      ${
-                        isActive
-                          ? 'bg-[#093C5D] text-white shadow-md'
-                          : 'text-slate-700 hover:bg-[#093C5D] hover:text-white hover:shadow-md hover:translate-x-1'
-                      }
-                    `}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`flex w-full items-center rounded-md px-4 py-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#159A9C] focus-visible:ring-inset ${isActive ? 'bg-[#E5F6F4] font-bold text-[#07556B] shadow-[inset_3px_0_0_#159A9C]' : 'text-slate-600 hover:bg-slate-100/70 hover:text-[#093C5D]'}`}
                   >
                     {item.label}
                   </a>
                 )
               })}
-
-
-              {/* Mobile Get Quote */}
-              {/* <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, 'contact')}
-                className="
-                  flex
-                  items-center
-                  justify-center
-                  w-full
-                  mt-3
-                  px-5
-                  py-3
-                  rounded-full
-                  bg-[#5DF8D8]
-                  text-[#093C5D]
-                  font-bold
-                  text-sm
-                  shadow-sm
-                  hover:bg-[#34D399]
-                  hover:shadow-lg
-                  active:scale-95
-                  transition-all
-                  duration-200
-                "
-              >
-                Get a Quote
-              </a> */}
-
             </nav>
-
           </motion.div>
-
         )}
-
       </AnimatePresence>
 
     </header>

@@ -179,7 +179,7 @@ export function AboutUs({ t, onOpenQuote }) {
             <img
               src="/Assets/Featured Telemetry.jpg"
               alt="Global Freight Telemetry Network"
-              className="w-full h-[380px] md:h-[480px] object-cover filter brightness-[0.75] contrast-[1.1] group-hover:scale-105 transition-transform duration-700"
+              className="w-full h-[380px] md:h-[480px] object-cover opacity-50 filter brightness-[0.75] contrast-[1.1] transition-all duration-700 group-hover:scale-105 group-hover:opacity-65"
             />
 
             {/* Image Gradient Overlay */}
