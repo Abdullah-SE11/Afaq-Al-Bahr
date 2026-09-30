@@ -156,7 +156,7 @@ export function Navbar({ currentPage, navigateTo, t }) {
               duration: 0.25,
               ease: 'easeOut',
             }}
-            className="overflow-hidden bg-transparent xl:hidden"
+            className="absolute inset-x-0 top-full z-50 overflow-hidden border-y border-slate-200/70 bg-white/85 shadow-xl backdrop-blur-xl xl:hidden"
           >
             <nav id="mobile-navigation" aria-label="Mobile navigation" className="relative mx-auto grid w-full max-w-7xl gap-1 px-4 pb-2 pt-3 sm:px-6 sm:pb-3">
               {navItems.map((item) => {
