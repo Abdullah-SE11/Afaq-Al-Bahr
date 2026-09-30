@@ -137,26 +137,28 @@ export function Navbar({ currentPage, navigateTo, t }) {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{
-              opacity: 0,
-              height: 0,
-              y: -10,
-            }}
+            initial={{ opacity: 0, height: 0, y: -8 }}
             animate={{
               opacity: 1,
               height: 'auto',
               y: 0,
+              transition: {
+                height: { duration: 0.32, ease: [0.16, 1, 0.3, 1] },
+                opacity: { duration: 0.2, ease: 'easeOut' },
+                y: { duration: 0.28, ease: [0.16, 1, 0.3, 1] },
+              },
             }}
             exit={{
               opacity: 0,
               height: 0,
-              y: -10,
+              y: -6,
+              transition: {
+                height: { duration: 0.24, ease: [0.4, 0, 1, 1] },
+                opacity: { duration: 0.16, ease: 'easeIn' },
+                y: { duration: 0.2, ease: [0.4, 0, 1, 1] },
+              },
             }}
-            transition={{
-              duration: 0.25,
-              ease: 'easeOut',
-            }}
-            className="overflow-hidden bg-transparent xl:hidden"
+            className="absolute inset-x-0 top-full z-50 overflow-hidden border-y border-slate-200/70 bg-white/85 shadow-xl backdrop-blur-xl xl:hidden"
           >
             <nav id="mobile-navigation" aria-label="Mobile navigation" className="relative mx-auto grid w-full max-w-7xl gap-1 px-4 pb-2 pt-3 sm:px-6 sm:pb-3">
               {navItems.map((item) => {
