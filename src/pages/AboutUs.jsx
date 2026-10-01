@@ -37,17 +37,14 @@ export function AboutUs({ t, onOpenQuote }) {
         <div className="absolute inset-0 z-0">
           <video
             className="h-full w-full object-cover object-center"
-            src="/Assets/about hero.mp4"
+            src="/Assets/about-hero.mp4"
             poster="/Assets/about-bg.jpg"
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             aria-hidden="true"
-            onError={(e) => {
-              e.target.style.display = 'none'
-            }}
           />
         </div>
 
