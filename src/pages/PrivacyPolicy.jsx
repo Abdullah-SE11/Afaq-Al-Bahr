@@ -12,7 +12,7 @@ export function PrivacyPolicy({ navigateTo, t }) {
             <div className="relative z-10 container mx-auto px-4 py-16 md:px-8 md:py-24">
             <div className="max-w-4xl">
                 <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl font-poppins">
-                Privacy Policy
+                Privacy <span className="text-gradient-cyan">Policy</span>
                 </h1>
                 <p className="mt-5 max-w-2xl text-base text-slate-300 md:text-lg">
                 We are committed to protecting the confidentiality, security, and lawful use of information entrusted to our logistics operations.

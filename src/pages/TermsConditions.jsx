@@ -20,7 +20,7 @@ export function TermsConditions({ navigateTo, t }) {
         <div className="relative z-10 container mx-auto px-4 md:px-8 py-16 md:py-24">
             <div className="max-w-4xl">
             <h1 className="mt-0 text-4xl font-black tracking-tight text-white sm:text-5xl md:text-6xl font-poppins">
-                Terms & Conditions
+                Terms & <span className="text-gradient-cyan">Conditions</span>
             </h1>
 
             <p className="mt-5 max-w-2xl text-base text-slate-300 md:text-lg">
