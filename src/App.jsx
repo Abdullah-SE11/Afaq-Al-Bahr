@@ -26,9 +26,9 @@ export default function App() {
   }
 
   const waLines = [
-    { label: "Customer Support", num: "+971 56 826 2134", wa: "971568262134" },
-    { label: "Dispatch Line 1 (Dubai)", num: "+971 55 935 9616", wa: "971559359616" },
-    { label: "Dispatch Line 2 (Dubai)", num: "+971 55 536 5465", wa: "971555365465" }
+    { label: "Customer Support", num: '+971 55 536 5465', wa: '971555365465' },
+    // { label: "Dispatch Line 1 (Dubai)", num: "+971 55 935 9616", wa: "971559359616" },
+    // { label: "Dispatch Line 2 (Dubai)", num: "+971 55 536 5465", wa: "971555365465" }
   ]
 
   return (
