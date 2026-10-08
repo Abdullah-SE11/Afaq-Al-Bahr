@@ -184,7 +184,7 @@ export function Footer({ navigateTo, t }) {
 
           <p className="flex gap-2 items-center">
             <Phone className="w-4 h-4 text-[#5DF8D8] flex-shrink-0" />
-            +971 4 888 9200
+            +971 55 536 5465
           </p>
 
           <p className="flex gap-2 items-start">

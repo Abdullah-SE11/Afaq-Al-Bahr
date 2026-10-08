@@ -340,9 +340,9 @@ export const translations = {
         },
         contact: {
             directLines: [
-                { label: 'Dispatch Line 1 (Dubai)', num: '+971 56 826 2134', wa: '971568262134' },
-                { label: 'Dispatch Line 2 (Dubai)', num: '+971 55 935 9616', wa: '971559359616' },
-                { label: 'Dispatch Line 3 (Dubai)', num: '+971 55 536 5465', wa: '971555365465' }
+                // { label: 'Dispatch Line 1 (Dubai)', num: '+971 56 826 2134', wa: '971568262134' },
+                // { label: 'Dispatch Line 2 (Dubai)', num: '+971 55 935 9616', wa: '971559359616' },
+                { label: 'Dispatch Line  (Dubai)', num: '+971 55 536 5465', wa: '971555365465' }
             ],
             hubsData: [
                 {
@@ -354,7 +354,7 @@ export const translations = {
                     position: [40.7128, -74.0060],
                     desc: 'Major North American maritime gateway supporting global cargo operations.',
                     volume: '8.4M TEU',
-                    dwell: '2.8 Days',
+                    dwell: '28 Days',
                     manager: 'Michael Carter'
                 },
                 {
@@ -396,7 +396,7 @@ export const translations = {
             ],
             faqs: [
                 {
-                    q: 'How can I track my shipment status in real time?',
+                    q: 'How can I .track my shipment status in real time?',
                     a: 'Enter your Container or Bill of Lading (B/L) tracking code into our home page tracking portal. Our satellite telemetry system updates cargo location, temperature, and estimated arrival every 15 minutes.'
                 },
                 {
